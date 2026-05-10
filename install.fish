@@ -66,7 +66,7 @@ end
 
 # Variables
 set -q _flag_noconfirm && set noconfirm '--noconfirm'
-set -q _flag_aur_helper && set -l aur_helper paru
+set -l aur_helper paru
 set -q XDG_CONFIG_HOME && set -l config $XDG_CONFIG_HOME || set -l config $HOME/.config
 set -q XDG_STATE_HOME && set -l state $XDG_STATE_HOME || set -l state $HOME/.local/state
 set -l install_dir (path dirname (path resolve (status filename)))
@@ -130,12 +130,7 @@ if ! pacman -Q $aur_helper &> /dev/null
     rm -rf $aur_helper
 
     # Setup
-    if test $aur_helper = yay
-        $aur_helper -Y --gendb
-        $aur_helper -Y --devel --save
-    else
-        $aur_helper --gendb
-    end
+    $aur_helper --gendb
 end
 
 # Cd into dir
@@ -144,6 +139,10 @@ cd $install_dir || exit 1
 log 'Installing custom caelestia-shell...'
 cd ./shell || exit 1
 $aur_helper -Ui $noconfirm
+
+# Clean up the built package archive
+fish -c 'rm -f caelestia-shell-*.pkg.tar.zst' 2> /dev/null
+
 cd $install_dir || exit 1
 
 # Install metapackage for deps
@@ -153,23 +152,24 @@ $aur_helper -Ui $noconfirm
 # Clean up the built package archive
 fish -c 'rm -f caelestia-meta-*.pkg.tar.zst' 2> /dev/null
 
+set PKGS \
+    zen-browser-bin \
+    vesktop \
+    telegram-desktop \
+    visual-studio-code-bin \
+    spotify-launcher \
+    spicetify-cli \
+    spicetify-marketplace-bin \
+    valent-git \
+    vlc \
+    celluloid \
+    gthumb \
+    geoclue \
+    gammastep
 
-PKGS=(
-    zen-browser-bin
-    vesktop
-    telegram-desktop
-    spotify-launcher
-    spicetify-cli 
-    spicetify-marketplace-bin
-    valent-git
-    vlc
-    celluloid
-    gthumb
-)
 log 'Installing packages...'
 set -l has_spicetify (pacman -Q spicetify-cli 2> /dev/null)
-paru -S --needed --noconfirm "${PKGS[@]}"
-
+paru -S --needed --noconfirm $PKGS
 
 # Install hypr* configs
 if confirm-overwrite $config/hypr
@@ -226,6 +226,13 @@ if confirm-overwrite $config/yazi
     ln -s (realpath yazi) $config/yazi
 end
 
+# Caelestia
+if confirm-overwrite $config/caelestia
+    log 'Installing Caelestia config...'
+    ln -s (realpath caelestia) $config/caelestia
+end
+
+
 # Install spicetify
 
 log 'Installing spicetify..'
@@ -251,14 +258,14 @@ set -l folder $config/Code/User
 log "Setup vscode..."
 
 # Install configs
-if confirm-overwrite $folder/settings.json && confirm-overwrite $folder/keybindings.json && confirm-overwrite $config/$prog-flags.conf
-    log "Installing vs$prog config..."
+if confirm-overwrite $folder/settings.json && confirm-overwrite $folder/keybindings.json && confirm-overwrite $config/code-flags.conf
+    log "Installing vscode config..."
     ln -s (realpath vscode/settings.json) $folder/settings.json
     ln -s (realpath vscode/keybindings.json) $folder/keybindings.json
-    ln -s (realpath vscode/flags.conf) $config/$prog-flags.conf
+    ln -s (realpath vscode/flags.conf) $config/code-flags.conf
 
     # Install extension
-    $prog --install-extension vscode/caelestia-vscode-integration/caelestia-vscode-integration-*.vsix
+    code --install-extension vscode/caelestia-vscode-integration/caelestia-vscode-integration-*.vsix
 end
 
 
@@ -298,6 +305,18 @@ if ! test -f $state/caelestia/scheme.json
     sleep .5
     hyprctl reload
 end
+
+log 'Installing Hyprland plugins'
+
+hyprpm update
+hyprpm purge-cache
+hyprpm add https://github.com/hyprwm/hyprland-plugins
+hyprpm add https://github.com/zjeffer/split-monitor-workspaces
+hyprpm add https://github.com/gfhdhytghd/hymission
+hyprpm enable hymission
+hyprpm enable hyprscrolling
+hyprpm enable split-monitor-workspaces
+hyprpm reload
 
 # Start the shell
 caelestia shell -d > /dev/null
