@@ -7,6 +7,9 @@ function y
 	command rm -f -- "$tmp"
 end
 
+set -gx EDITOR micro
+fish_add_path --append --path ~/.local/bin/
+
 if status is-interactive
     # Starship custom prompt
     starship init fish | source
@@ -48,6 +51,4 @@ if status is-interactive
     function mark_prompt_start --on-event fish_prompt
         echo -en "\e]133;A\e\\"
     end
-    
-    set -gx EDITOR micro
 end
