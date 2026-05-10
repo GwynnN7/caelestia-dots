@@ -1,26 +1,27 @@
 # caelestia-meta
 
-# Maintainer: Soramane <soramane32 at gmail dot com>
-
-pkgname='caelestia-meta'
-pkgver=r183.cf94e7f
+_pkgname='caelestia-meta'
+pkgname="$_pkgname-gwynn7" 
+pkgver=1.0
 pkgrel=1
 pkgdesc='A metapackage containing all dependencies for the Caelestia dotfiles'
 arch=('any')
 url='https://github.com/caelestia-dots/caelestia'
 license=('GPL-3.0-only')
+provides=($_pkgname)
+conflicts=($_pkgname)
+pkgver() {
+    cd "${srcdir}/${pkgname}"
+    git describe --long --tags --abbrev=7 | sed 's/^v//;s/\([^-]*-g\)/r\1/;s/-/./g'
+}
 depends=('caelestia-cli' 'caelestia-shell'
          'hyprland' 'xdg-desktop-portal-hyprland' 'xdg-desktop-portal-gtk' 'hyprpicker'
          'wl-clipboard' 'cliphist' 'inotify-tools' 'app2unit' 'wireplumber' 'trash-cli'
-         'foot' 'fish' 'eza' 'fastfetch' 'starship' 'btop' 'jq' 'adw-gtk-theme'
+         'foot' 'fish' 'yazi' 'eza' 'fastfetch' 'starship' 'btop' 'jq' 'adw-gtk-theme'
          'papirus-icon-theme' 'qtengine-git' 'ttf-jetbrains-mono-nerd')
 optdepends=('thunar: file manager'
-            'spotify: music player'
-            'vscode: code editor'
+            'spotify-launcher: music player'
+            'visual-studio-code: code editor'
             'zen-browser: web browser'
-            'todoist-appimage: todo manager'
-            'uwsm: uwsm session'
             'gnome-keyring: keyring daemon'
-            'polkit-gnome: gnome polkit client'
-            'direnv: isolated dev envs'
-            'zoxide: better cd')
+            'polkit-gnome: gnome polkit client')

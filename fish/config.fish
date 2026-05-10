@@ -40,6 +40,5 @@ if status is-interactive
         echo -en "\e]133;A\e\\"
     end
     
-    # Custom fish config
-    source ~/.config/caelestia/user-config.fish 2> /dev/null
+    set -gx EDITOR micro
 end
