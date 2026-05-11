@@ -2,7 +2,7 @@
 
 _pkgname='caelestia-shell'
 pkgname="$_pkgname-gwynn7-git" 
-pkgver=1.0.r4.g7faa71c
+pkgver=1.0.r10.g4dc366b
 pkgrel=1
 pkgdesc='The desktop shell for the Caelestia dotfiles (Custom Fork)'
 arch=('x86_64')

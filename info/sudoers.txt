@@ -1,0 +1,2 @@
+gwynn7 ALL=(ALL) NOPASSWD: /usr/bin/efibootmgr
+gwynn7 ALL=(ALL) NOPASSWD: /usr/bin/scxctl

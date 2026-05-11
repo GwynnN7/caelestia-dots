@@ -141,7 +141,7 @@ cd ./shell || exit 1
 $aur_helper -Ui $noconfirm
 
 # Clean up the built package archive
-fish -c 'rm -f caelestia-shell-*.pkg.tar.zst' 2> /dev/null
+fish -c 'rm -rf caelestia-shell-*' 2> /dev/null
 
 cd $install_dir || exit 1
 
@@ -157,18 +157,15 @@ set PKGS \
     vesktop \
     telegram-desktop \
     visual-studio-code-bin \
-    spotify-launcher \
-    spicetify-cli \
-    spicetify-marketplace-bin \
     valent-git \
     vlc \
     celluloid \
     gthumb \
+    file-roller \
     geoclue \
     gammastep
 
 log 'Installing packages...'
-set -l has_spicetify (pacman -Q spicetify-cli 2> /dev/null)
 paru -S --needed --noconfirm $PKGS
 
 # Install hypr* configs
@@ -196,61 +193,51 @@ if confirm-overwrite $config/fish
     ln -s (realpath fish) $config/fish
 end
 
-# Fastfetch
-if confirm-overwrite $config/fastfetch
-    log 'Installing fastfetch config...'
-    ln -s (realpath fastfetch) $config/fastfetch
+# Link everything inside the dotfiles directory (files and directories)
+if test -d dotfiles
+    for src in dotfiles/*
+        if test -e $src
+            set name (basename $src)
+            set dest $config/$name
+
+            if confirm-overwrite $dest
+                log "Installing $name..."
+                ln -s (realpath $src) $dest
+            end
+        end
+    end
 end
 
-# Btop
-if confirm-overwrite $config/btop
-    log 'Installing btop config...'
-    ln -s (realpath btop) $config/btop
+# Install and enable user services from services/
+if test -d services
+    set user_systemd_dir $HOME/.config/systemd/user
+    mkdir -p $user_systemd_dir
+
+    set -l enabled_list
+    for svc in services/*.service
+        if test -f $svc
+            set name (basename $svc)
+            set dest $user_systemd_dir/$name
+
+            if confirm-overwrite $dest
+                log "Installing service $name..."
+                ln -s (realpath $svc) $dest
+                set enabled_list $enabled_list $name
+            end
+        end
+    end
+
+    if test (count $enabled_list) -gt 0
+        if type -q systemctl
+            systemctl --user daemon-reload
+            for name in $enabled_list
+                systemctl --user enable --now $name
+            end
+        else
+            log 'systemctl not found; cannot enable services automatically.'
+        end
+    end
 end
-
-# Environment
-if confirm-overwrite $config/environment.d
-    log 'Installing environment config...'
-    ln -s (realpath environment.d) $config/environment.d
-end
-
-# MangoHud
-if confirm-overwrite $config/MangoHud
-    log 'Installing MangoHud config...'
-    ln -s (realpath MangoHud) $config/MangoHud
-end
-
-# Yazi
-if confirm-overwrite $config/yazi
-    log 'Installing Yazi config...'
-    ln -s (realpath yazi) $config/yazi
-end
-
-# Caelestia
-if confirm-overwrite $config/caelestia
-    log 'Installing Caelestia config...'
-    ln -s (realpath caelestia) $config/caelestia
-end
-
-
-# Install spicetify
-
-log 'Installing spicetify..'
-
-if test -z "$has_spicetify"
-    spicetify backup apply
-end
-
-# Install configs
-if confirm-overwrite $config/spicetify
-    log 'Installing spicetify config...'
-    ln -s (realpath spicetify) $config/spicetify
-
-    # Set spicetify configs
-    spicetify config current_theme caelestia color_scheme caelestia custom_apps marketplace 2> /dev/null
-    spicetify backup apply
-end
-
 
 # Setup VSCode
 set -l folder $config/Code/User
@@ -260,23 +247,22 @@ log "Setup vscode..."
 # Install configs
 if confirm-overwrite $folder/settings.json && confirm-overwrite $folder/keybindings.json && confirm-overwrite $config/code-flags.conf
     log "Installing vscode config..."
-    ln -s (realpath vscode/settings.json) $folder/settings.json
-    ln -s (realpath vscode/keybindings.json) $folder/keybindings.json
-    ln -s (realpath vscode/flags.conf) $config/code-flags.conf
+    ln -s (realpath patches/vscode/settings.json) $folder/settings.json
+    ln -s (realpath patches/vscode/keybindings.json) $folder/keybindings.json
+    ln -s (realpath patches/vscode/flags.conf) $config/code-flags.conf
 
     # Install extension
-    code --install-extension vscode/caelestia-vscode-integration/caelestia-vscode-integration-*.vsix
+    code --install-extension patches/vscode/caelestia-vscode-integration/caelestia-vscode-integration-*.vsix
 end
 
 
 # Setup Zen
-
 log "Setup zen..."
 
 set -l chrome $HOME/.zen/*/chrome
 if confirm-overwrite $chrome/userChrome.css
     log 'Installing zen userChrome...'
-    ln -s (realpath zen/userChrome.css) $chrome/userChrome.css
+    ln -s (realpath patches/zen/userChrome.css) $chrome/userChrome.css
 end
 
 # Install native app
@@ -286,18 +272,39 @@ set -l lib $HOME/.local/lib/caelestia
 if confirm-overwrite $hosts/caelestiafox.json
     log 'Installing zen native app manifest...'
     mkdir -p $hosts
-    cp zen/native_app/manifest.json $hosts/caelestiafox.json
+    cp patches/zen/native_app/manifest.json $hosts/caelestiafox.json
     sed -i "s|{{ \$lib }}|$lib|g" $hosts/caelestiafox.json
 end
 
 if confirm-overwrite $lib/caelestiafox
     log 'Installing zen native app...'
     mkdir -p $lib
-    ln -s (realpath zen/native_app/app.fish) $lib/caelestiafox
+    ln -s (realpath patches/zen/native_app/app.fish) $lib/caelestiafox
 end
 
 # Prompt user to install extension
 log 'Please install the CaelestiaFox extension from https://addons.mozilla.org/en-US/firefox/addon/caelestiafox if you have not already done so.'
+
+
+# Install scripts into ~/.local/bin
+if test -d scripts
+    log "Setup scripts..."
+    set -l bin_dir $HOME/.local/bin
+    mkdir -p $bin_dir
+
+    for file in scripts/*
+        if test -f $file
+            set name (basename $file)
+            set dest $bin_dir/$name
+
+            if confirm-overwrite $dest
+                log "Installing script $name..."
+                ln -s (realpath $file) $dest
+            end
+        end
+    end
+end
+
 
 # Generate scheme stuff if needed
 if ! test -f $state/caelestia/scheme.json
@@ -306,19 +313,31 @@ if ! test -f $state/caelestia/scheme.json
     hyprctl reload
 end
 
-log 'Installing Hyprland plugins'
+if set -q noconfirm
+    set -l _hypr_auto_yes 1
+else
+    input 'Install Hyprland plugins? [y/s] ' -n
+    set -l _hypr_choice (sh-read)
+end
 
-hyprpm update
-hyprpm purge-cache
-hyprpm add https://github.com/hyprwm/hyprland-plugins
-hyprpm add https://github.com/zjeffer/split-monitor-workspaces
-hyprpm add https://github.com/gfhdhytghd/hymission
-hyprpm enable hymission
-hyprpm enable hyprscrolling
-hyprpm enable split-monitor-workspaces
-hyprpm reload
+if test "$_hypr_auto_yes" = '1' -o "$_hypr_choice" = 'y' -o "$_hypr_choice" = 'Y'
+    log 'Installing Hyprland plugins'
+
+    hyprpm purge-cache
+    hyprpm update
+    hyprpm add https://github.com/zjeffer/split-monitor-workspaces
+    hyprpm add https://github.com/gfhdhytghd/hymission
+    hyprpm enable hymission
+    hyprpm enable split-monitor-workspaces
+    hyprpm reload
+else
+    log 'Skipping Hyprland plugins...'
+end
 
 # Start the shell
 caelestia shell -d > /dev/null
 
 log 'Done!'
+log 'Edit sudoers with visudo command:'
+bat info/sudoers.txt
+
