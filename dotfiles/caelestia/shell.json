@@ -74,50 +74,6 @@
             {
                 "command": [
                     "autocomplete",
-                    "calc"
-                ],
-                "dangerous": false,
-                "description": "Do simple math equations (powered by Qalc)",
-                "enabled": true,
-                "icon": "calculate",
-                "name": "Calculator"
-            },
-            {
-                "command": [
-                    "autocomplete",
-                    "scheme"
-                ],
-                "dangerous": false,
-                "description": "Change the current colour scheme",
-                "enabled": true,
-                "icon": "palette",
-                "name": "Scheme"
-            },
-            {
-                "command": [
-                    "autocomplete",
-                    "wallpaper"
-                ],
-                "dangerous": false,
-                "description": "Change the current wallpaper",
-                "enabled": true,
-                "icon": "image",
-                "name": "Wallpaper"
-            },
-            {
-                "command": [
-                    "autocomplete",
-                    "variant"
-                ],
-                "dangerous": false,
-                "description": "Change the current scheme variant",
-                "enabled": true,
-                "icon": "colors",
-                "name": "Variant"
-            },
-            {
-                "command": [
-                    "autocomplete",
                     "clip"
                 ],
                 "dangerous": false,
@@ -125,6 +81,17 @@
                 "enabled": true,
                 "icon": "content_paste",
                 "name": "Clipboard"
+            },
+            {
+                "command": [
+                    "autocomplete",
+                    "calc"
+                ],
+                "dangerous": false,
+                "description": "Do simple math equations (powered by Qalc)",
+                "enabled": true,
+                "icon": "calculate",
+                "name": "Calculator"
             },
             {
                 "command": [
@@ -140,13 +107,13 @@
             {
                 "command": [
                     "autocomplete",
-                    "transparency"
+                    "wallpaper"
                 ],
                 "dangerous": false,
-                "description": "Change shell transparency",
-                "enabled": false,
-                "icon": "opacity",
-                "name": "Transparency"
+                "description": "Change the current wallpaper",
+                "enabled": true,
+                "icon": "image",
+                "name": "Wallpaper"
             },
             {
                 "command": [
@@ -159,6 +126,39 @@
                 "enabled": true,
                 "icon": "casino",
                 "name": "Random"
+            },
+            {
+                "command": [
+                    "autocomplete",
+                    "scheme"
+                ],
+                "dangerous": false,
+                "description": "Change the current colour scheme",
+                "enabled": true,
+                "icon": "palette",
+                "name": "Scheme"
+            },
+            {
+                "command": [
+                    "autocomplete",
+                    "variant"
+                ],
+                "dangerous": false,
+                "description": "Change the current scheme variant",
+                "enabled": true,
+                "icon": "colors",
+                "name": "Variant"
+            },
+            {
+                "command": [
+                    "autocomplete",
+                    "transparency"
+                ],
+                "dangerous": false,
+                "description": "Change shell transparency",
+                "enabled": false,
+                "icon": "opacity",
+                "name": "Transparency"
             },
             {
                 "command": [

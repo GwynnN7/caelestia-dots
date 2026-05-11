@@ -8,7 +8,7 @@ or exit
 
 # Print help
 if set -q _flag_h
-    echo 'usage: ./install.sh [-h] [--noconfirm] [--spotify] [--vscode] [--discord] [--aur-helper]'
+    echo 'usage: ./install.sh [-h] [--noconfirm]'
     echo
     echo 'options:'
     echo '  -h, --help                  show this help message and exit'
@@ -39,12 +39,12 @@ function sh-read
 end
 
 function confirm-overwrite -a path
-    if test -e $path -o -L $path
+    if test -e "$path"; or test -L "$path"
         # No prompt if noconfirm
         if set -q noconfirm
             input "$path already exists. Overwrite? [Y/n]"
             log 'Removing...'
-            rm -rf $path
+            rm -rf "$path"
         else
             # Prompt user
             input "$path already exists. Overwrite? [Y/n] " -n
@@ -55,7 +55,7 @@ function confirm-overwrite -a path
                 return 1
             else
                 log 'Removing...'
-                rm -rf $path
+                rm -rf "$path"
             end
         end
     end
@@ -168,31 +168,6 @@ set PKGS \
 log 'Installing packages...'
 paru -S --needed --noconfirm $PKGS
 
-# Install hypr* configs
-if confirm-overwrite $config/hypr
-    log 'Installing hypr* configs...'
-    ln -s (realpath hypr) $config/hypr
-    hyprctl reload
-end
-
-# Starship
-if confirm-overwrite $config/starship.toml
-    log 'Installing starship config...'
-    ln -s (realpath starship.toml) $config/starship.toml
-end
-
-# Foot
-if confirm-overwrite $config/foot
-    log 'Installing foot config...'
-    ln -s (realpath foot) $config/foot
-end
-
-# Fish
-if confirm-overwrite $config/fish
-    log 'Installing fish config...'
-    ln -s (realpath fish) $config/fish
-end
-
 # Link everything inside the dotfiles directory (files and directories)
 if test -d dotfiles
     for src in dotfiles/*
@@ -208,7 +183,66 @@ if test -d dotfiles
     end
 end
 
-# Install and enable user services from services/
+
+# Setup VSCode
+set -l folder $config/Code/User
+
+log "Setup vscode..."
+
+# Install configs
+if confirm-overwrite $folder/settings.json && confirm-overwrite $folder/keybindings.json && confirm-overwrite $config/code-flags.conf
+    log "Installing vscode config..."
+    ln -s (realpath patches/vscode/settings.json) $folder/settings.json
+    ln -s (realpath patches/vscode/keybindings.json) $folder/keybindings.json
+    ln -s (realpath patches/vscode/flags.conf) $config/code-flags.conf
+
+    # Install extension
+    code --install-extension patches/vscode/caelestia-vscode-integration/caelestia-vscode-integration-*.vsix
+end
+
+
+# Setup Zen
+log "Setup zen..."
+
+for chrome in $HOME/.zen/*/chrome
+    if test -d "$chrome"
+        if confirm-overwrite "$chrome/userChrome.css"
+            log 'Installing zen userChrome...'
+            ln -s (realpath patches/zen/userChrome.css) "$chrome/userChrome.css"
+        end
+    end
+end
+
+# Install native app
+set -l hosts $HOME/.mozilla/native-messaging-hosts
+set -l lib $HOME/.local/lib/caelestia
+
+if confirm-overwrite $hosts/caelestiafox.json
+    log 'Installing zen native app manifest...'
+    mkdir -p $hosts
+    cp patches/zen/native_app/manifest.json $hosts/caelestiafox.json
+    sed -i "s|{{ \$lib }}|$lib|g" $hosts/caelestiafox.json
+end
+
+if confirm-overwrite $lib/caelestiafox
+    log 'Installing zen native app...'
+    mkdir -p $lib
+    ln -s (realpath patches/zen/native_app/app.fish) $lib/caelestiafox
+end
+# Prompt user to install extension
+log 'Please install the CaelestiaFox extension from https://addons.mozilla.org/en-US/firefox/addon/caelestiafox if you have not already done so.'
+
+
+# Custom scripts
+
+mkdir -p "$HOME/.local/bin"
+mkdir -p "$HOME/Projects"
+mkdir -p "$HOME/Pictures"
+
+git clone https://github.com/GwynnN7/Wallpapers "$HOME/Pictures/Wallpapers" --depth=1
+git clone https://github.com/GwynnN7/Cortana "$HOME/Projects/Cortana" --depth=1
+mkdir -p "$HOME/Projects/Cortana/CortanaDesktop/out"
+
 if test -d services
     set user_systemd_dir $HOME/.config/systemd/user
     mkdir -p $user_systemd_dir
@@ -239,53 +273,6 @@ if test -d services
     end
 end
 
-# Setup VSCode
-set -l folder $config/Code/User
-
-log "Setup vscode..."
-
-# Install configs
-if confirm-overwrite $folder/settings.json && confirm-overwrite $folder/keybindings.json && confirm-overwrite $config/code-flags.conf
-    log "Installing vscode config..."
-    ln -s (realpath patches/vscode/settings.json) $folder/settings.json
-    ln -s (realpath patches/vscode/keybindings.json) $folder/keybindings.json
-    ln -s (realpath patches/vscode/flags.conf) $config/code-flags.conf
-
-    # Install extension
-    code --install-extension patches/vscode/caelestia-vscode-integration/caelestia-vscode-integration-*.vsix
-end
-
-
-# Setup Zen
-log "Setup zen..."
-
-set -l chrome $HOME/.zen/*/chrome
-if confirm-overwrite $chrome/userChrome.css
-    log 'Installing zen userChrome...'
-    ln -s (realpath patches/zen/userChrome.css) $chrome/userChrome.css
-end
-
-# Install native app
-set -l hosts $HOME/.mozilla/native-messaging-hosts
-set -l lib $HOME/.local/lib/caelestia
-
-if confirm-overwrite $hosts/caelestiafox.json
-    log 'Installing zen native app manifest...'
-    mkdir -p $hosts
-    cp patches/zen/native_app/manifest.json $hosts/caelestiafox.json
-    sed -i "s|{{ \$lib }}|$lib|g" $hosts/caelestiafox.json
-end
-
-if confirm-overwrite $lib/caelestiafox
-    log 'Installing zen native app...'
-    mkdir -p $lib
-    ln -s (realpath patches/zen/native_app/app.fish) $lib/caelestiafox
-end
-
-# Prompt user to install extension
-log 'Please install the CaelestiaFox extension from https://addons.mozilla.org/en-US/firefox/addon/caelestiafox if you have not already done so.'
-
-
 # Install scripts into ~/.local/bin
 if test -d scripts
     log "Setup scripts..."
@@ -313,14 +300,17 @@ if ! test -f $state/caelestia/scheme.json
     hyprctl reload
 end
 
-if set -q noconfirm
-    set -l _hypr_auto_yes 1
-else
-    input 'Install Hyprland plugins? [y/s] ' -n
+set -l _hypr_install 1
+if ! set -q noconfirm
+    input 'Install Hyprland plugins? [Y/n] ' -n
     set -l _hypr_choice (sh-read)
+
+    if test "$_hypr_choice" = 'n' -o "$_hypr_choice" = 'N'
+        set _hypr_install 0
+    end
 end
 
-if test "$_hypr_auto_yes" = '1' -o "$_hypr_choice" = 'y' -o "$_hypr_choice" = 'Y'
+if test $_hypr_install -eq 1
     log 'Installing Hyprland plugins'
 
     hyprpm purge-cache

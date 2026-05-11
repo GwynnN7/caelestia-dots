@@ -2,17 +2,17 @@
     "theme": {
         "enableTerm": true,
         "enableHypr": true,
-        "enableDiscord": true,
+        "enableDiscord": false,
         "enableSpicetify": false,
-        "enablePandora": true,
+        "enablePandora": false,
         "enableFuzzel": true,
         "enableBtop": true,
         "enableNvtop": true,
         "enableHtop": true,
         "enableGtk": true,
         "enableQt": true,
-        "enableWarp": true,
-        "enableChromium": true,
+        "enableWarp": false,
+        "enableChromium": false,
         "enableZed": false,
         "enableCava": true,
         "iconTheme": "Papirus-Dark",
@@ -42,7 +42,7 @@
                 "command": ["spicetify", "watch", "-s"],
                 "move": true
             },
-            "tidal": {
+            "tidal-hifi": {
                 "enable": true,
                 "match": [{ "class": "com.mastermindzh.tidal-hifi" }],
                 "command": ["flatpak", "run", "com.mastermindzh.tidal-hifi"],

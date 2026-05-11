@@ -22,7 +22,7 @@ if status is-interactive
     alias ls='eza --icons --group-directories-first -1'
 
     #Better cat
-    alias cat='bat --style=plain'
+    #alias cat='bat --style=plain'
 
     # Abbrs
     abbr lg 'lazygit'
