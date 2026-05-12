@@ -158,7 +158,7 @@ end
 
 log 'Installing custom caelestia-shell...'
 cd $CAELESTIA_SHELL_REPO || exit 1
-$aur_helper -Ui $noconfirm --mflags "--overwrite '*'"
+$aur_helper -Ui $noconfirm
 
 # Clean up the built package archive
 fish -c 'rm -rf src/ pkg/' 2> /dev/null
