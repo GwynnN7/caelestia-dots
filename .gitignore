@@ -9,4 +9,7 @@
 
 /dotfiles/micro/b*
 
+/dotfiles/caelestia/monitors
+/dotfiles/caelestia/templates
+
 .SRCINFO

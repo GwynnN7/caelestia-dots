@@ -1,10 +1,7 @@
 {
-	"wallpaper": {
-	    "postHook": "sudo /usr/share/sddm/themes/caelestia/scripts/sync.sh --posthook"
-	},
-	"theme": {
-	    "postHook": "sudo /usr/share/sddm/themes/caelestia/scripts/sync.sh --posthook"
-	},
+    "wallpaper": {
+        "postHook": "sudo /usr/share/sddm/themes/caelestia/scripts/sync.sh --posthook"
+    },
     "theme": {
         "enableTerm": true,
         "enableHypr": true,
@@ -24,7 +21,7 @@
         "iconTheme": "Papirus-Dark",
         "iconThemeLight": "Papirus-Light",
         "iconThemeDark": "Papirus-Dark",
-        "postHook": "echo $SCHEME_NAME $SCHEME_FLAVOUR $SCHEME_MODE $SCHEME_VARIANT $SCHEME_COLOURS"
+        "postHook": "echo $SCHEME_NAME $SCHEME_FLAVOUR $SCHEME_MODE $SCHEME_VARIANT $SCHEME_COLOURS && sudo /usr/share/sddm/themes/caelestia/scripts/sync.sh --posthook"
     },
     "toggles": {
         "communication": {

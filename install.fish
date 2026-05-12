@@ -232,16 +232,15 @@ end
 # Prompt user to install extension
 log 'Please install the CaelestiaFox extension from https://addons.mozilla.org/en-US/firefox/addon/caelestiafox if you have not already done so.'
 
-
 # Custom scripts
 
 mkdir -p "$HOME/.local/bin"
 mkdir -p "$HOME/Projects"
 mkdir -p "$HOME/Pictures"
 
-if ! test -d "$HOME/Pictures/Wallpapers"
+if ! test -d "$HOME/Pictures/Wallpaper"
     log 'Cloning Wallpapers...'
-    git clone https://github.com/GwynnN7/Wallpapers "$HOME/Pictures/Wallpapers" --depth=1
+    git clone https://github.com/GwynnN7/Wallpaper "$HOME/Pictures/Wallpaper" --depth=1
 else
     log 'Wallpapers already exists, skipping...'
 end
