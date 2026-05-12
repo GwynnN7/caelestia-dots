@@ -3,16 +3,18 @@
 argparse -n 'install.fish' -X 0 \
     'h/help' \
     'noconfirm' \
+    'shell-only' \
     -- $argv
 or exit
 
 # Print help
 if set -q _flag_h
-    echo 'usage: ./install.sh [-h] [--noconfirm]'
+    echo 'usage: ./install.fish [-h] [--noconfirm] [--shell-only]'
     echo
     echo 'options:'
     echo '  -h, --help                  show this help message and exit'
     echo '  --noconfirm                 do not confirm package installation'
+    echo '  --shell-only                reinstall caelestia-shell only'
 
     exit
 end
@@ -67,6 +69,8 @@ end
 # Variables
 set -q _flag_noconfirm && set noconfirm '--noconfirm'
 set -l aur_helper paru
+set -l shell_only 0
+set -q _flag_shell_only && set shell_only 1
 set -q XDG_CONFIG_HOME && set -l config $XDG_CONFIG_HOME || set -l config $HOME/.config
 set -q XDG_STATE_HOME && set -l state $XDG_STATE_HOME || set -l state $HOME/.local/state
 set -l install_dir (path dirname (path resolve (status filename)))
@@ -83,10 +87,11 @@ echo '│                                                 │'
 echo '╰─────────────────────────────────────────────────╯'
 set_color normal
 log 'Welcome to the Caelestia dotfiles installer!'
-log 'Before continuing, please ensure you have made a backup of your config directory.'
+
 
 # Prompt for backup
-if ! set -q _flag_noconfirm
+if test $shell_only -eq 0; and ! set -q _flag_noconfirm
+    log 'Before continuing, please ensure you have made a backup of your config directory.'
     log '[1] Two steps ahead of you!  [2] Make one for me please!'
     input '=> ' -n
     set -l choice (sh-read)
@@ -136,12 +141,32 @@ end
 # Cd into dir
 cd $install_dir || exit 1
 
+set -q CAELESTIA_ROOT_DIR || set -x CAELESTIA_ROOT_DIR $HOME/Projects/caelestia
+set -q CAELESTIA_SHELL_REPO || set -x CAELESTIA_SHELL_REPO $CAELESTIA_ROOT_DIR/caelestia-shell
+set -q CAELESTIA_SHELL_REPO_URL || set -x CAELESTIA_SHELL_REPO_URL https://github.com/gwynnn7/caelestia-shell.git
+
+if ! test -d "$CAELESTIA_SHELL_REPO/.git"
+    if test -e "$CAELESTIA_SHELL_REPO"
+        log "$CAELESTIA_SHELL_REPO exists but is not a git repository."
+        exit 1
+    end
+
+    log "Seeding shell repo in $CAELESTIA_SHELL_REPO..."
+    mkdir -p (path dirname "$CAELESTIA_SHELL_REPO")
+    git clone "$CAELESTIA_SHELL_REPO_URL" "$CAELESTIA_SHELL_REPO"
+end
+
 log 'Installing custom caelestia-shell...'
-cd ./shell || exit 1
-$aur_helper -Ui $noconfirm
+cd $CAELESTIA_SHELL_REPO || exit 1
+$aur_helper -Ui $noconfirm --mflags "--overwrite '*'"
 
 # Clean up the built package archive
-fish -c 'rm -rf caelestia-shell-*' 2> /dev/null
+fish -c 'rm -rf src/ pkg/' 2> /dev/null
+
+if test $shell_only -eq 1
+    log 'Done!'
+    exit
+end
 
 cd $install_dir || exit 1
 
@@ -158,12 +183,16 @@ set PKGS \
     telegram-desktop \
     visual-studio-code-bin \
     valent-git \
+    flatpak \
+    gimp \
     vlc \
     celluloid \
-    gthumb \
+    loupe \
+    evince \
     file-roller \
-    geoclue \
-    gammastep
+    7zip \
+    xorg-xhost \
+    ncdu 
 
 log 'Installing packages...'
 paru -S --needed --noconfirm $PKGS

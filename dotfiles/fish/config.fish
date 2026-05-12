@@ -20,10 +20,7 @@ if status is-interactive
 
     # Better ls
     alias ls='eza --icons --group-directories-first -1'
-
-    #Better cat
-    #alias cat='bat --style=plain'
-
+    
     # Abbrs
     abbr lg 'lazygit'
     abbr gd 'git diff'
@@ -54,4 +51,7 @@ if status is-interactive
     function mark_prompt_start --on-event fish_prompt
         echo -en "\e]133;A\e\\"
     end
+
+    alias cat='bat --style=plain'
+    alias todo='micro ~/Documents/todo.md'
 end

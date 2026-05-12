@@ -5,64 +5,75 @@ apps. This repo also includes an install script to install the entire dots.
 
 ## Installation
 
-Simply clone this repo and run the install script (you need
-[`fish`](https://github.com/fish-shell/fish-shell) installed).
+Bootstrap the repo with the shell entrypoint, or clone it manually if you
+want to keep a checkout for upgrades. The shell bootstrap updates the system
+and installs [`fish`](https://github.com/fish-shell/fish-shell) and `git`
+automatically; the standalone `install.fish` entrypoint still requires fish.
+The default structure is:
+`~/Projects/caelestia/caelestia-dotfiles` (this repo)
+`~/Projects/caelestia/caelestia-shell` (shell repo used by PKGBUILD)
 
 > [!WARNING]
 > The install script symlinks all configs into place, so you CANNOT
 > move/remove the repo folder once you run the install script. If
 > you do, most apps will not behave properly and some (e.g. Hyprland)
 > will fail to start completely. I recommend cloning the repo to
-> `~/.local/share/caelestia`.
+> `~/Projects/caelestia/caelestia-dotfiles`.
 
 The install script has some options for installing configs for some apps.
 
 ```
 $ ./install.fish -h
-usage: ./install.sh [-h] [--noconfirm] [--spotify] [--vscode] [--discord] [--aur-helper]
+usage: ./install.fish [-h] [--noconfirm] [--shell-only]
 
 options:
   -h, --help                  show this help message and exit
   --noconfirm                 do not confirm package installation
-  --spotify                   install Spotify (Spicetify)
-  --vscode=[codium|code]      install VSCodium (or VSCode)
-  --discord                   install Discord (OpenAsar + Equicord)
-  --zen                       install Zen browser
-  --aur-helper=[yay|paru]     the AUR helper to use
+  --shell-only                reinstall caelestia-shell only
 ```
 
 For example:
 
 ```sh
-git clone https://github.com/caelestia-dots/caelestia.git ~/.local/share/caelestia
-~/.local/share/caelestia/install.fish
+curl -fsSL https://raw.githubusercontent.com/caelestia-dots/caelestia/main/install.sh | sh
+```
+
+To upgrade an existing checkout, run:
+
+```sh
+cd ~/Projects/caelestia
+cd caelestia-dotfiles
+./install.fish
+
+# shell-only reinstall
+./install.fish --shell-only
 ```
 
 ### Manual installation
 
 Dependencies:
 
--   hyprland
--   xdg-desktop-portal-hyprland
--   xdg-desktop-portal-gtk
--   hyprpicker
--   wl-clipboard
--   cliphist
--   inotify-tools
--   app2unit
--   wireplumber
--   trash-cli
--   foot
--   fish
--   fastfetch
--   starship
--   btop
--   jq
--   eza
--   adw-gtk-theme
--   papirus-icon-theme
--   qtengine-git
--   ttf-jetbrains-mono-nerd
+- hyprland
+- xdg-desktop-portal-hyprland
+- xdg-desktop-portal-gtk
+- hyprpicker
+- wl-clipboard
+- cliphist
+- inotify-tools
+- app2unit
+- wireplumber
+- trash-cli
+- foot
+- fish
+- fastfetch
+- starship
+- btop
+- jq
+- eza
+- adw-gtk-theme
+- papirus-icon-theme
+- qtengine-git
+- ttf-jetbrains-mono-nerd
 
 Install all dependencies and follow the installation guides of the
 [shell](https://github.com/caelestia-dots/shell) and [cli](https://github.com/caelestia-dots/cli)
@@ -131,13 +142,13 @@ There aren't really any usage instructions... these are a set of dotfiles.
 
 Here's a list of useful keybinds though:
 
--   `Super` - open launcher
--   `Super` + `#` - switch to workspace `#`
--   `Super` `Alt` + `#` - move window to workspace `#`
--   `Super` + `T` - open terminal (foot)
--   `Super` + `W` - open browser (zen)
--   `Super` + `C` - open IDE (vscodium)
--   `Super` + `S` - toggle special workspace or close current special workspace
--   `Ctrl` `Alt` + `Delete` - open session menu
--   `Ctrl` `Super` + `Space` - toggle media play state
--   `Ctrl` `Super` `Alt` + `R` - restart the shell
+- `Super` - open launcher
+- `Super` + `#` - switch to workspace `#`
+- `Super` `Alt` + `#` - move window to workspace `#`
+- `Super` + `T` - open terminal (foot)
+- `Super` + `W` - open browser (zen)
+- `Super` + `C` - open IDE (vscodium)
+- `Super` + `S` - toggle special workspace or close current special workspace
+- `Ctrl` `Alt` + `Delete` - open session menu
+- `Ctrl` `Super` + `Space` - toggle media play state
+- `Ctrl` `Super` `Alt` + `R` - restart the shell
