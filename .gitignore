@@ -4,6 +4,7 @@
 /dotfiles/btop/themes/
 
 /fish/fish_variables
+/fish/conf.d/
 
 /shell/caelestia-shell*
 
