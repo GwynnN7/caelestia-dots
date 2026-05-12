@@ -3,10 +3,8 @@
 /dotfiles/btop/btop.log
 /dotfiles/btop/themes/
 
-/fish/fish_variables
-/fish/conf.d/
-
-/shell/caelestia-shell*
+/dotfiles/fish/fish_variables
+/dotfiles/fish/conf.d/
 
 /dotfiles/micro/b*
 /dotfiles/micro/plug
