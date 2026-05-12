@@ -239,8 +239,20 @@ mkdir -p "$HOME/.local/bin"
 mkdir -p "$HOME/Projects"
 mkdir -p "$HOME/Pictures"
 
-git clone https://github.com/GwynnN7/Wallpapers "$HOME/Pictures/Wallpapers" --depth=1
-git clone https://github.com/GwynnN7/Cortana "$HOME/Projects/Cortana" --depth=1
+if ! test -d "$HOME/Pictures/Wallpapers"
+    log 'Cloning Wallpapers...'
+    git clone https://github.com/GwynnN7/Wallpapers "$HOME/Pictures/Wallpapers" --depth=1
+else
+    log 'Wallpapers already exists, skipping...'
+end
+
+if ! test -d "$HOME/Projects/Cortana"
+    log 'Cloning Cortana...'
+    git clone https://github.com/GwynnN7/Cortana "$HOME/Projects/Cortana" --depth=1
+else
+    log 'Cortana already exists, skipping...'
+end
+
 mkdir -p "$HOME/Projects/Cortana/CortanaDesktop/out"
 
 if test -d services

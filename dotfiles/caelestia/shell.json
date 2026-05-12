@@ -66,7 +66,8 @@
                     "timeout": 900
                 }
             ]
-        }
+        },
+        "mediaGifSpeedAdjustment": 125
     },
     "launcher": {
         "actionPrefix": "@",
@@ -275,9 +276,8 @@
         "hideDelay": 1000
     },
     "paths": {
-        "cortanaPic": "root:/assets/cortana.png",
         "lyricsDir": "~/Music/lyrics",
-        "wallpaperDir": "~/Pictures/Wallpapers"
+        "wallpaperDir": "~/Pictures/Wallpaper"
     },
     "services": {
         "defaultPlayer": "Tidal",
@@ -291,11 +291,6 @@
     },
     "session": {
         "commands": {
-            "bios": [
-                "systemctl",
-                "reboot",
-                "--firmware-setup"
-            ],
             "reboot": [
                 "systemctl",
                 "reboot"
@@ -303,14 +298,6 @@
             "shutdown": [
                 "systemctl",
                 "poweroff"
-            ],
-            "suspend": [
-                "systemctl",
-                "suspend"
-            ],
-            "windows": [
-                "systemctl",
-                "reboot"
             ]
         }
     },

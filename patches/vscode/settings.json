@@ -47,5 +47,6 @@
     "editor.inlayHints.enabled": "off",
     "qt-qml.qmlls.customExePath": "/usr/bin/qmlls6",
     "qt-qml.doNotAskForQmllsDownload": true,
-    "chat.viewSessions.orientation": "stacked"
+    "chat.viewSessions.orientation": "stacked",
+    "editor.minimap.enabled": false
 }
