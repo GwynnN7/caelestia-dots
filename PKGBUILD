@@ -10,8 +10,8 @@ url='https://github.com/gwynnn7/caelestia-dots'
 license=('GPL-3.0-only')
 provides=($_pkgname)
 conflicts=($_pkgname)
-depends=('caelestia-cli' 'caelestia-shell'
-         'hyprland' 'xdg-desktop-portal-hyprland' 'xdg-desktop-portal-gtk' 'hyprpicker' 'polkit-gnome' 'gnome-keyring'
+depends=('caelestia-cli' 'caelestia-shell' 'caelestia-sddm-minimalistv2-git'
+         'hyprland' 'xdg-desktop-portal-hyprland' 'xdg-desktop-portal-gtk' 'hyprpicker' 'polkit-gnome' 'gnome-keyring' 'uwsm'
          'wl-clipboard' 'cliphist' 'wtype' 'inotify-tools' 'app2unit' 'wireplumber' 'trash-cli' 'dotnet-sdk'
          'foot' 'fish' 'yazi' 'eza' 'bat' 'fastfetch' 'starship' 'btop' 'jq' 'adw-gtk-theme'
          'papirus-icon-theme' 'qtengine-git' 'ttf-jetbrains-mono-nerd')

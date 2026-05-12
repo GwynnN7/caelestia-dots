@@ -207,9 +207,9 @@
             },
             {
                 "command": [
-                    "loginctl",
-                    "terminate-user",
-                    ""
+                    "hyprctl",
+                    "dispatch",
+                    "exit"
                 ],
                 "dangerous": true,
                 "description": "Log out of the current session",
@@ -291,13 +291,36 @@
     },
     "session": {
         "commands": {
+            "logout": [
+                "hyprctl",
+                "dispatch",
+                "exit"
+            ],
             "reboot": [
-                "systemctl",
-                "reboot"
+                "cortana",
+                "api",
+                "-cmd",
+                "reboot",
+                "computer"
             ],
             "shutdown": [
-                "systemctl",
-                "poweroff"
+                "cortana",
+                "api",
+                "-cmd",
+                "shutdown",
+                "computer"
+            ],
+            "suspend": [
+                "cortana",
+                "api",
+                "-cmd",
+                "suspend"
+            ],
+            "windows": [
+                "cortana",
+                "api",
+                "-cmd",
+                "system"
             ]
         }
     },
