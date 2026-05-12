@@ -40,7 +40,7 @@ function sh-read
     sh -c 'read a && echo -n "$a"' || exit 1
 end
 
-function confirm-overwrite -a path
+function confirm-overwrite -a path src
     if test -e "$path"; or test -L "$path"
         # No prompt if noconfirm
         if set -q noconfirm
@@ -60,6 +60,10 @@ function confirm-overwrite -a path
                 rm -rf "$path"
             end
         end
+    end
+
+    if test -n "$src"
+        ln -s (realpath "$src") "$path"
     end
 
     return 0
@@ -186,6 +190,7 @@ fish -c 'rm -rf src pkg' 2> /dev/null
 fish -c 'rm -f caelestia-meta-*.pkg.tar.*' 2> /dev/null
 
 set PKGS \
+    thunar \
     zen-browser-bin \
     vesktop \
     telegram-desktop \
@@ -200,7 +205,8 @@ set PKGS \
     file-roller \
     7zip \
     xorg-xhost \
-    ncdu 
+    ncdu \
+    nvtop
 
 log 'Installing packages...'
 paru -S --needed --noconfirm $PKGS
@@ -212,9 +218,8 @@ if test -d dotfiles
             set name (basename $src)
             set dest $config/$name
 
-            if confirm-overwrite $dest
+            if confirm-overwrite $dest $src
                 log "Installing $name..."
-                ln -s (realpath $src) $dest
             end
         end
     end
@@ -227,11 +232,8 @@ set -l folder $config/Code/User
 log "Setup vscode..."
 
 # Install configs
-if confirm-overwrite $folder/settings.json && confirm-overwrite $folder/keybindings.json && confirm-overwrite $config/code-flags.conf
+if confirm-overwrite $folder/settings.json patches/vscode/settings.json && confirm-overwrite $folder/keybindings.json patches/vscode/keybindings.json && confirm-overwrite $config/code-flags.conf patches/vscode/flags.conf
     log "Installing vscode config..."
-    ln -s (realpath patches/vscode/settings.json) $folder/settings.json
-    ln -s (realpath patches/vscode/keybindings.json) $folder/keybindings.json
-    ln -s (realpath patches/vscode/flags.conf) $config/code-flags.conf
 
     # Install extension
     code --install-extension patches/vscode/caelestia-vscode-integration/caelestia-vscode-integration-*.vsix
@@ -243,9 +245,8 @@ log "Setup zen..."
 
 for chrome in $HOME/.zen/*/chrome
     if test -d "$chrome"
-        if confirm-overwrite "$chrome/userChrome.css"
+        if confirm-overwrite "$chrome/userChrome.css" patches/zen/userChrome.css
             log 'Installing zen userChrome...'
-            ln -s (realpath patches/zen/userChrome.css) "$chrome/userChrome.css"
         end
     end
 end
@@ -261,10 +262,9 @@ if confirm-overwrite $hosts/caelestiafox.json
     sed -i "s|{{ \$lib }}|$lib|g" $hosts/caelestiafox.json
 end
 
-if confirm-overwrite $lib/caelestiafox
+if confirm-overwrite $lib/caelestiafox patches/zen/native_app/app.fish
     log 'Installing zen native app...'
     mkdir -p $lib
-    ln -s (realpath patches/zen/native_app/app.fish) $lib/caelestiafox
 end
 
 # Prompt user to install extension
@@ -305,9 +305,8 @@ if test -d services
                 set name (basename $svc)
                 set dest $user_systemd_dir/$name
 
-                if confirm-overwrite $dest
+                if confirm-overwrite $dest $svc
                     log "Installing service $name..."
-                    ln -s (realpath $svc) $dest
                     set enabled_list $enabled_list $name
                 end
             end
@@ -337,9 +336,8 @@ if test -d scripts
             set name (basename $file)
             set dest $bin_dir/$name
 
-            if confirm-overwrite $dest
+            if confirm-overwrite $dest $file
                 log "Installing script $name..."
-                ln -s (realpath $file) $dest
             end
         end
     end
@@ -386,6 +384,8 @@ caelestia shell -d > /dev/null
 caelestia wallpaper -r "$HOME/Pictures/Wallpaper" > /dev/null
 
 log 'Done!'
-log 'Edit sudoers with visudo command:'
-bat info/sudoers.txt
+bat info/post.md >> $HOME/TODO.md
+
+clear
+exec fish -i -C $HOME/TODO.md
 
