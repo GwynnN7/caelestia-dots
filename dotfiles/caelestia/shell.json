@@ -89,7 +89,7 @@
                     "calc"
                 ],
                 "dangerous": false,
-                "description": "Do simple math equations (powered by Qalc)",
+                "description": "Do simple math equations",
                 "enabled": true,
                 "icon": "calculate",
                 "name": "Calculator"
@@ -185,6 +185,20 @@
             },
             {
                 "command": [
+                    "caelestia",
+                    "shell",
+                    "drawers",
+                    "toggle",
+                    "session"
+                ],
+                "dangerous": false,
+                "description": "Open session menu",
+                "enabled": true,
+                "icon": "power_settings_new",
+                "name": "Session"
+            },
+            {
+                "command": [
                     "systemctl",
                     "poweroff"
                 ],
@@ -233,7 +247,7 @@
                     "systemctl",
                     "suspend"
                 ],
-                "dangerous": false,
+                "dangerous": true,
                 "description": "Suspend then hibernate",
                 "enabled": true,
                 "icon": "bedtime",
@@ -253,7 +267,22 @@
                 "name": "Settings"
             }
         ],
-        "enableDangerousActions": true,
+        "enableDangerousActions": false,
+        "favouriteApps": [
+            "com.mastermindzh.tidal-hifi",
+            "org.telegram.desktop",
+            "zen",
+            "code",
+            "vesktop",
+            "steam"
+        ],
+        "hiddenApps": [
+            "xfce4-about",
+            "cmake-gui",
+            "vim",
+            "qvidcap",
+            "qv4l2"
+        ],
         "maxShown": 7,
         "maxWallpapers": 9,
         "showOnHover": false,
@@ -297,30 +326,14 @@
                 "exit"
             ],
             "reboot": [
-                "cortana",
-                "api",
-                "-cmd",
-                "reboot",
-                "computer"
+                "sh",
+                "-c",
+                "cortana api -cmd reboot computer | cortana notify || systemctl reboot"
             ],
             "shutdown": [
-                "cortana",
-                "api",
-                "-cmd",
-                "shutdown",
-                "computer"
-            ],
-            "suspend": [
-                "cortana",
-                "api",
-                "-cmd",
-                "suspend"
-            ],
-            "windows": [
-                "cortana",
-                "api",
-                "-cmd",
-                "system"
+                "sh",
+                "-c",
+                "cortana api -cmd shutdown computer | cortana notify || systemctl poweroff"
             ]
         }
     },
