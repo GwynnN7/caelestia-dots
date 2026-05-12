@@ -1,17 +1,22 @@
-# caelestia
+<h1 align=center>caelestia-shell</h1>
 
-This is the main repo of the caelestia dots and contains the user configs for
-apps. This repo also includes an install script to install the entire dots.
+<div align=center>
+
+![GitHub last commit](https://img.shields.io/github/last-commit/gwynnn7/caelestia-dots?style=for-the-badge&labelColor=101418&color=9ccbfb)
+![GitHub Repo stars](https://img.shields.io/github/stars/caelestia-dots/caelestia?style=for-the-badge&labelColor=101418&color=b9c8da)
+![GitHub repo size](https://img.shields.io/github/repo-size/gwynnn7/caelestia-dots?style=for-the-badge&labelColor=101418&color=d3bfe6)
+
+</div>
+
+https://github.com/user-attachments/assets/0840f496-575c-4ca6-83a8-87bb01a85c5f
 
 ## Installation
 
-Bootstrap the repo with the shell entrypoint, or clone it manually if you
-want to keep a checkout for upgrades. The shell bootstrap updates the system
-and installs [`fish`](https://github.com/fish-shell/fish-shell) and `git`
-automatically; the standalone `install.fish` entrypoint still requires fish.
+> [!NOTE]
+> This is a customized fork of the original [`caelestia-dots`](https://github.com/caelestia-dots/caelestia) repository.
+> It is **not** recommended to use this version. Refer to the [`original dotfiles`](https://github.com/caelestia-dots/caelestia) installation.
+
 The default structure is:
-`~/Projects/caelestia/caelestia-dotfiles` (this repo)
-`~/Projects/caelestia/caelestia-shell` (shell repo used by PKGBUILD)
 
 > [!WARNING]
 > The install script symlinks all configs into place, so you CANNOT
@@ -24,18 +29,18 @@ The install script has some options for installing configs for some apps.
 
 ```
 $ ./install.fish -h
-usage: ./install.fish [-h] [--noconfirm] [--shell-only]
+usage: ./install.fish [-h] [--noconfirm] [--shell]
 
 options:
   -h, --help                  show this help message and exit
   --noconfirm                 do not confirm package installation
-  --shell-only                reinstall caelestia-shell only
+  --shell                reinstall caelestia-shell only
 ```
 
 For example:
 
 ```sh
-curl -fsSL https://raw.githubusercontent.com/caelestia-dots/caelestia/main/install.sh | sh
+curl -fsSL https://raw.githubusercontent.com/gwynnn7/caelestia-dots/main/install.sh | sh
 ```
 
 To upgrade an existing checkout, run:
@@ -46,109 +51,57 @@ cd caelestia-dotfiles
 ./install.fish
 
 # shell-only reinstall
-./install.fish --shell-only
+./install.fish --shell
 ```
-
-### Manual installation
 
 Dependencies:
 
+- caelestia-cli
+- caelestia-shell
+- caelestia-sddm-minimalistv2-git
 - hyprland
 - xdg-desktop-portal-hyprland
 - xdg-desktop-portal-gtk
 - hyprpicker
+- polkit-gnome
+- gnome-keyring
+- uwsm
 - wl-clipboard
 - cliphist
+- wtype
 - inotify-tools
 - app2unit
 - wireplumber
 - trash-cli
+- dotnet-sdk
+- udiskie
+- geoclue
+- gammastep
+- micro
+- pacseek
 - foot
 - fish
+- yazi
+- eza
+- bat
 - fastfetch
 - starship
 - btop
 - jq
-- eza
+- 7zip
 - adw-gtk-theme
+- playerctl
 - papirus-icon-theme
 - qtengine-git
 - ttf-jetbrains-mono-nerd
 
-Install all dependencies and follow the installation guides of the
-[shell](https://github.com/caelestia-dots/shell) and [cli](https://github.com/caelestia-dots/cli)
-to install them.
+Optional dependencies:
 
-> [!TIP]
-> If on Arch or an Arch-based distro, there is a meta package available [in this repository](PKGBUILD)
-> that pulls in all dependencies. It can be installed through the install script, makepkg/pacman, yay,
-> paru, or your preferred AUR helper.
-
-Then copy or symlink the `hypr`, `foot`, `fish`, `fastfetch`, `uwsm` and `btop` folders to the
-`$XDG_CONFIG_HOME` (usually `~/.config`) directory. e.g. `hypr -> ~/.config/hypr`.
-Copy `starship.toml` to `$XDG_CONFIG_HOME/starship.toml`.
-
-#### Installing Spicetify configs:
-
-Follow the Spicetify [installation instructions](https://spicetify.app/docs/advanced-usage/installation),
-copy or symlink the `spicetify` folder to `$XDG_CONFIG_HOME/spicetify` and run
-
-```sh
-spicetify config current_theme caelestia color_scheme caelestia custom_apps marketplace
-spicetify apply
-```
-
-#### Installing VSCode/VSCodium configs:
-
-Install VSCode or VSCodium, then copy or symlink `vscode/settings.json` and
-`vscode/keybindings.json` into the `$XDG_CONFIG_HOME/Code/User` (or `$XDG_CONFIG_HOME/VSCodium/User`
-if using VSCodium) folder. Then copy or symlink `vscode/flags.conf` to `$XDG_CONFIG_HOME/code-flags.conf`
-(or `$XDG_CONFIG_HOME/codium-flags.conf` if using VSCodium).
-
-Finally, install the extension VSIX from `vscode/caelestia-vscode-integration`.
-
-```sh
-# Use `codium` if using VSCodium
-code --install-extension vscode/caelestia-vscode-integration/caelestia-vscode-integration-*.vsix
-```
-
-#### Installing Zen Browser configs:
-
-Install Zen Browser, then copy or symlink `zen/userChrome.css` to the `chrome` folder in your
-profile of choice in `~/.zen`. e.g. `zen/userChrome.css -> ~/.zen/<profile>/chrome/userChrome.css`.
-
-Now install the native app by copying `zen/native_app/manifest.json` to
-`~/.mozilla/native-messaging-hosts/caelestiafox.json` and replacing the `{{ $lib }}` string in it
-with the absolute path of `~/.local/lib/caelestia` (this must be the absolute path, e.g.
-`/home/user/.local/lib/caelestia`). Then copy or symlink `zen/native_app/app.fish` to
-`~/.local/lib/caelestia/caelestiafox`.
-
-Finally, install the CaelestiaFox extension from [here](https://addons.mozilla.org/en-US/firefox/addon/caelestiafox).
-
-## Updating
-
-Simply run `yay` to update the AUR packages, then `cd` into the repo directory and run `git pull` to update the configs.
-
-## Usage
-
-> [!NOTE]
-> These dots do not contain a login manager (for now), so you must install a
-> login manager yourself unless you want to log in from a TTY. I recommend
-> [`greetd`](https://sr.ht/~kennylevinsen/greetd) with
-> [`tuigreet`](https://github.com/apognu/tuigreet), however you can use
-> any login manager you want.
-
-There aren't really any usage instructions... these are a set of dotfiles.
-
-Here's a list of useful keybinds though:
-
-- `Super` - open launcher
-- `Super` + `#` - switch to workspace `#`
-- `Super` `Alt` + `#` - move window to workspace `#`
-- `Super` + `T` - open terminal (foot)
-- `Super` + `W` - open browser (zen)
-- `Super` + `C` - open IDE (vscodium)
-- `Super` + `S` - toggle special workspace or close current special workspace
-- `Ctrl` `Alt` + `Delete` - open session menu
-- `Ctrl` `Super` + `Space` - toggle media play state
-- `Ctrl` `Super` `Alt` + `R` - restart the shell
+- thunar (file manager)
+- telegram-desktop (message client)
+- vesktop (communication client)
+- visual-studio-code-bin (code editor)
+- zen-browser (web browser)
+- valent-git (phone link)
+- cachyos-gaming-applications (gaming suite)
+- gamemode (gaming utility)

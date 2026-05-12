@@ -3,18 +3,18 @@
 argparse -n 'install.fish' -X 0 \
     'h/help' \
     'noconfirm' \
-    'shell-only' \
+    'shell' \
     -- $argv
 or exit
 
 # Print help
 if set -q _flag_h
-    echo 'usage: ./install.fish [-h] [--noconfirm] [--shell-only]'
+    echo 'usage: ./install.fish [-h] [--noconfirm] [--shell]'
     echo
     echo 'options:'
     echo '  -h, --help                  show this help message and exit'
     echo '  --noconfirm                 do not confirm package installation'
-    echo '  --shell-only                reinstall caelestia-shell only'
+    echo '  --shell                     reinstall caelestia-shell only'
 
     exit
 end
@@ -74,6 +74,12 @@ set -q _flag_shell_only && set shell_only 1
 set -q XDG_CONFIG_HOME && set -l config $XDG_CONFIG_HOME || set -l config $HOME/.config
 set -q XDG_STATE_HOME && set -l state $XDG_STATE_HOME || set -l state $HOME/.local/state
 set -l install_dir (path dirname (path resolve (status filename)))
+
+# Detect if running on laptop or desktop
+set -l is_laptop 0
+if test -d /sys/class/power_supply/BAT0 -o -d /sys/class/power_supply/BAT1
+    set is_laptop 1
+end
 
 # Startup prompt
 set_color magenta
@@ -160,8 +166,9 @@ log 'Installing custom caelestia-shell...'
 cd $CAELESTIA_SHELL_REPO || exit 1
 $aur_helper -Ui $noconfirm
 
-# Clean up the built package archive
-fish -c 'rm -rf src/ pkg/' 2> /dev/null
+# Clean up PKGBUILD artifacts
+fish -c 'rm -rf src pkg' 2> /dev/null
+fish -c 'rm -f caelestia-shell-*.pkg.tar.*' 2> /dev/null
 
 if test $shell_only -eq 1
     log 'Done!'
@@ -174,8 +181,9 @@ cd $install_dir || exit 1
 log 'Installing metapackage...'
 $aur_helper -Ui $noconfirm
 
-# Clean up the built package archive
-fish -c 'rm -f caelestia-meta-*.pkg.tar.zst' 2> /dev/null
+# Clean up PKGBUILD artifacts
+fish -c 'rm -rf src pkg' 2> /dev/null
+fish -c 'rm -f caelestia-meta-*.pkg.tar.*' 2> /dev/null
 
 set PKGS \
     zen-browser-bin \
@@ -258,6 +266,7 @@ if confirm-overwrite $lib/caelestiafox
     mkdir -p $lib
     ln -s (realpath patches/zen/native_app/app.fish) $lib/caelestiafox
 end
+
 # Prompt user to install extension
 log 'Please install the CaelestiaFox extension from https://addons.mozilla.org/en-US/firefox/addon/caelestiafox if you have not already done so.'
 
@@ -284,31 +293,35 @@ end
 mkdir -p "$HOME/Projects/Cortana/CortanaDesktop/out"
 
 if test -d services
-    set user_systemd_dir $HOME/.config/systemd/user
-    mkdir -p $user_systemd_dir
+    if test $is_laptop -eq 1
+        log 'Skipping service installation on laptop'
+    else
+        set user_systemd_dir $HOME/.config/systemd/user
+        mkdir -p $user_systemd_dir
 
-    set -l enabled_list
-    for svc in services/*.service
-        if test -f $svc
-            set name (basename $svc)
-            set dest $user_systemd_dir/$name
+        set -l enabled_list
+        for svc in services/*.service
+            if test -f $svc
+                set name (basename $svc)
+                set dest $user_systemd_dir/$name
 
-            if confirm-overwrite $dest
-                log "Installing service $name..."
-                ln -s (realpath $svc) $dest
-                set enabled_list $enabled_list $name
+                if confirm-overwrite $dest
+                    log "Installing service $name..."
+                    ln -s (realpath $svc) $dest
+                    set enabled_list $enabled_list $name
+                end
             end
         end
-    end
 
-    if test (count $enabled_list) -gt 0
-        if type -q systemctl
-            systemctl --user daemon-reload
-            for name in $enabled_list
-                systemctl --user enable --now $name
+        if test (count $enabled_list) -gt 0
+            if type -q systemctl
+                systemctl --user daemon-reload
+                for name in $enabled_list
+                    systemctl --user enable --now $name
+                end
+            else
+                log 'systemctl not found; cannot enable services automatically.'
             end
-        else
-            log 'systemctl not found; cannot enable services automatically.'
         end
     end
 end
@@ -331,6 +344,10 @@ if test -d scripts
         end
     end
 end
+
+
+log 'Enabling sddm display manager...'
+sudo systemctl enable --now sddm.service || log 'Failed to enable sddm service'
 
 
 # Generate scheme stuff if needed
@@ -366,6 +383,7 @@ end
 
 # Start the shell
 caelestia shell -d > /dev/null
+caelestia wallpaper -r "$HOME/Pictures/Wallpaper" > /dev/null
 
 log 'Done!'
 log 'Edit sudoers with visudo command:'

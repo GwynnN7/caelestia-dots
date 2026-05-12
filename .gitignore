@@ -12,4 +12,12 @@
 /dotfiles/caelestia/monitors
 /dotfiles/caelestia/templates
 
+.vscode/
+
+# PKGBUILD artifacts
+src/
+pkg/
+*.pkg.tar.zst
+*.pkg.tar.xz
+*.pkg.tar.gz
 .SRCINFO
