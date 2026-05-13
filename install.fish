@@ -384,7 +384,7 @@ caelestia shell -d > /dev/null
 caelestia wallpaper -r "$HOME/Pictures/Wallpaper" > /dev/null
 
 log 'Done!'
-bat info/post.md >> $HOME/TODO.md
+bat other/post.md >> $HOME/TODO.md
 
 clear
 exec fish -i -C $HOME/TODO.md

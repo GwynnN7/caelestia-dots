@@ -1,0 +1,130 @@
+binds {
+    Ctrl+Escape hotkey-overlay-title="Task Manager: Toggle" { spawn-sh "ghostty -e btop"; }
+    Mod+Comma hotkey-overlay-title="Settings" { spawn-sh "qs -c noctalia-shell ipc call settings toggle"; }
+    Mod+Period hotkey-overlay-title="Emoji" { spawn-sh "qs -c noctalia-shell ipc call launcher emoji"; }
+    Mod+V hotkey-overlay-title="Clipboard Manager" { spawn-sh "qs -c noctalia-shell ipc call launcher clipboard"; }
+    Super+B hotkey-overlay-title="Control Center: Toggle" { spawn-sh "qs -c noctalia-shell ipc call controlCenter toggle"; }
+    Super+E hotkey-overlay-title="Application Launcher" { spawn-sh "qs -c noctalia-shell ipc call launcher toggle"; }
+    Super+Escape hotkey-overlay-title="Power Menu: Toggle" { spawn-sh "qs -c noctalia-shell ipc call sessionMenu toggle"; }
+    Super+F3 hotkey-overlay-title="Power Menu: Toggle" { spawn-sh "qs -c noctalia-shell ipc call sessionMenu toggle"; }
+    Super+F4 hotkey-overlay-title="Task Manager: Toggle" { spawn-sh "ghostty -e btop"; }
+    Super+H hotkey-overlay-title="Dashboard: Toggle" { spawn-sh "qs -c noctalia-shell ipc call wallpaper toggle"; }
+    Super+L hotkey-overlay-title="Lock Screen" { spawn-sh "qs -c noctalia-shell ipc call lockScreen lock"; }
+    Super+N hotkey-overlay-title="Notification Center" { spawn-sh "qs -c noctalia-shell ipc call notifications toggleHistory"; }
+    Super+M hotkey-overlay-title="Notepad" { spawn-sh "qs -c noctalia-shell ipc call plugin togglePanel clipper"; }
+    Super+U hotkey-overlay-title="Bar: Toggle (Primary)" { spawn-sh "qs -c noctalia-shell ipc call bar toggle"; }
+    
+    Super+XF86AudioLowerVolume hotkey-overlay-title="Player Volume Down (5%)" { spawn "~/.local/bin/media.sh" "-"; }
+    Super+XF86AudioRaiseVolume hotkey-overlay-title="Player Volume Up (5%)" { spawn "~/.local/bin/media.sh" "+"; }
+    Super+Page_Down hotkey-overlay-title="Player Volume Down (5%)" { spawn "~/.local/bin/media.sh" "-"; }
+    Super+Page_Up hotkey-overlay-title="Player Volume Up (5%)" { spawn "~/.local/bin/media.sh" "+"; }
+
+    XF86AudioRaiseVolume { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "volume" "increase"; }
+    XF86AudioLowerVolume { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "volume" "decrease"; }
+    XF86AudioMute { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "volume" "muteOutput"; }
+    XF86MonBrightnessUp { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "brightness" "increase"; }
+    XF86MonBrightnessDown { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "brightness" "decrease"; }
+
+    Ctrl+Shift+F12 allow-when-locked=true { spawn-sh "qs -c noctalia-shell ipc call volume muteInput"; }
+    XF86AudioMicMute allow-when-locked=true { spawn-sh "qs -c noctalia-shell ipc call volume muteInput"; }
+    XF86AudioNext allow-when-locked=true  { spawn-sh "qs -c noctalia-shell ipc call media next"; }
+    XF86AudioPause allow-when-locked=true  { spawn-sh "qs -c noctalia-shell ipc call media pause"; }
+    XF86AudioPlay allow-when-locked=true  { spawn-sh "qs -c noctalia-shell ipc call media playPause"; }
+    XF86AudioPrev allow-when-locked=true  { spawn-sh "qs -c noctalia-shell ipc call media previous"; }
+   
+    Mod+1 { focus-workspace 1; }
+    Mod+2 { focus-workspace 2; }
+    Mod+3 { focus-workspace 3; }
+    Mod+4 { focus-workspace 4; }
+    Mod+5 { focus-workspace 5; }
+    Mod+6 { focus-workspace 6; }
+    Mod+7 { focus-workspace 7; }
+    Mod+8 { focus-workspace 8; }
+    Mod+9 { focus-workspace 9; }
+    Mod+Shift+1 { move-column-to-workspace 1; }
+    Mod+Shift+2 { move-column-to-workspace 2; }
+    Mod+Shift+3 { move-column-to-workspace 3; }
+    Mod+Shift+4 { move-column-to-workspace 4; }
+    Mod+Shift+5 { move-column-to-workspace 5; }
+    Mod+Shift+6 { move-column-to-workspace 6; }
+    Mod+Shift+7 { move-column-to-workspace 7; }
+    Mod+Shift+8 { move-column-to-workspace 8; }
+    Mod+Shift+9 { move-column-to-workspace 9; }
+    Mod+WheelScrollDown cooldown-ms=150 { focus-workspace-down; }
+    Mod+WheelScrollUp cooldown-ms=150 { focus-workspace-up; }
+    Shift+Super+WheelScrollDown cooldown-ms=150 { move-column-to-workspace-down; }
+    Shift+Super+WheelScrollUp { move-column-to-workspace-up; }
+    Super+Ctrl+Down { move-workspace-down; }
+    Super+Ctrl+S { move-workspace-down; }
+    Super+Ctrl+Up { move-workspace-up; }
+    Super+Ctrl+W { move-workspace-up; }
+    Super+Down { focus-workspace-down; }
+    Super+S { focus-workspace-down; }
+    Super+Shift+Down { move-column-to-workspace-down; }
+    Super+Shift+S { move-column-to-workspace-down; }
+    Super+Shift+Up { move-column-to-workspace-up; }
+    Super+Shift+W { move-column-to-workspace-up; }
+    Super+Up { focus-workspace-up; }
+    Super+W { focus-workspace-up; }
+    Alt+Print { screenshot-window; }
+    Alt+XF86Launch1 { screenshot-window; }
+    Mod+C { center-column; }
+    Mod+Ctrl+F { expand-column-to-available-width; }
+    Mod+Ctrl+Left { focus-monitor-left; }
+    Mod+End { focus-column-last; }
+    Mod+Equal { set-column-width "+10%"; }
+    Mod+F { maximize-column; }
+    Mod+Home { focus-column-first; }
+    Mod+Left { focus-column-left; }
+    Mod+Minus { set-column-width "-10%"; }
+    Mod+Q repeat=false { close-window; }
+    Mod+Right { focus-column-right; }
+    Mod+Shift+Left { move-column-left; }
+    Mod+Shift+Right { move-column-right; }
+    Super+A { focus-column-left; }
+    Super+Alt+A { set-column-width "-10%"; }
+    Super+Alt+Apostrophe { set-window-height "+10%"; }
+    Super+Alt+C { center-visible-columns; }
+    Super+Alt+D { set-column-width "+10%"; }
+    Super+Alt+Equal { set-window-height "+10%"; }
+    Super+Alt+F { fullscreen-window; }
+    Super+Alt+G { switch-focus-between-floating-and-tiling; }
+    Super+Alt+Minus { set-window-height "-10%"; }
+    Super+Alt+Semicolon { set-window-height "-10%"; }
+    Super+Alt+X hotkey-overlay-title="Cycle Window Height" { switch-preset-window-height; }
+    Super+Alt+Z { set-window-height "-10%"; }
+    Super+Apostrophe { set-column-width "+10%"; }
+    Super+Ctrl+A { focus-monitor-left; }
+    Super+Ctrl+D { focus-monitor-right; }
+    Super+Ctrl+Right { focus-monitor-right; }
+    Super+Ctrl+Shift+A { move-column-to-monitor-left; }
+    Super+Ctrl+Shift+D { move-column-to-monitor-right; }
+    Super+Ctrl+Shift+Left { move-column-to-monitor-left; }
+    Super+Ctrl+Shift+Right { move-column-to-monitor-right; }
+    Super+D { focus-column-right; }
+    Super+G { toggle-window-floating; }
+    Super+Semicolon { set-column-width "-10%"; }
+    Super+Shift+A { move-column-left; }
+    Super+Shift+D { move-column-right; }
+    Super+Shift+End { move-column-to-last; }
+    Super+Shift+Home { move-column-to-first; }
+    Super+X { switch-preset-column-width; }
+    Super+Z { set-window-height "+10%"; }
+    Super+Alt+P { power-off-monitors; }
+    Alt+Shift+S { screenshot; }
+    Ctrl+Print { screenshot-screen; }
+    Ctrl+XF86Launch1 { screenshot-screen; }
+    Print { screenshot; }
+    XF86Launch1 { screenshot; }
+    Mod+T hotkey-overlay-title="Open Terminal" { spawn "ghostty"; }
+    Super+F1 { spawn "sh" "-c" "cortana api -act toggle devices/lamp | cortana notify"; }
+    Super+F2 { spawn "sh" "-c" "cortana api -act toggle devices/generic | cortana notify"; }
+    Super+F5 { spawn "sh" "-c" "cortana api -val 0 settings/automaticMode | cortana notify"; }
+    Super+F6 { spawn "sh" "-c" "cortana api -val 1 settings/automaticMode | cortana notify"; }
+    Super+R hotkey-overlay-title="Nautilus" { spawn "nautilus"; }
+    Super+Y hotkey-overlay-title="Yazi" { spawn "sh" "-c" "ghostty -e yazi"; }
+    Ctrl+Shift+F11 repeat=false { toggle-overview; }
+    Mod+Tab repeat=false { toggle-overview; }
+    Super+P repeat=false allow-inhibiting=false hotkey-overlay-title="Toggle Shortcuts Inhibit" { toggle-keyboard-shortcuts-inhibit; }
+    Super+space repeat=false { toggle-overview; }
+}
