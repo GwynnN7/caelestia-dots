@@ -74,7 +74,7 @@ end
 set -q _flag_noconfirm && set noconfirm '--noconfirm'
 set -l aur_helper paru
 set -l shell_only 0
-set -q _flag_shell_only && set shell_only 1
+set -q _flag_shell && set shell_only 1
 set -q XDG_CONFIG_HOME && set -l config $XDG_CONFIG_HOME || set -l config $HOME/.config
 set -q XDG_STATE_HOME && set -l state $XDG_STATE_HOME || set -l state $HOME/.local/state
 set -l install_dir (path dirname (path resolve (status filename)))
