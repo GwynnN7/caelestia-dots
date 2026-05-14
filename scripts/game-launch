@@ -17,7 +17,7 @@ if ! command -v powerprofilesctl &>/dev/null; then
 fi
 
 
-GS_ARGS=(gamescope -W 1920 -H 1080 -f --adaptive-sync --mangoapp -r 165 --)
+GS_ARGS=(gamescope -W 1920 -H 1080 -f -r 165 --adaptive-sync --mangoapp --force-grab-cursor --)
 
 ENV_VARS=(
     env PROTON_ENABLE_WAYLAND=1

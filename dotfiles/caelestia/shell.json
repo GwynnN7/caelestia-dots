@@ -46,6 +46,8 @@
             "recolour": false
         },
         "workspaces": {
+            "maxWindowIcons": 4,
+            "occupiedBg": false,
             "shown": 4
         }
     },
@@ -226,9 +228,8 @@
             },
             {
                 "command": [
-                    "hyprctl",
-                    "dispatch",
-                    "exit"
+                    "uwsm",
+                    "stop"
                 ],
                 "dangerous": true,
                 "description": "Log out of the current session",
@@ -286,11 +287,17 @@
             "cmake-gui",
             "vim",
             "qvidcap",
-            "qv4l2"
+            "qv4l2",
+            "bssh",
+            "bvnc",
+            "avahi-discover",
+            "thunar-settings",
+            "org.kde.kdeconnect.nonplasma",
+            "org.kde.kdeconnect.sms"
         ],
         "maxShown": 7,
         "maxWallpapers": 9,
-        "showOnHover": false,
+        "showOnHover": true,
         "specialPrefix": "@",
         "useFuzzy": {
             "actions": false,
@@ -301,7 +308,8 @@
         }
     },
     "notifs": {
-        "actionOnClick": true
+        "actionOnClick": true,
+        "defaultExpireTimeout": 3000
     },
     "osd": {
         "enableBrightness": true,
@@ -331,9 +339,8 @@
                 "cortana api settings/automaticmode | grep -q On && val=0 || val=1; cortana api -val $val settings/automaticmode | cortana notify"
             ],
             "logout": [
-                "hyprctl",
-                "dispatch",
-                "exit"
+                "uwsm",
+                "stop"
             ],
             "reboot": [
                 "sh",

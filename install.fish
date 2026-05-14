@@ -195,7 +195,7 @@ set PKGS \
     vesktop \
     telegram-desktop \
     visual-studio-code-bin \
-    valent-git \
+    kdeconnect \
     flatpak \
     gimp \
     vlc \
@@ -204,9 +204,11 @@ set PKGS \
     evince \
     file-roller \
     7zip \
+    nvtop \
     xorg-xhost \
     ncdu \
-    nvtop
+    sshfs \
+    android-tools
 
 log 'Installing packages...'
 paru -S --needed --noconfirm $PKGS
@@ -266,9 +268,6 @@ if confirm-overwrite $lib/caelestiafox patches/zen/native_app/app.fish
     log 'Installing zen native app...'
     mkdir -p $lib
 end
-
-# Prompt user to install extension
-log 'Please install the CaelestiaFox extension from https://addons.mozilla.org/en-US/firefox/addon/caelestiafox if you have not already done so.'
 
 # Custom scripts
 
@@ -389,3 +388,11 @@ bat other/post.md >> $HOME/TODO.md
 clear
 exec fish -i -C $HOME/TODO.md
 
+
+# TODO
+https://github.com/gfhdhytghd/hypr-kdeconnect-fix.git
+
+cmake -S . -B build -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX="$HOME/.local"
+cmake --build build -j"$(nproc)"
+ctest --test-dir build --output-on-failure
+cmake --install build

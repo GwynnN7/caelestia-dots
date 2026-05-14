@@ -13,13 +13,13 @@ depends=('caelestia-cli' 'caelestia-shell' 'caelestia-sddm-minimalistv2-git'
          'hyprland' 'xdg-desktop-portal-hyprland' 'xdg-desktop-portal-gtk' 'hyprpicker' 'polkit-gnome' 'gnome-keyring' 'uwsm'
          'wl-clipboard' 'cliphist' 'wtype' 'inotify-tools' 'app2unit' 'wireplumber' 'trash-cli' 'dotnet-sdk' 'udiskie' 'geoclue' 'gammastep'
          'micro' 'pacseek' 'foot' 'fish' 'yazi' 'eza' 'bat' 'fastfetch' 'starship' 'btop' 'jq' '7zip' 'adw-gtk-theme' 'playerctl'
-         'papirus-icon-theme' 'qtengine-git' 'ttf-jetbrains-mono-nerd')
+         'papirus-icon-theme' 'qtengine' 'ttf-jetbrains-mono-nerd')
 
 optdepends=('thunar: file manager'
 			'telegram-desktop: message client'
             'vesktop: communication client'
             'visual-studio-code-bin: code editor'
             'zen-browser: web browser'
-            'valent-git: phone link'
+            'kdeconnect: phone link'
             'cachyos-gaming-applications: gaming suite'
             'gamemode: gaming utility')
