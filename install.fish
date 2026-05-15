@@ -481,4 +481,4 @@ log 'Done!'
 bat other/post.md >> $HOME/TODO.md
 
 clear
-exec fish -i -C $HOME/TODO.md
+exec fish -i -C 'cat $HOME/TODO.md'
