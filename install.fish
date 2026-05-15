@@ -456,6 +456,7 @@ if test -f $sddm_src
         log 'Failed to create /etc/sddm.conf.d (permission denied)'
     else
         sudo cp -f $sddm_src $sddm_dest
+        sudo rm -f /etc/sddm.conf
     end
 else
     log 'sddm caelestia.conf not found; skipping.'
