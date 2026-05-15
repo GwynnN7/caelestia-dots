@@ -364,18 +364,113 @@ if ! set -q noconfirm
     end
 end
 
+
+# Install Hyprland plugins
 if test $_hypr_install -eq 1
     log 'Installing Hyprland plugins'
 
     hyprpm purge-cache
     hyprpm update
     hyprpm add https://github.com/zjeffer/split-monitor-workspaces
-    hyprpm add https://github.com/gfhdhytghd/hymission
-    hyprpm enable hymission
+    hyprpm add https://github.com/MainstreamOS/hyprland-scroll-overview de26fe9c1be6501ca1f1cacd7a3a9443933cf8f1
+    hyprpm enable scrolloverview
     hyprpm enable split-monitor-workspaces
     hyprpm reload
 else
     log 'Skipping Hyprland plugins...'
+end
+
+
+# Build and install hypr-kdeconnect-fix from source
+set -l _hypr_repo https://github.com/gfhdhytghd/hypr-kdeconnect-fix.git
+set -l _hypr_dir /tmp/hypr-kdeconnect-fix
+
+if not set -q noconfirm
+    input 'Build and install hypr-kdeconnect-fix from source? [Y/n] ' -n
+    set -l _choice (sh-read)
+    if test "$__choice" = 'n' -o "$__choice" = 'N'
+        log 'Skipping hypr-kdeconnect build...'
+        set _do_build 0
+    else
+        set _do_build 1
+    end
+else
+    set _do_build 1
+end
+
+if test $_do_build -eq 1
+    log 'Cloning hypr-kdeconnect-fix...'
+    rm -rf $_hypr_dir
+    if not git clone $_hypr_repo $_hypr_dir --depth=1
+        log 'Failed to clone hypr-kdeconnect-fix; skipping.'
+    else
+        cd $_hypr_dir || true
+
+        log 'Configuring with CMake...'
+        if cmake -S . -B build -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX="$HOME/.local"
+            log 'Building...'
+            cmake --build build -j(nproc) || log 'Build failed'
+
+            log 'Running tests...'
+            ctest --test-dir build --output-on-failure || log 'Tests failed (continuing)'
+
+            log 'Installing...'
+            cmake --install build || log 'Install failed'
+        else
+            log 'CMake configure step failed; aborting build.'
+        end
+
+        log 'Cleaning up build artifacts and repository...'
+        cd /tmp
+        rm -rf $_hypr_dir
+    end
+end
+
+# Install system config files (gamemode, sddm, hypr)
+
+# Paths
+set -l src_dir $install_dir/other
+set -l gamemode_src $src_dir/gamemode.ini
+set -l gamemode_dest /usr/share/gamemode/gamemode.ini
+set -l sddm_src $src_dir/sddm/caelestia.conf
+set -l sddm_dest /etc/sddm.conf.d/caelestia.conf
+set -l hypr_src $src_dir/sddm/sddm.lua
+set -l hypr_dest /opt/hypr/sddm.lua
+
+# Link gamemode.ini into /usr/share/gamemode/gamemode.ini (create dirs)
+if test -f $gamemode_src
+    log 'Installing gamemode.ini to /usr/share/gamemode/'
+    if not sudo mkdir -p (dirname $gamemode_dest)
+        log 'Failed to create /usr/share/gamemode directory (permission denied)'
+    else
+        sudo ln -sf (realpath $gamemode_src) $gamemode_dest
+    end
+else
+    log 'gamemode.ini not found; skipping.'
+end
+
+# Copy sddm config
+if test -f $sddm_src
+    log 'Copying caelestia.conf to /etc/sddm.conf.d/'
+    if not sudo mkdir -p (dirname $sddm_dest)
+        log 'Failed to create /etc/sddm.conf.d (permission denied)'
+    else
+        sudo cp -f $sddm_src $sddm_dest
+    end
+else
+    log 'sddm caelestia.conf not found; skipping.'
+end
+
+# Copy hypr.lua to /opt/hypr/sddm.lua
+if test -f $hypr_src
+    log 'Installing hypr sddm script to /opt/hypr/sddm.lua'
+    if not sudo mkdir -p (dirname $hypr_dest)
+        log 'Failed to create /opt/hypr (permission denied)'
+    else
+        sudo cp -f $hypr_src $hypr_dest
+    end
+else
+    log 'hypr.lua not found; skipping.'
 end
 
 # Start the shell
@@ -387,12 +482,3 @@ bat other/post.md >> $HOME/TODO.md
 
 clear
 exec fish -i -C $HOME/TODO.md
-
-
-# TODO
-https://github.com/gfhdhytghd/hypr-kdeconnect-fix.git
-
-cmake -S . -B build -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX="$HOME/.local"
-cmake --build build -j"$(nproc)"
-ctest --test-dir build --output-on-failure
-cmake --install build
