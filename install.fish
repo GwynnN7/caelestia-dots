@@ -76,7 +76,6 @@ set -l aur_helper paru
 set -l shell_only 0
 set -q _flag_shell && set shell_only 1
 set -q XDG_CONFIG_HOME && set -l config $XDG_CONFIG_HOME || set -l config $HOME/.config
-set -q XDG_STATE_HOME && set -l state $XDG_STATE_HOME || set -l state $HOME/.local/state
 set -l install_dir (path dirname (path resolve (status filename)))
 
 # Detect if running on laptop or desktop
@@ -383,7 +382,7 @@ end
 
 # Build and install hypr-kdeconnect-fix from source
 set -l _hypr_repo https://github.com/gfhdhytghd/hypr-kdeconnect-fix.git
-set -l _hypr_dir /tmp/hypr-kdeconnect-fix
+set -l _hypr_dir $HOME/.local/share/hypr-kdeconnect-fix
 
 if not set -q noconfirm
     input 'Build and install hypr-kdeconnect-fix from source? [Y/n] ' -n
@@ -419,10 +418,6 @@ if test $_do_build -eq 1
         else
             log 'CMake configure step failed; aborting build.'
         end
-
-        log 'Cleaning up build artifacts and repository...'
-        cd /tmp
-        rm -rf $_hypr_dir
     end
 end
 

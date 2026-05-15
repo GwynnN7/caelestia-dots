@@ -66,7 +66,10 @@
                     "timeout": 750
                 },
                 {
-                    "idleAction": ["systemctl", "suspend"],
+                    "idleAction": [
+                        "systemctl",
+                        "suspend"
+                    ],
                     "timeout": 900
                 }
             ]
@@ -77,7 +80,10 @@
         "actionPrefix": "@",
         "actions": [
             {
-                "command": ["autocomplete", "clip"],
+                "command": [
+                    "autocomplete",
+                    "clip"
+                ],
                 "dangerous": false,
                 "description": "Clipboard history",
                 "enabled": true,
@@ -85,7 +91,10 @@
                 "name": "Clipboard"
             },
             {
-                "command": ["autocomplete", "calc"],
+                "command": [
+                    "autocomplete",
+                    "calc"
+                ],
                 "dangerous": false,
                 "description": "Do simple math equations",
                 "enabled": true,
@@ -93,7 +102,10 @@
                 "name": "Calculator"
             },
             {
-                "command": ["autocomplete", "emoji"],
+                "command": [
+                    "autocomplete",
+                    "emoji"
+                ],
                 "dangerous": false,
                 "description": "Emoji Picker",
                 "enabled": true,
@@ -101,7 +113,10 @@
                 "name": "Emoji"
             },
             {
-                "command": ["autocomplete", "wallpaper"],
+                "command": [
+                    "autocomplete",
+                    "wallpaper"
+                ],
                 "dangerous": false,
                 "description": "Change the current wallpaper",
                 "enabled": true,
@@ -109,7 +124,11 @@
                 "name": "Wallpaper"
             },
             {
-                "command": ["caelestia", "wallpaper", "-r"],
+                "command": [
+                    "caelestia",
+                    "wallpaper",
+                    "-r"
+                ],
                 "dangerous": false,
                 "description": "Switch to a random wallpaper",
                 "enabled": true,
@@ -117,7 +136,10 @@
                 "name": "Random"
             },
             {
-                "command": ["autocomplete", "scheme"],
+                "command": [
+                    "autocomplete",
+                    "scheme"
+                ],
                 "dangerous": false,
                 "description": "Change the current colour scheme",
                 "enabled": true,
@@ -125,7 +147,10 @@
                 "name": "Scheme"
             },
             {
-                "command": ["autocomplete", "variant"],
+                "command": [
+                    "autocomplete",
+                    "variant"
+                ],
                 "dangerous": false,
                 "description": "Change the current scheme variant",
                 "enabled": true,
@@ -133,7 +158,10 @@
                 "name": "Variant"
             },
             {
-                "command": ["autocomplete", "transparency"],
+                "command": [
+                    "autocomplete",
+                    "transparency"
+                ],
                 "dangerous": false,
                 "description": "Change shell transparency",
                 "enabled": false,
@@ -141,7 +169,10 @@
                 "name": "Transparency"
             },
             {
-                "command": ["setMode", "light"],
+                "command": [
+                    "setMode",
+                    "light"
+                ],
                 "dangerous": false,
                 "description": "Change the scheme to light mode",
                 "enabled": false,
@@ -149,7 +180,10 @@
                 "name": "Light"
             },
             {
-                "command": ["setMode", "dark"],
+                "command": [
+                    "setMode",
+                    "dark"
+                ],
                 "dangerous": false,
                 "description": "Change the scheme to dark mode",
                 "enabled": false,
@@ -157,7 +191,13 @@
                 "name": "Dark"
             },
             {
-                "command": ["caelestia", "shell", "drawers", "toggle", "session"],
+                "command": [
+                    "caelestia",
+                    "shell",
+                    "drawers",
+                    "toggle",
+                    "session"
+                ],
                 "dangerous": false,
                 "description": "Open session menu",
                 "enabled": true,
@@ -165,7 +205,10 @@
                 "name": "Session"
             },
             {
-                "command": ["systemctl", "poweroff"],
+                "command": [
+                    "systemctl",
+                    "poweroff"
+                ],
                 "dangerous": true,
                 "description": "Shutdown the system",
                 "enabled": true,
@@ -173,7 +216,10 @@
                 "name": "Shutdown"
             },
             {
-                "command": ["systemctl", "reboot"],
+                "command": [
+                    "systemctl",
+                    "reboot"
+                ],
                 "dangerous": true,
                 "description": "Reboot the system",
                 "enabled": true,
@@ -181,7 +227,10 @@
                 "name": "Reboot"
             },
             {
-                "command": ["uwsm", "stop"],
+                "command": [
+                    "uwsm",
+                    "stop"
+                ],
                 "dangerous": true,
                 "description": "Log out of the current session",
                 "enabled": true,
@@ -189,7 +238,10 @@
                 "name": "Logout"
             },
             {
-                "command": ["loginctl", "lock-session"],
+                "command": [
+                    "loginctl",
+                    "lock-session"
+                ],
                 "dangerous": false,
                 "description": "Lock the current session",
                 "enabled": true,
@@ -197,7 +249,10 @@
                 "name": "Lock"
             },
             {
-                "command": ["systemctl", "suspend"],
+                "command": [
+                    "systemctl",
+                    "suspend"
+                ],
                 "dangerous": true,
                 "description": "Suspend then hibernate",
                 "enabled": true,
@@ -205,7 +260,12 @@
                 "name": "Sleep"
             },
             {
-                "command": ["caelestia", "shell", "controlCenter", "open"],
+                "command": [
+                    "caelestia",
+                    "shell",
+                    "controlCenter",
+                    "open"
+                ],
                 "dangerous": false,
                 "description": "Configure the shell",
                 "enabled": true,
@@ -214,7 +274,14 @@
             }
         ],
         "enableDangerousActions": false,
-        "favouriteApps": ["com.mastermindzh.tidal-hifi", "org.telegram.desktop", "zen", "code", "vesktop", "steam"],
+        "favouriteApps": [
+            "com.mastermindzh.tidal-hifi",
+            "org.telegram.desktop",
+            "zen",
+            "code",
+            "vesktop",
+            "steam"
+        ],
         "hiddenApps": [
             "xfce4-about",
             "cmake-gui",
@@ -271,11 +338,30 @@
                 "-c",
                 "cortana api settings/automaticmode | grep -q On && val=0 || val=1; cortana api -val $val settings/automaticmode | cortana notify"
             ],
-            "logout": ["uwsm", "stop"],
-            "reboot": ["sh", "-c", "cortana api -cmd reboot computer | cortana notify || systemctl reboot"],
-            "shutdown": ["sh", "-c", "cortana api -cmd shutdown computer | cortana notify || systemctl poweroff"],
-            "suspend": ["sh", "-c", "cortana api -cmd reboot suspend | cortana notify || systemctl suspend"],
-            "windows": ["sh", "-c", "cortana api -cmd system computer | cortana notify || systemctl reboot"]
+            "logout": [
+                "uwsm",
+                "stop"
+            ],
+            "reboot": [
+                "sh",
+                "-c",
+                "cortana service &>/dev/null  && cortana api -cmd reboot computer | cortana notify || systemctl reboot"
+            ],
+            "shutdown": [
+                "sh",
+                "-c",
+                "cortana service &>/dev/null  && cortana api -cmd shutdown computer | cortana notify || systemctl poweroff"
+            ],
+            "suspend": [
+                "sh",
+                "-c",
+                "cortana service &>/dev/null  && cortana api -cmd reboot suspend | cortana notify || systemctl suspend"
+            ],
+            "windows": [
+                "sh",
+                "-c",
+                "cortana service &>/dev/null  && cortana api -cmd system computer | cortana notify || systemctl reboot"
+            ]
         }
     },
     "utilities": {
