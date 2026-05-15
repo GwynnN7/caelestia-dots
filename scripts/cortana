@@ -59,15 +59,16 @@ def api_call(method, route="", json_data=None):
 def handle_service(args):
     """Handles systemd user service interactions."""
     if not args.action:
-        run_cmd(f"systemctl --user status {SERVICE_NAME}")
-        return
+        res = run_cmd(f"systemctl --user status {SERVICE_NAME}")
+        exit(0 if res else 1)
 
     action = args.action
     
     if action in ["start", "stop", "restart"]:
-        print_blue(f"Service: {action}ing...")
+        action_verb = "Start" if action == "start" else "Stopp" if action == "stop" else "Restart"
+        print_blue(f"Service {action_verb}ing...")
         if run_cmd(f"systemctl --user {action} {SERVICE_NAME}"):
-            print_blue(f"Service {action}ed.")
+            print_blue(f"Service {action_verb}ed.")
 
 # --- Module: Git ---
 def handle_git(args):
