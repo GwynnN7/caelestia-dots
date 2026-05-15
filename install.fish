@@ -207,7 +207,9 @@ set PKGS \
     xorg-xhost \
     ncdu \
     sshfs \
-    android-tools
+    android-tools \
+    github-cli \
+    gamemode
 
 log 'Installing packages...'
 paru -S --needed --noconfirm $PKGS
