@@ -209,7 +209,8 @@ set PKGS \
     sshfs \
     android-tools \
     github-cli \
-    gamemode
+    gamemode \
+    rocm-smi-lib
 
 log 'Installing packages...'
 paru -S --needed --noconfirm $PKGS
@@ -423,6 +424,8 @@ if test $_do_build -eq 1
     end
 end
 
+cd $install_dir || exit 1
+
 # Install system config files (gamemode, sddm, hypr)
 
 # Paths
@@ -476,7 +479,7 @@ caelestia shell -d > /dev/null
 caelestia wallpaper -r "$HOME/Pictures/Wallpaper" > /dev/null
 
 log 'Done!'
-bat other/post.md >> $HOME/TODO.md
+bat --plain $install_dir/other/post.md >> $HOME/TODO.md
 
 clear
 exec fish -i -C 'cat $HOME/TODO.md'

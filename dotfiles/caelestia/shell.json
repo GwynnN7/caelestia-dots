@@ -293,7 +293,13 @@
             "avahi-discover",
             "thunar-settings",
             "org.kde.kdeconnect.nonplasma",
-            "org.kde.kdeconnect.sms"
+            "org.kde.kdeconnect.sms",
+            "thunar-bulk-rename",
+            "footclient",
+            "foot-server",
+            "mpv",
+            "uuctl",
+            "net.retrodeck.retrodeck.Configurator"
         ],
         "maxShown": 7,
         "maxWallpapers": 9,
