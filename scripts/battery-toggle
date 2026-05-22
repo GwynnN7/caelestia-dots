@@ -6,9 +6,9 @@ CURRENT=$(cat "$BAT/charge_control_end_threshold")
 if [ "$CURRENT" -lt 100 ]; then
     echo 100 > "$BAT/charge_control_end_threshold"
     echo 90 > "$BAT/charge_control_start_threshold" 2>/dev/null || true
-    echo "Travel Mode (100%)"
+    echo "Travel Mode (90%-100%)"
 else
     echo 85 > "$BAT/charge_control_end_threshold"
     echo 70 > "$BAT/charge_control_start_threshold" 2>/dev/null || true
-    echo "Life Extender (85%)"
+    echo "Safe Mode (70%-85%)"
 fi

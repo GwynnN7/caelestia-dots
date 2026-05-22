@@ -374,7 +374,7 @@ if test $_hypr_install -eq 1
     hyprpm purge-cache
     hyprpm update
     hyprpm add https://github.com/zjeffer/split-monitor-workspaces
-    hyprpm add https://github.com/MainstreamOS/hyprland-scroll-overview de26fe9c1be6501ca1f1cacd7a3a9443933cf8f1
+    hyprpm add https://github.com/yayuuu/hyprland-scroll-overview
     hyprpm enable scrolloverview
     hyprpm enable split-monitor-workspaces
     hyprpm reload
@@ -421,6 +421,36 @@ if test $_do_build -eq 1
         else
             log 'CMake configure step failed; aborting build.'
         end
+    end
+end
+
+# Build and install hyprland-dmemcg-boost from source
+set -l _boost_repo https://github.com/egnappahz/hyprland-dmemcg-boost
+set -l _boost_dir $HOME/.local/share/hyprland-dmemcg-boost
+
+if not set -q noconfirm
+    input 'Build and install hyprland-dmemcg-boost from source? [Y/n] ' -n
+    set -l _choice (sh-read)
+    if test "$__choice" = 'n' -o "$__choice" = 'N'
+        log 'Skipping hyprland-dmemcg-boost build...'
+        set _do_build 0
+    else
+        set _do_build 1
+    end
+else
+    set _do_build 1
+end
+
+if test $_do_build -eq 1
+    log 'Cloning hyprland-dmemcg-boost...'
+    rm -rf $_boost_dir
+    if not git clone $_boost_repo $_boost_dir --depth=1
+        log 'Failed to clone hyprland-dmemcg-boost; skipping.'
+    else
+        cd $_boost_dir || true
+
+        log 'Building...'
+        makepkg -si
     end
 end
 

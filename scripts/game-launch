@@ -1,44 +1,25 @@
 #!/usr/bin/env bash
 
-# --- 1. Default States ---
-NVAPI=0
-MANGOAPP=0
-USE_X11=0
-GAME_CMD=()
+NVAPI_STATUS=0
+MANGOAPP_FLAG=0
+USE_GAMESCOPE=0
 
-# --- 2. Strict Argument Parsing ---
+GAME_CMD=()
+GAME_ENV=(
+    PROTON_PRIORITY_HIGH=1 
+    ENABLE_LAYER_MESA_ANTI_LAG=1
+    PROTON_FSR4_RDNA3_UPGRADE=1
+)
+
 while [[ $# -gt 0 ]]; do
     case "$1" in
-        --nvapi)
-            NVAPI=1
-            shift
-            ;;
-        --no-nvapi)
-            NVAPI=2
-            shift
-            ;;
-        --mangoapp)
-            MANGOAPP=1
-            shift
-            ;;
-        --x11)
-            USE_X11=1
-            shift
-            ;;
-        --)
-            shift
-            GAME_CMD+=("$@")
-            break
-            ;;
-        -*)
-            echo "Error: Unknown or unsupported flag '$1' provided to game-launch."
-            echo "Supported flags: --nvapi, --no-nvapi, --mangoapp, --x11"
-            exit 1
-            ;;
-        *)
-            GAME_CMD+=("$@")
-            break
-            ;;
+        --nvapi) NVAPI_STATUS=1; shift ;;
+        --no-nvapi) NVAPI_STATUS=2; shift ;;
+        --mangoapp) MANGOAPP_FLAG=1; shift ;;
+        --gamescope) USE_GAMESCOPE=1; shift ;;
+        --) shift; GAME_CMD+=("$@"); break ;;
+        -*) echo "Error: Unknown or unsupported flag '$1'"; exit 1 ;;
+        *) GAME_CMD+=("$@"); break ;;
     esac
 done
 
@@ -47,53 +28,31 @@ if [ ${#GAME_CMD[@]} -eq 0 ]; then
     exit 1
 fi
 
-# --- 3. Game Environment Variables (Proton/Wine) ---
-GAME_ENV=(
-    LD_PRELOAD="$LD_PRELOAD"
-    PROTON_PRIORITY_HIGH=1 
-    ENABLE_LAYER_MESA_ANTI_LAG=1
-)
-
-if [ "$NVAPI" = "1" ]; then
+if [ "$NVAPI_STATUS" = "1" ]; then
     GAME_ENV+=(PROTON_ENABLE_NVAPI=1)
-elif [ "$NVAPI" = "2" ]; then
+elif [ "$NVAPI_STATUS" = "2" ]; then
     GAME_ENV+=(PROTON_DISABLE_NVAPI=1)
 fi
 
-if [ "$USE_X11" = "0" ]; then
+LAUNCH_CMD=(systemd-run --user --scope --slice=app.slice --)
+WRAPPER=(gamemoderun mangohud "${GAME_CMD[@]}")
+
+if [ "$USE_GAMESCOPE" = "1" ]; then
+    GAMESCOPE_ARGS=(
+        -W 1920 -H 1080 -f -r 165 
+        --adaptive-sync --rt 
+        --force-grab-cursor
+    )
+    
+    if [ "$MANGOAPP_FLAG" = "1" ]; then
+        GAMESCOPE_ARGS+=(--mangoapp)
+        WRAPPER=(gamemoderun "${GAME_CMD[@]}")
+    fi
+
+    LAUNCH_CMD+=(env LD_PRELOAD="" gamescope "${GAMESCOPE_ARGS[@]}" --)
+else
     GAME_ENV+=(PROTON_ENABLE_WAYLAND=1)
 fi
 
-# --- 4. Gamescope Compositor Arguments ---
-GAMESCOPE_ARGS=(
-    -W 1920 -H 1080 -f -r 165 
-    --adaptive-sync --rt 
-    --force-grab-cursor
-)
-
-if [ "$USE_X11" = "0" ]; then
-    GAMESCOPE_ARGS+=(--expose-wayland)
-fi
-
-if [ "$MANGOAPP" = "1" ]; then
-    GAMESCOPE_ARGS+=(--mangoapp)
-    INNER_WRAPPER=()
-else
-    INNER_WRAPPER=(mangohud)
-fi
-
-# --- 5. Assemble Launch Command ---
-LAUNCH_CMD=(
-    env LD_PRELOAD="" gamemoderun gamescope "${GAMESCOPE_ARGS[@]}" -- env "${GAME_ENV[@]}" "${INNER_WRAPPER[@]}" "${GAME_CMD[@]}"
-)
-
-# --- 6. Execution ---
-if ! powerprofilesctl list | grep -q 'performance:'; then 
-    exec "${LAUNCH_CMD[@]}"
-else 
-    if [ -n "$GAME_PERFORMANCE_SCREENSAVER_ON" ]; then 
-        exec powerprofilesctl launch -p performance -r "CachyOS wrapper" -- "${LAUNCH_CMD[@]}"
-    else 
-        exec systemd-inhibit --why "Gaming" powerprofilesctl launch -p performance -r "CachyOS wrapper" -- "${LAUNCH_CMD[@]}"
-    fi
-fi
+LAUNCH_CMD+=(env "${GAME_ENV[@]}" "${WRAPPER[@]}")
+exec systemd-inhibit --why "Gaming" powerprofilesctl launch -p performance -- "${LAUNCH_CMD[@]}"

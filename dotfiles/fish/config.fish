@@ -66,4 +66,5 @@ if status is-interactive
 
     alias cat='bat --style=plain'
     alias todo='micro ~/Documents/todo.md'
+    alias c='cd ~/Projects/caelestia && y'
 end
