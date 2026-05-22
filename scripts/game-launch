@@ -8,7 +8,6 @@ GAME_CMD=()
 GAME_ENV=(
     PROTON_PRIORITY_HIGH=1 
     ENABLE_LAYER_MESA_ANTI_LAG=1
-    PROTON_FSR4_RDNA3_UPGRADE=1
 )
 
 while [[ $# -gt 0 ]]; do
@@ -34,14 +33,13 @@ elif [ "$NVAPI_STATUS" = "2" ]; then
     GAME_ENV+=(PROTON_DISABLE_NVAPI=1)
 fi
 
-LAUNCH_CMD=(systemd-run --user --scope --slice=app.slice --)
+LAUNCH_CMD=()
 WRAPPER=(gamemoderun mangohud "${GAME_CMD[@]}")
 
 if [ "$USE_GAMESCOPE" = "1" ]; then
     GAMESCOPE_ARGS=(
-        -W 1920 -H 1080 -f -r 165 
-        --adaptive-sync --rt 
-        --force-grab-cursor
+        -W 1920 -H 1080 -f -r 60
+        --adaptive-sync --rt
     )
     
     if [ "$MANGOAPP_FLAG" = "1" ]; then

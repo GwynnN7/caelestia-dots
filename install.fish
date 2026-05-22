@@ -284,44 +284,31 @@ else
     log 'Wallpapers already exists, skipping...'
 end
 
-if ! test -d "$HOME/Projects/Cortana"
-    log 'Cloning Cortana...'
-    git clone https://github.com/GwynnN7/Cortana "$HOME/Projects/Cortana" --depth=1
-else
-    log 'Cortana already exists, skipping...'
-end
-
-mkdir -p "$HOME/Projects/Cortana/CortanaDesktop/out"
-
 if test -d services
-    if test $is_laptop -eq 1
-        log 'Skipping service installation on laptop'
-    else
-        set user_systemd_dir $HOME/.config/systemd/user
-        mkdir -p $user_systemd_dir
+    set user_systemd_dir $HOME/.config/systemd/user
+    mkdir -p $user_systemd_dir
 
-        set -l enabled_list
-        for svc in services/*.service
-            if test -f $svc
-                set name (basename $svc)
-                set dest $user_systemd_dir/$name
+    set -l enabled_list
+    for svc in services/*.service
+        if test -f $svc
+            set name (basename $svc)
+            set dest $user_systemd_dir/$name
 
-                if confirm-overwrite $dest $svc
-                    log "Installing service $name..."
-                    set enabled_list $enabled_list $name
-                end
+            if confirm-overwrite $dest $svc
+                log "Installing service $name..."
+                set enabled_list $enabled_list $name
             end
         end
+    end
 
-        if test (count $enabled_list) -gt 0
-            if type -q systemctl
-                systemctl --user daemon-reload
-                for name in $enabled_list
-                    systemctl --user enable --now $name
-                end
-            else
-                log 'systemctl not found; cannot enable services automatically.'
+    if test (count $enabled_list) -gt 0
+        if type -q systemctl
+            systemctl --user daemon-reload
+            for name in $enabled_list
+                systemctl --user enable --now $name
             end
+        else
+            log 'systemctl not found; cannot enable services automatically.'
         end
     end
 end
@@ -421,36 +408,6 @@ if test $_do_build -eq 1
         else
             log 'CMake configure step failed; aborting build.'
         end
-    end
-end
-
-# Build and install hyprland-dmemcg-boost from source
-set -l _boost_repo https://github.com/egnappahz/hyprland-dmemcg-boost
-set -l _boost_dir $HOME/.local/share/hyprland-dmemcg-boost
-
-if not set -q noconfirm
-    input 'Build and install hyprland-dmemcg-boost from source? [Y/n] ' -n
-    set -l _choice (sh-read)
-    if test "$__choice" = 'n' -o "$__choice" = 'N'
-        log 'Skipping hyprland-dmemcg-boost build...'
-        set _do_build 0
-    else
-        set _do_build 1
-    end
-else
-    set _do_build 1
-end
-
-if test $_do_build -eq 1
-    log 'Cloning hyprland-dmemcg-boost...'
-    rm -rf $_boost_dir
-    if not git clone $_boost_repo $_boost_dir --depth=1
-        log 'Failed to clone hyprland-dmemcg-boost; skipping.'
-    else
-        cd $_boost_dir || true
-
-        log 'Building...'
-        makepkg -si
     end
 end
 

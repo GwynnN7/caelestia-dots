@@ -351,22 +351,22 @@
             "reboot": [
                 "sh",
                 "-c",
-                "cortana service &>/dev/null  && cortana api -cmd reboot computer | cortana notify || systemctl reboot"
+                "systemctl reboot"
             ],
             "shutdown": [
                 "sh",
                 "-c",
-                "cortana service &>/dev/null  && cortana api -cmd shutdown computer | cortana notify || systemctl poweroff"
+                "systemctl poweroff"
             ],
             "suspend": [
                 "sh",
                 "-c",
-                "cortana service &>/dev/null  && cortana api -cmd reboot suspend | cortana notify || systemctl suspend"
+                "systemctl suspend"
             ],
             "windows": [
                 "sh",
                 "-c",
-                "cortana service &>/dev/null  && cortana api -cmd system computer | cortana notify || systemctl reboot"
+                "systemctl reboot"
             ]
         }
     },
