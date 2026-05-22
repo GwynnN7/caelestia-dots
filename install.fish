@@ -353,41 +353,40 @@ if ! set -q noconfirm
     end
 end
 
-
 # Install Hyprland plugins
 if test $_hypr_install -eq 1
     log 'Installing Hyprland plugins'
 
     hyprpm purge-cache
     hyprpm update
+
     hyprpm add https://github.com/zjeffer/split-monitor-workspaces
     hyprpm add https://github.com/yayuuu/hyprland-scroll-overview
-    hyprpm enable scrolloverview
+
     hyprpm enable split-monitor-workspaces
+    hyprpm enable scrolloverview
+    
     hyprpm reload
 else
     log 'Skipping Hyprland plugins...'
 end
 
 
-# Build and install hypr-kdeconnect-fix from source
-set -l _hypr_repo https://github.com/gfhdhytghd/hypr-kdeconnect-fix.git
-set -l _hypr_dir $HOME/.local/share/hypr-kdeconnect-fix
+set -l _kdeconnect_install 1
+if ! set -q noconfirm
+    input 'Install KDE Connect Fix? [Y/n] ' -n
+    set -l _kde_choice (sh-read)
 
-if not set -q noconfirm
-    input 'Build and install hypr-kdeconnect-fix from source? [Y/n] ' -n
-    set -l _choice (sh-read)
-    if test "$__choice" = 'n' -o "$__choice" = 'N'
-        log 'Skipping hypr-kdeconnect build...'
-        set _do_build 0
-    else
-        set _do_build 1
+    if test "$_kde_choice" = 'n' -o "$_kde_choice" = 'N'
+        set _kdeconnect_install 0
     end
-else
-    set _do_build 1
 end
 
-if test $_do_build -eq 1
+# Build and install hypr-kdeconnect-fix from source
+if test $_kdeconnect_install -eq 1
+    set -l _hypr_repo https://github.com/gfhdhytghd/hypr-kdeconnect-fix.git
+    set -l _hypr_dir $HOME/.local/share/hypr-kdeconnect-fix
+
     log 'Cloning hypr-kdeconnect-fix...'
     rm -rf $_hypr_dir
     if not git clone $_hypr_repo $_hypr_dir --depth=1
@@ -424,7 +423,7 @@ set -l sddm_dest /etc/sddm.conf.d/caelestia.conf
 set -l hypr_src $src_dir/sddm/sddm.lua
 set -l hypr_dest /opt/hypr/sddm.lua
 
-# Link gamemode.ini into /usr/share/gamemode/gamemode.ini (create dirs)
+# Link gamemode.ini into /usr/share/gamemode/gamemode.ini
 if test -f $gamemode_src
     log 'Installing gamemode.ini to /usr/share/gamemode/'
     if not sudo mkdir -p (dirname $gamemode_dest)
