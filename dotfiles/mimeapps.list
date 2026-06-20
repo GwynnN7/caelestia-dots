@@ -13,6 +13,9 @@ x-scheme-handler/discord=vesktop.desktop
 x-scheme-handler/kdeconnect=thunar.desktop
 inode/directory=thunar.desktop
 image/jpeg=org.gnome.Loupe.desktop
+image/png=org.gnome.Loupe.desktop
+application/pdf=org.gnome.Evince.desktop
+x-scheme-handler/tidal=tidal-hifi.desktop
 
 [Added Associations]
 x-scheme-handler/http=zen.desktop;
@@ -27,3 +30,4 @@ application/x-extension-xhtml=zen.desktop;
 application/x-extension-xht=zen.desktop;
 application/pdf=org.gnome.Evince.desktop;
 image/jpeg=org.gnome.Loupe.desktop;
+image/png=gimp.desktop;org.gnome.Loupe.desktop;

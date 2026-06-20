@@ -1,0 +1,23 @@
+hl.config({
+    input = {
+        kb_layout = "it",
+        kb_variant = "us",
+        kb_options = "lv3:ralt_switch",
+        numlock_by_default = false,
+        repeat_delay = 250,
+        repeat_rate = 35,
+        focus_on_close = 1,
+        touchpad = {
+            natural_scroll = true,
+            disable_while_typing = touchpadDisableTyping,
+            scroll_factor = touchpadScrollFactor,
+        },
+    },
+    binds = {
+        scroll_event_delay = 0,
+    },
+    cursor = {
+        hotspot_padding = 1,
+    },
+})
+

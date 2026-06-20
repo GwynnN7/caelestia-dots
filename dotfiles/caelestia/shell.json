@@ -1,69 +1,168 @@
 {
+    "ai": {
+        "activeOllamaModel": "llama3",
+        "enableCelestialMode": true,
+        "enableOllama": true,
+        "ollamaHistoryJson": "[{\"isUser\":false,\"text\":\"Chat cleared. How can I help you today?\"}]"
+    },
     "appearance": {
+        "deformScale": 1,
+        "padding": {
+            "scale": 0.8
+        },
+        "pitchBlack": false,
+        "rounding": {
+            "scale": 1
+        },
         "spacing": {
-            "scale": 0.9
+            "scale": 0.5
         },
         "transparency": {
-            "base": 0.93,
+            "base": 0.65,
             "enabled": true,
-            "layers": 0.3
+            "layers": 0.1
         }
+    },
+    "audio": {
+        "sounds": {
+            "disabledNotifApps": [
+            ],
+            "enabled": true,
+            "notificationVolume": 0.4,
+            "sfxVolume": 0.4
+        }
+    },
+    "background": {
+        "desktopLyrics": {
+            "autoHide": true,
+            "enabled": true,
+            "position": "bottom-center",
+            "scale": 1.2,
+            "shadow": {
+                "blur": 0.4,
+                "enabled": true,
+                "opacity": 0.9
+            }
+        },
+        "visualiser": {
+            "enabled": true
+        },
+        "wallpaperRecolor": false
     },
     "bar": {
         "activeWindow": {
             "compact": true,
-            "inverted": false,
-            "showOnHover": true
+            "inverted": false
         },
         "clock": {
-            "background": false,
+            "background": true,
             "showDate": true,
-            "showIcon": false
+            "showIcon": true
         },
-        "popouts": {
-            "activeWindow": true,
-            "statusIcons": true,
-            "tray": true
+        "dock": {
+            "monitorCenter": true,
+            "recolourIcons": false
         },
-        "scrollActions": {
-            "brightness": true,
-            "volume": true,
-            "workspaces": true
+        "entries": [
+            {
+                "enabled": true,
+                "id": "logo"
+            },
+            {
+                "enabled": true,
+                "id": "workspaces"
+            },
+            {
+                "enabled": true,
+                "id": "spacer"
+            },
+            {
+                "enabled": true,
+                "id": "dock"
+            },
+            {
+                "enabled": true,
+                "id": "spacer"
+            },
+            {
+                "enabled": true,
+                "id": "tray"
+            },
+            {
+                "enabled": true,
+                "id": "spacer"
+            },
+            {
+                "enabled": true,
+                "id": "clock"
+            },
+            {
+                "enabled": true,
+                "id": "statusIcons"
+            },
+            {
+                "enabled": true,
+                "id": "power"
+            }
+        ],
+        "github": {
+            "background": false
         },
+        "position": "left",
         "status": {
             "showAudio": false,
-            "showBattery": true,
-            "showBluetooth": true,
             "showKbLayout": false,
             "showLockStatus": true,
             "showMicrophone": true,
             "showNetwork": true,
-            "showWifi": true
-        },
-        "tray": {
-            "background": false,
-            "compact": false,
-            "recolour": false
+            "showNotifications": false,
+            "showPeripheralBattery": false,
+            "showWifi": false
         },
         "workspaces": {
-            "maxWindowIcons": 4,
+            "activeTrail": false,
+            "maxWindowIcons": 2,
             "occupiedBg": false,
-            "shown": 4
+            "shown": 4,
+            "useIcon": true
         }
     },
+    "border": {
+        "rounding": 25,
+        "smoothing": 20,
+        "thickness": 8
+    },
+    "dashboard": {
+        "colorizeMediaGif": false,
+        "performance": {
+            "showNetwork": true
+        },
+        "profilePicShape": 17,
+        "randomizeMediaShapeColors": true,
+        "showHyprlandSplash": true,
+        "showTerminal": true,
+        "showWeather": false,
+        "syncMediaShapesToBeat": true,
+        "useMediaShapes": false
+    },
     "general": {
+        "apps": {
+            "playback": [
+                "celluloid"
+            ]
+        },
         "idle": {
             "inhibitWhenAudio": true,
             "lockBeforeSleep": true,
             "timeouts": [
                 {
                     "idleAction": "lock",
-                    "timeout": 600
+                    "timeout": 700
                 },
                 {
                     "idleAction": "dpms off",
                     "returnAction": "dpms on",
-                    "timeout": 750
+                    "timeout": 895
                 },
                 {
                     "idleAction": [
@@ -74,15 +173,16 @@
                 }
             ]
         },
+        "logo": "caelestia",
         "mediaGifSpeedAdjustment": 125
     },
     "launcher": {
-        "actionPrefix": "@",
+        "actionPrefix": ">",
         "actions": [
             {
                 "command": [
                     "autocomplete",
-                    "clip"
+                    "clipboard"
                 ],
                 "dangerous": false,
                 "description": "Clipboard history",
@@ -263,7 +363,7 @@
                 "command": [
                     "caelestia",
                     "shell",
-                    "controlCenter",
+                    "nexus",
                     "open"
                 ],
                 "dangerous": false,
@@ -275,11 +375,10 @@
         ],
         "enableDangerousActions": false,
         "favouriteApps": [
-            "com.mastermindzh.tidal-hifi",
-            "org.telegram.desktop",
             "zen",
-            "code",
-            "vesktop",
+            "org.telegram.desktop",
+            "equibop",
+            "tidal-hifi",
             "steam"
         ],
         "hiddenApps": [
@@ -299,23 +398,23 @@
             "foot-server",
             "mpv",
             "uuctl",
-            "net.retrodeck.retrodeck.Configurator"
+            "net.retrodeck.retrodeck.Configurator",
+            "net.retrodeck.retrodeck",
+            "lstopo"
         ],
-        "maxShown": 7,
-        "maxWallpapers": 9,
         "showOnHover": false,
         "specialPrefix": "@",
         "useFuzzy": {
-            "actions": false,
             "apps": true,
-            "schemes": false,
-            "variants": false,
             "wallpapers": true
         }
     },
+    "lock": {
+        "profilePicShape": 18
+    },
     "notifs": {
         "actionOnClick": true,
-        "defaultExpireTimeout": 3000
+        "defaultExpireTimeout": 4000
     },
     "osd": {
         "enableBrightness": true,
@@ -324,17 +423,15 @@
         "hideDelay": 1000
     },
     "paths": {
-        "lyricsDir": "~/Music/lyrics",
+        "lyricsDir": "~/Music/Lyrics",
+        "mediaGif": "root:/assets/toothless.gif",
+        "sessionGif": "root:/assets/cortana.png",
         "wallpaperDir": "~/Pictures/Wallpaper"
     },
     "services": {
-        "defaultPlayer": "Tidal",
-        "playerAliases": [
-            {
-                "from": "tidal-hifi",
-                "to": "Tidal"
-            }
-        ],
+        "defaultPlayer": "tidal-hifi",
+        "lyricsBackend": "Auto",
+        "visualiserBars": 60,
         "weatherLocation": "Orvieto"
     },
     "session": {
@@ -342,7 +439,17 @@
             "automode": [
                 "sh",
                 "-c",
-                "cortana api settings/automaticmode | grep -q On && val=0 || val=1; cortana api -val $val settings/automaticmode | cortana notify"
+                "cortana service &>/dev/null && cortana api -val 0 settings/automaticmode | cortana notify"
+            ],
+            "generic": [
+                "sh",
+                "-c",
+                "cortana service &>/dev/null && cortana api -act toggle devices/generic | cortana notify"
+            ],
+            "lamp": [
+                "sh",
+                "-c",
+                "cortana service &>/dev/null && cortana api -act toggle devices/lamp | cortana notify"
             ],
             "logout": [
                 "uwsm",
@@ -351,24 +458,17 @@
             "reboot": [
                 "sh",
                 "-c",
-                "cortana service &>/dev/null  && cortana api -cmd reboot computer | cortana notify || systemctl reboot"
+                "cortana service &>/dev/null && cortana api -cmd reboot computer | cortana notify || systemctl reboot"
             ],
             "shutdown": [
                 "sh",
                 "-c",
-                "cortana service &>/dev/null  && cortana api -cmd shutdown computer | cortana notify || systemctl poweroff"
-            ],
-            "suspend": [
-                "sh",
-                "-c",
-                "cortana service &>/dev/null  && cortana api -cmd reboot suspend | cortana notify || systemctl suspend"
-            ],
-            "windows": [
-                "sh",
-                "-c",
-                "cortana service &>/dev/null  && cortana api -cmd system computer | cortana notify || systemctl reboot"
+                "cortana service &>/dev/null && cortana api -cmd shutdown computer | cortana notify || systemctl poweroff"
             ]
         }
+    },
+    "shimeji": {
+        "enabled": false
     },
     "utilities": {
         "enabled": true,
@@ -400,13 +500,27 @@
             },
             {
                 "enabled": true,
+                "id": "wallpaper"
+            },
+            {
+                "enabled": true,
                 "id": "settings"
+            },
+            {
+                "enabled": false,
+                "id": "badapple"
+            },
+            {
+                "enabled": false,
+                "id": "pauseWallpaper"
             }
         ],
         "toasts": {
+            "capsLockChanged": true,
             "kbLayoutChanged": false,
             "kbLimit": false,
-            "nowPlaying": false
+            "nowPlaying": false,
+            "transparency": true
         },
         "vpn": {
             "enabled": false

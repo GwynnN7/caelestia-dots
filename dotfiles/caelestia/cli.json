@@ -4,8 +4,9 @@
     },
     "theme": {
         "enableTerm": true,
+        "enableTelegram": true,
         "enableHypr": true,
-        "enableDiscord": false,
+        "enableDiscord": true,
         "enableSpicetify": false,
         "enablePandora": false,
         "enableFuzzel": true,
@@ -25,10 +26,10 @@
     },
     "toggles": {
         "communication": {
-            "vesktop": {
+            "equibop": {
                 "enable": false,
-                "match": [{ "class": "vesktop" }],
-                "command": ["vesktop"],
+                "match": [{ "class": "equibop" }],
+                "command": ["equibop"],
                 "move": true
             },
             "telegram": {
@@ -47,8 +48,8 @@
             },
             "tidal-hifi": {
                 "enable": true,
-                "match": [{ "class": "com.mastermindzh.tidal-hifi" }],
-                "command": ["flatpak", "run", "com.mastermindzh.tidal-hifi"],
+                "match": [{ "class": "tidal-hifi" }],
+                "command": ["tidal-hifi"],
                 "move": true
             }
         },
@@ -58,6 +59,13 @@
                 "match": [{ "class": "btop", "title": "btop", "workspace": { "name": "special:sysmon" } }],
                 "command": ["foot", "-a", "btop", "-T", "btop", "fish", "-C", "exec btop"]
             }
-        }
+        },
+        "gaming": {
+             "steam": {
+                 "enable": true,
+                 "match": [{ "class": "steam", "workspace": { "name": "special:gaming" } }],
+                 "command": ["steam"]
+             }
+         }
     }
 }

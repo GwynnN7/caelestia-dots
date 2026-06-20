@@ -10,7 +10,7 @@ provides=($_pkgname)
 conflicts=($_pkgname)
 
 depends=('caelestia-cli' 'caelestia-shell' 'caelestia-sddm-minimalistv2-git' 'layer-shell-qt'
-         'hyprland' 'xdg-desktop-portal-hyprland' 'xdg-desktop-portal-gtk' 'hyprpicker' 'polkit-gnome' 'gnome-keyring' 'uwsm'
+         'hyprland' 'xdg-desktop-portal-hyprland' 'xdg-desktop-portal-gtk' 'hyprpicker' 'gnome-keyring' 'uwsm'
          'wl-clipboard' 'cliphist' 'wtype' 'inotify-tools' 'app2unit' 'wireplumber' 'trash-cli' 'dotnet-sdk' 'udiskie' 'geoclue' 'gammastep'
          'micro' 'pacseek' 'foot' 'fish' 'yazi' 'eza' 'bat' 'fastfetch' 'starship' 'btop' 'jq' '7zip' 'adw-gtk-theme' 'playerctl'
          'papirus-icon-theme' 'qtengine' 'ttf-jetbrains-mono-nerd')

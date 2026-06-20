@@ -23,16 +23,6 @@
             "format": "{$4}{pretty-name>22}{$1} │"
         },
         {
-            "type": "wm",
-            "key": "│ {$4}{$1}  Desktop",
-            "format": "{$4}{pretty-name>21}{$1} │"
-        },
-        {
-            "type": "shell",
-            "key": "│ {$2}{$1}  Shell ",
-            "format": "{$2}{pretty-name>22}{$1} │"
-        },
-        {
             "type": "cpu",
             "key": "│ {$3}{$1}  CPU   ",
             "temp": false,

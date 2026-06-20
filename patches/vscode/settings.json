@@ -48,5 +48,6 @@
     "qt-qml.qmlls.customExePath": "/usr/bin/qmlls6",
     "qt-qml.doNotAskForQmllsDownload": true,
     "chat.viewSessions.orientation": "stacked",
-    "editor.minimap.enabled": false
+    "editor.minimap.enabled": false,
+    "python.analysis.typeCheckingMode": "standard"
 }

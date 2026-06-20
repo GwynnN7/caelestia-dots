@@ -22,6 +22,14 @@ end
 
 set -gx EDITOR micro
 
+# AMD ROCm AI Stack Config for RX 6650 XT (RDNA2)
+set -gx HSA_OVERRIDE_GFX_VERSION 10.3.0
+set -gx PYTORCH_ROCM_ARCH "gfx1030"
+set -gx HSA_ENABLE_SDMA 0
+set -gx HSA_NO_SCRATCH_VRAM 1
+set -gx PYTORCH_HIP_ALLOC_CONF "garbage_collection_threshold:0.8,max_split_size_mb:512"
+fish_add_path /opt/rocm/bin
+
 if status is-interactive
     # Starship custom prompt
     starship init fish | source
