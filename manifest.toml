@@ -281,6 +281,7 @@ packages = [
     "xdg-user-dirs",
 ]
 post_install = [
+    "systemctl --user enable --now hyprsunset", 
     "xdg-user-dirs-update", 
     'git clone https://github.com/GwynnN7/Wallpaper "$HOME/Pictures/Wallpaper" --depth=1'
     ]

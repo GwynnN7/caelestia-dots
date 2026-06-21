@@ -53,52 +53,41 @@ return {
     cursorSize                 = 24,
     sleepGestureCmd            = "systemctl suspend",
 
+
     ------------------
     ---- KEYBINDS ----
     ------------------
 
-    -- Workspaces
-    kbMoveWinToWs              = "SUPER + ALT",
-    kbMoveWinToWsGroup         = "CTRL + SUPER + ALT",
-    kbGoToWs                   = "SUPER",
-    kbGoToWsGroup              = "CTRL + SUPER",
-    kbNextWs                   = "CTRL + SUPER + Right",
-    kbPrevWs                   = "CTRL + SUPER + Left",
-
-    -- Window Group
-    kbWindowGroupCycleNext     = "ALT + TAB",
-    kbWindowGroupCyclePrev     = "SHIFT + ALT + TAB",
-    kbUngroup                  = "SUPER + U",
-    kbToggleGroup              = "SUPER + Comma",
+    -- Workspaces & Navigation
+    kbFocus                    = "SUPER",
+    kbMove                     = "SUPER + SHIFT",
+    kbFocusWin                 = "SUPER + CTRL",
+    kbMoveWin                  = "SUPER + SHIFT + CTRL",
 
     -- Window Action
-    kbMoveWindow               = "SUPER + Z",
-    kbResizeWindow             = "SUPER + X",
-    kbWindowPip                = "SUPER + ALT + backslash",
     kbPinWindow                = "SUPER + P",
-    kbWindowFullscreen         = "SUPER + F",
-    kbWindowBorderedFullscreen = "SUPER + ALT + F",
-    kbToggleWindowFloating     = "SUPER + ALT + space",
+    kbWindowFullscreen         = "SUPER + Enter",
+    kbWindowBorderedFullscreen = "SUPER + F",
+    kbToggleWindowFloating     = "SUPER + G",
     kbCloseWindow              = "SUPER + Q",
 
     -- Special workspaces toggles
-    kbSpecialWs                = "SUPER + S",
-    kbSystemMonitorWs          = "CTRL + SHIFT + Escape",
-    kbMusicWs                  = "SUPER + M",
-    kbCommunicationWs          = "SUPER + D",
-    kbTodoWs                   = "SUPER + R",
+    kbScratchpad               = "SUPER + Comma",
+    kbSpecialWs                = "SUPER + C",
+    kbSystemMonitorWs          = "CTRL + Escape",
 
     -- Apps
     kbTerminal                 = "SUPER + T",
-    kbBrowser                  = "SUPER + W",
-    kbEditor                   = "SUPER + C",
+    kbBrowser                  = "SUPER + R",
     kbFileExplorer             = "SUPER + E",
+    kbYazi                     = "SUPER + Y",
+    kbAudioSettings            = "CTRL + N",
 
     -- Misc
-    kbSession                  = "CTRL + ALT + Delete",
-    kbShowSidebar              = "SUPER + N",
-    kbClearNotifs              = "CTRL + ALT + C",
-    kbShowPanels               = "SUPER + K",
+    kbSession                  = "SUPER + Escape",
+    kbShowSidebar              = "SUPER + B",
+    kbClearNotifs              = "SUPER + ALT + B",
+    kbShowPanels               = "SUPER + H",
     kbLock                     = "SUPER + L",
     kbRestoreLock              = "SUPER + ALT + L",
 }
