@@ -28,20 +28,15 @@ dest = "$XDG_CONFIG_HOME/xdg-desktop-portal"
 
 [[components]]
 name = "caelestia"
-packages = ["quickshell-git"]
-[[components.entries]]
-src = "caelestia"
-dest = "$XDG_CONFIG_HOME/caelestia"
-[[components.manual_packages]]
-name = "caelestia-shell"
-repo = "https://github.com/GwynnN7/caelestia-shell.git"
-build_cmds = [
-    'makepkg -si'
-]
+default=true
+packages = ["local:shell"]
 post_install = [
     "test -f ${XDG_STATE_HOME:-$HOME/.local/state}/caelestia/scheme.json || caelestia scheme set -n caelestia",
     "caelestia shell -k >/dev/null; sleep 1; caelestia shell -d >/dev/null",
 ]
+[[components.entries]]
+src = "caelestia"
+dest = "$XDG_CONFIG_HOME/caelestia"
 
 [[components]]
 name = "fish"
@@ -278,7 +273,6 @@ default = true
 packages = ["git", "github-cli", "android-tools", "rocm-smi-lib"]
 
 
-
 # --- Optional components ---
 
 
@@ -300,16 +294,7 @@ dest = "$XDG_CONFIG_HOME/code-flags.conf"
 
 [[components]]
 name = "kde-connect"
-packages = ["kdeconnect"]
-[[components.manual_packages]]
-name = "hypr-kdeconnect-fix"
-repo = "https://github.com/gfhdhytghd/hypr-kdeconnect-fix.git"
-build_cmds = [
-    'cmake -S . -B build -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX="$HOME/.local"',
-    'cmake --build build -j"$(nproc)"',
-    'ctest --test-dir build --output-on-failure',
-    'cmake --install build'
-]
+packages = ["kdeconnect", "local:kdeconnect"]
 post_install = [
     "systemctl --user stop hypr-kdeconnect-portal.service",
     "systemctl --user daemon-reload",
