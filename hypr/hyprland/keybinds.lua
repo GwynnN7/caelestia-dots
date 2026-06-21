@@ -45,20 +45,20 @@ for i = 1, 8 do
 end
 
 -- Go to workspace -1/+1
-hl.bind(vars.kbFocus .. " + mouse_up", function() return smw.workspace(-1) end)
-hl.bind(vars.kbFocus .. " + mouse_down", function() return smw.workspace(+1) end)
-hl.bind(vars.kbFocus .. " + up", function() return smw.workspace(-1) end)
-hl.bind(vars.kbFocus .. " + down", function() return smw.workspace(+1) end)
-hl.bind(vars.kbFocus .. " + W", function() return smw.workspace(-1) end)
-hl.bind(vars.kbFocus .. " + S", function() return smw.workspace(+1) end)
+hl.bind(vars.kbFocus .. " + mouse_up", function() return smw.workspace(1) end)
+hl.bind(vars.kbFocus .. " + mouse_down", function() return smw.workspace(-1) end)
+hl.bind(vars.kbFocus .. " + up", function() return smw.workspace(1) end)
+hl.bind(vars.kbFocus .. " + down", function() return smw.workspace(-1) end)
+hl.bind(vars.kbFocus .. " + W", function() return smw.workspace(1) end)
+hl.bind(vars.kbFocus .. " + S", function() return smw.workspace(-1) end)
 
 -- Move window to workspace -1/+1
-hl.bind(vars.kbMove .. " + mouse_up", function() return smw.move_to_workspace(-1) end)
-hl.bind(vars.kbMove .. " + mouse_down", function() return smw.move_to_workspace(+1) end)
-hl.bind(vars.kbMove .. " + up", function() return smw.move_to_workspace(-1) end)
-hl.bind(vars.kbMove .. " + down", function() return smw.move_to_workspace(+1) end)
-hl.bind(vars.kbMove .. " + W", function() return smw.move_to_workspace(-1) end)
-hl.bind(vars.kbMove .. " + S", function() return smw.move_to_workspace(+1) end)
+hl.bind(vars.kbMove .. " + mouse_up", function() return smw.move_to_workspace(1) end)
+hl.bind(vars.kbMove .. " + mouse_down", function() return smw.move_to_workspace(-1) end)
+hl.bind(vars.kbMove .. " + up", function() return smw.move_to_workspace(1) end)
+hl.bind(vars.kbMove .. " + down", function() return smw.move_to_workspace(-1) end)
+hl.bind(vars.kbMove .. " + W", function() return smw.move_to_workspace(1) end)
+hl.bind(vars.kbMove .. " + S", function() return smw.move_to_workspace(-1) end)
 
 -- Window actions
 hl.bind(vars.kbFocusWin .. " + up", hl.dsp.focus({ direction = "up" }))

@@ -66,7 +66,7 @@ return {
 
     -- Window Action
     kbPinWindow                = "SUPER + P",
-    kbWindowFullscreen         = "SUPER + Enter",
+    kbWindowFullscreen         = "SUPER + Return",
     kbWindowBorderedFullscreen = "SUPER + F",
     kbToggleWindowFloating     = "SUPER + G",
     kbCloseWindow              = "SUPER + Q",
