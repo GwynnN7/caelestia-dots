@@ -7,8 +7,8 @@ return {
 
     -- Apps
     terminal                   = "foot",
-    browser                    = "firefox",
-    editor                     = "codium",
+    browser                    = "zen-browser",
+    editor                     = "micro",
     fileExplorer               = "thunar",
     audioSettings              = "pavucontrol",
 
@@ -26,7 +26,7 @@ return {
     blurInputMethods           = true,
     blurSize                   = 8,
     blurPasses                 = 2,
-    blurXray                   = false,
+    blurXray                   = true,
 
     -- Shadow
     shadowEnabled              = true,
@@ -41,7 +41,7 @@ return {
     singleWindowGapsOut        = 20,
 
     -- Window styling
-    windowOpacity              = 0.95,
+    windowOpacity              = 0.8,
     windowRounding             = 15,
     windowBorderSize           = 1,
     activeWindowBorderColour   = "rgba(" .. scheme.primary .. "e6)",
@@ -51,7 +51,7 @@ return {
     volumeStep                 = 10,
     cursorTheme                = "sweet-cursors",
     cursorSize                 = 24,
-    sleepGestureCmd            = "systemctl suspend-then-hibernate",
+    sleepGestureCmd            = "systemctl suspend",
 
     ------------------
     ---- KEYBINDS ----

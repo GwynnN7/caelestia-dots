@@ -16,19 +16,81 @@ packages = [
     "xdg-desktop-portal-gtk",
     "ttf-jetbrains-mono-nerd",
 ]
-post_install = ["hyprctl reload >/dev/null"]
-post_update = ["hyprctl reload >/dev/null"]
+post_install = [
+    "hyprctl reload >/dev/null",
+    "hyprpm update",
+    "hyprpm add https://github.com/zjeffer/split-monitor-workspaces || true",
+    "hyprpm add https://github.com/yayuuu/hyprland-scroll-overview || true",
+    "hyprpm add https://github.com/gfhdhytghd/hymission || true",
+    "hyprpm enable split-monitor-workspaces || true",
+    "hyprpm enable scrolloverview || true",
+    "hyprpm enable hymission || true",
+    "hyprpm reload"
+]
+post_update = [
+    "hyprctl reload >/dev/null",
+    "hyprpm update",
+    "hyprpm reload"
+]
 [[components.entries]]
 src = "hypr"
 dest = "$XDG_CONFIG_HOME/hypr"
+[[components.entries]]
+src = "xdg-desktop-portal"
+dest = "$XDG_CONFIG_HOME/xdg-desktop-portal"
+
+[[components]]
+name = "caelestia"
+packages = ["quickshell-git", "ddcutil", "brightnessctl", "libcava", "lm-sensors", "aubio", "material-symbols", "caskaydia-cove-nerd", "swappy", "libqalculate", "qt6-base", "qt6-declarative"]
+[[components.entries]]
+src = "caelestia"
+dest = "$XDG_CONFIG_HOME/caelestia"
+[[components.manual_packages]]
+name = "caelestia-shell-gwynn7"
+repo = "https://github.com/GwynnN7/caelestia-shell.git"
+build_cmds = [
+    './scripts/install.sh'
+]
+post_install = [
+    "test -f ${XDG_STATE_HOME:-$HOME/.local/state}/caelestia/scheme.json || caelestia scheme set -n caelestia",
+    "caelestia shell -k >/dev/null; sleep 1; caelestia shell -d >/dev/null",
+]
+
+[[components]]
+name = "sddm"
+default = true
+packages = [
+    "sddm",
+    "caelestia-sddm-minimalistv2-git",
+    "layer-shell-qt"
+]
+post_install = [
+    "sudo systemctl enable --now sddm.service",
+    "sudo /usr/share/sddm/themes/caelestia/scripts/sync.sh >/dev/null"
+]
+post_update = [
+    "sudo systemctl enable --now sddm.service",
+    "sudo /usr/share/sddm/themes/caelestia/scripts/sync.sh >/dev/null"
+]
+[[components.entries]]
+src = "sddm/caelestia.conf"
+dest = "/etc/sddm.conf.d/caelestia.conf"
+sudo = true
+[[components.entries]]
+src = "sddm/sddm.lua"
+dest = "/opt/hypr/sddm.lua"
+sudo = true
+[[components.entries]]
+src = "sddm/caelestia-sddm"
+dest = "/etc/sudoers.d/caelestia-sddm"
+sudo = true
 
 [[components]]
 name = "fish"
 default = true
 packages = ["fish", "eza", "zoxide", "direnv"]
 post_install = [
-    "mkdir -p ${XDG_CONFIG_HOME:-$HOME/.config}/caelestia",
-    "touch ${XDG_CONFIG_HOME:-$HOME/.config}/caelestia/user-config.fish",
+    "mkdir -p ${XDG_CONFIG_HOME:-$HOME/.config}/caelestia"
 ]
 [[components.entries]]
 src = "fish"
@@ -51,9 +113,25 @@ src = "fastfetch"
 dest = "$XDG_CONFIG_HOME/fastfetch"
 
 [[components]]
-name = "btop"
+name = "yazi"
 default = true
-packages = ["btop"]
+packages = ["yazi", "7zip", "ffmpeg"]
+[[components.entries]]
+src = "yazi"
+dest = "$XDG_CONFIG_HOME/yazi"
+
+[[components]]
+name = "pacseek"
+default = true
+packages = ["pacseek"]
+[[components.entries]]
+src = "pacseek"
+dest = "$XDG_CONFIG_HOME/pacseek"
+
+[[components]]
+name = "system"
+default = true
+packages = ["btop", "nvtop", "ncdu"]
 post_install = ["killall -USR2 btop 2>/dev/null || true"]
 post_update = ["killall -USR2 btop 2>/dev/null || true"]
 [[components.entries]]
@@ -71,10 +149,13 @@ dest = "$XDG_CONFIG_HOME/micro"
 [[components]]
 name = "thunar"
 default = true
-packages = ["thunar"]
+packages = ["thunar", "thunar-archive-plugin", "sshfs"]
 [[components.entries]]
 src = "thunar"
 dest = "$XDG_CONFIG_HOME/Thunar"
+[[components.entries]]
+src = "mimeapps.list"
+dest = "$XDG_CONFIG_HOME/mimeapps.list"
 
 [[components]]
 name = "starship"
@@ -85,16 +166,12 @@ src = "starship.toml"
 dest = "$XDG_CONFIG_HOME/starship.toml"
 
 [[components]]
-name = "firefox"
+name = "udiskie"
 default = true
-packages = ["firefox", "local:packages/caelestia-firefox-theme"]
-post_package = ["bash $CAELESTIA_DOTS/firefox/init_firefox.sh"]
+packages = ["udiskie"]
 [[components.entries]]
-src = "firefox/userChrome.css"
-dest = "$HOME/.mozilla/firefox/*.default*/chrome/userChrome.css"
-[[components.entries]]
-src = "firefox/user.js"
-dest = "$HOME/.mozilla/firefox/*.default*/user.js"
+src = "udiskie"
+dest = "$XDG_CONFIG_HOME/udiskie"
 
 [[components]]
 name = "gtk"
@@ -115,7 +192,7 @@ packages = [
 [[components]]
 name = "auth"
 default = true
-packages = ["gnome-keyring", "polkit-gnome"]
+packages = ["gnome-keyring"]
 
 [[components]]
 name = "network"
@@ -138,12 +215,13 @@ packages = [
     "pipewire-jack",
     "wireplumber",
     "pavucontrol",
+    "playerctl"
 ]
 
 [[components]]
 name = "clipboard"
 default = true
-packages = ["wl-clipboard", "cliphist"]
+packages = ["wl-clipboard", "cliphist", "wtype"]
 
 [[components]]
 name = "fonts"
@@ -151,11 +229,47 @@ default = true
 packages = ["noto-fonts", "noto-fonts-cjk", "noto-fonts-emoji"]
 
 [[components]]
+name = "gaming"
+default = true
+packages = ["cachyos-gaming-applications", "gamemode", "hyprland-focused-booster"]
+post_install = [
+    "systemctl --user enable --now hyprland-focused-booster.service"
+]
+[[components.entries]]
+src = "gaming/rungame"
+dest = "$XDG_BIN_HOME/rungame"
+[[components.entries]]
+src = "mangohud"
+dest = "$XDG_CONFIG_HOME/MangoHud"
+[[components.entries]]
+src = "gaming/gamemode.ini"
+dest = "/usr/share/gamemode/gamemode.ini"
+sudo=true
+[[components.entries]]
+src = "gaming/scx_loader.toml"
+dest = "/etc/scx_loader/config.toml"
+sudo=true
+[[components.entries]]
+src = "gaming/gaming"
+dest = "/etc/sudoers.d/gaming"
+sudo=true
+
+[[components]]
+name = "systemd"
+default = true
+packages = ["uwsm", "app2unit"]
+[[components.entries]]
+src = "uwsm"
+dest = "$XDG_CONFIG_HOME/uwsm"
+[[components.entries]]
+src = "environment.d"
+dest = "$XDG_CONFIG_HOME/environment.d"
+
+[[components]]
 name = "tools"
 default = true
 packages = [
     "curl",
-    "git",
     "trash-cli",
     "jq",
     "lazygit",
@@ -163,43 +277,52 @@ packages = [
     "ripgrep",
     "ydotool",
     "hyprpicker",
+    "hyprsunset",
     "xdg-user-dirs",
 ]
-post_install = ["xdg-user-dirs-update"]
+post_install = [
+    "xdg-user-dirs-update", 
+    'git clone https://github.com/GwynnN7/Wallpaper "$HOME/Pictures/Wallpaper" --depth=1'
+    ]
+
+[[components]]
+name = "zen"
+default = true
+packages = ["zen-browser-bin"]
+
+[[components]]
+name = "telegram"
+default = true
+packages = ["telegram-desktop"]
+
+[[components]]
+name = "discord"
+default = true
+packages = ["equibop"]
+
+[[components]]
+name = "tidal-hifi"
+default = true
+packages = ["tidal-hifi-bin"]
+
+[[components]]
+name = "software"
+default = true
+packages = ["gimp", "vlc", "celluloid", "loupe", "evince", "file-roller", "gparted", "xorg-xhost"]
+
+[[components]]
+name = "development"
+default = true
+packages = ["git", "github-cli", "android-tools", "rocm-smi-lib"]
+
 
 
 # --- Optional components ---
 
-[[components]]
-name = "spotify"
-packages = ["spotify", "spicetify-cli", "spicetify-marketplace-bin"]
-post_install = [
-    "spicetify config current_theme caelestia color_scheme caelestia custom_apps marketplace",
-    "spicetify apply",
-]
-[[components.entries]]
-src = "spicetify"
-dest = "$XDG_CONFIG_HOME/spicetify"
-
-[[components]]
-name = "vscodium"
-packages = ["vscodium-bin", "vscodium-bin-marketplace"]
-post_install = [
-    "codium --install-extension $CAELESTIA_DOTS/vscode/caelestia-vscode-integration/caelestia-vscode-integration-*.vsix",
-]
-[[components.entries]]
-src = "vscode/settings.json"
-dest = "$XDG_CONFIG_HOME/VSCodium/User/settings.json"
-[[components.entries]]
-src = "vscode/keybindings.json"
-dest = "$XDG_CONFIG_HOME/VSCodium/User/keybindings.json"
-[[components.entries]]
-src = "vscode/flags.conf"
-dest = "$XDG_CONFIG_HOME/codium-flags.conf"
 
 [[components]]
 name = "vscode"
-packages = ["code"]
+packages = ["visual-studio-code-bin"]
 post_install = [
     "code --install-extension $CAELESTIA_DOTS/vscode/caelestia-vscode-integration/caelestia-vscode-integration-*.vsix",
 ]
@@ -214,28 +337,54 @@ src = "vscode/flags.conf"
 dest = "$XDG_CONFIG_HOME/code-flags.conf"
 
 [[components]]
-name = "zed"
-packages = ["zed"]
+name = "kde-connect"
+packages = ["kdeconnect"]
+[[components.manual_packages]]
+name = "hypr-kdeconnect-fix"
+repo = "https://github.com/gfhdhytghd/hypr-kdeconnect-fix.git"
+build_cmds = [
+    'cmake -S . -B build -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX="$HOME/.local"',
+    'cmake --build build -j"$(nproc)"',
+    'ctest --test-dir build --output-on-failure',
+    'cmake --install build'
+]
+post_install = [
+    "systemctl --user stop hypr-kdeconnect-portal.service",
+    "systemctl --user daemon-reload",
+    "systemctl --user restart xdg-desktop-portal"
+]
+
+[[components]]
+name = "cortana"
+packages = ["dotnet-sdk"]
+post_install = [
+    'git clone https://github.com/GwynnN7/Cortana "$HOME/Projects/Cortana" --depth=1',
+    'mkdir -p "$HOME/Projects/Cortana/CortanaDesktop/out"',
+    "systemctl --user daemon-reload",
+    "systemctl --user restart xdg-desktop-portal"
+]
 [[components.entries]]
-src = "zed"
-dest = "$XDG_CONFIG_HOME/zed"
-
-[[components]]
-name = "discord"
-packages = ["equibop"]
-
-[[components]]
-name = "todoist"
-packages = ["todoist-appimage"]
-
-[[components]]
-name = "uwsm"
-packages = ["uwsm"]
+src = "cortana/Settings.json"
+dest = "$XDG_CONFIG_HOME/cortana/Settings.json"
 [[components.entries]]
-src = "uwsm"
-dest = "$XDG_CONFIG_HOME/uwsm"
+src = "cortana/cortana"
+dest = "$XDG_BIN_HOME/cortana"
+[[components.entries]]
+src = "cortana/efibootmgr"
+dest = "/etc/sudoers.d/efibootmgr"
+sudo = true
 
-# Zen theming doesn't currently work
 [[components]]
-name = "zen"
-packages = ["zen-browser-bin"]
+name = "retrodeck"
+packages = ["flatpak"]
+post_install = [
+    "flatpak install net.retrodeck.retrodeck",
+    "flatpak override --user --talk-name=org.freedesktop.Flatpak net.retrodeck.retrodeck",
+    "mkdir -p $HOME/Games/retrodeck/Eden"
+]
+[[components.entries]]
+src = "retrodeck/es_systems.xml"
+dest = "$HOME/.var/app/net.retrodeck.retrodeck/config/ES-DE/custom_systems/es_systems.xml"
+[[components.entries]]
+src = "retrodeck/Switch.sh"
+dest = "$HOME/Games/retrodeck/apps/Switch.sh"

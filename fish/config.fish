@@ -1,3 +1,35 @@
+source /usr/share/cachyos-fish-config/cachyos-config.fish
+
+function fish_greeting
+    echo -ne '\x1b[38;5;16m'  # Set colour to primary
+    echo '     ______           __          __  _       '
+    echo '    / ____/___ ____  / /__  _____/ /_(_)___ _ '
+    echo '   / /   / __ `/ _ \/ / _ \/ ___/ __/ / __ `/ '
+    echo '  / /___/ /_/ /  __/ /  __(__  ) /_/ / /_/ /  '
+    echo '  \____/\__,_/\___/_/\___/____/\__/_/\__,_/   '
+    set_color normal
+    fastfetch --key-padding-left 5
+end
+
+function y
+	set tmp (mktemp -t "yazi-cwd.XXXXXX")
+	command yazi $argv --cwd-file="$tmp"
+	if read -z cwd < "$tmp"; and [ "$cwd" != "$PWD" ]; and test -d "$cwd"
+		builtin cd -- "$cwd"
+	end
+	command rm -f -- "$tmp"
+end
+
+set -gx EDITOR micro
+
+# AMD ROCm AI Stack Config for RX 6650 XT (RDNA2)
+set -gx HSA_OVERRIDE_GFX_VERSION 10.3.0
+set -gx PYTORCH_ROCM_ARCH "gfx1030"
+set -gx HSA_ENABLE_SDMA 0
+set -gx HSA_NO_SCRATCH_VRAM 1
+set -gx PYTORCH_HIP_ALLOC_CONF "garbage_collection_threshold:0.8,max_split_size_mb:512"
+fish_add_path /opt/rocm/bin
+
 if status is-interactive
     # Starship custom prompt
     command -v starship &> /dev/null && starship init fish | source
@@ -40,7 +72,7 @@ if status is-interactive
         echo -en "\e]133;A\e\\"
     end
 
-    # Custom fish config
-    set -q XDG_CONFIG_HOME && set -l cConf $XDG_CONFIG_HOME/caelestia || set -l cConf $HOME/.config/caelestia
-    source $cConf/user-config.fish 2> /dev/null
+    alias cat='bat --style=plain'
+    alias todo='micro ~/Documents/todo.md'
+    alias c='cd ~/Projects/caelestia && y'
 end

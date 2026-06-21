@@ -1,0 +1,64 @@
+{
+    "wallpaper": {
+        "postHook": "sudo /usr/share/sddm/themes/caelestia/scripts/sync.sh --posthook"
+    },
+    "theme": {
+        "enableTerm": true,
+        "enableTelegram": true,
+        "enableHypr": true,
+        "enableDiscord": true,
+        "enableSpicetify": false,
+        "enablePandora": false,
+        "enableFuzzel": true,
+        "enableBtop": true,
+        "enableNvtop": true,
+        "enableHtop": true,
+        "enableGtk": true,
+        "enableQt": true,
+        "enableWarp": false,
+        "enableChromium": false,
+        "enableZed": false,
+        "enableCava": true,
+        "iconTheme": "Papirus-Dark",
+        "iconThemeLight": "Papirus-Light",
+        "iconThemeDark": "Papirus-Dark",
+        "postHook": "echo $SCHEME_NAME $SCHEME_FLAVOUR $SCHEME_MODE $SCHEME_VARIANT $SCHEME_COLOURS && sudo /usr/share/sddm/themes/caelestia/scripts/sync.sh --posthook"
+    },
+    "toggles": {
+        "communication": {
+            "discord": {
+                "enable": true,
+                "match": [{ "class": "equibop" }],
+                "command": ["equibop"],
+                "move": true
+            },
+            "telegram": {
+                "enable": true,
+                "match": [{ "class": "org.telegram.desktop" }],
+                "command": ["Telegram"],
+                "move": true
+            }
+        },
+        "music": {
+            "spotify": {
+                "enable": false,
+                "match": [{ "class": "Spotify" }, { "initialTitle": "Spotify" }, { "initialTitle": "Spotify Free" }],
+                "command": ["spicetify", "watch", "-s"],
+                "move": true
+            },
+            "tidal-hifi": {
+                "enable": true,
+                "match": [{ "class": "tidal-hifi" }],
+                "command": ["tidal-hifi"],
+                "move": true
+            }
+        },
+        "sysmon": {
+            "btop": {
+                "enable": true,
+                "match": [{ "class": "btop", "title": "btop", "workspace": { "name": "special:sysmon" } }],
+                "command": ["foot", "-a", "btop", "-T", "btop", "fish", "-C", "exec btop"]
+            }
+        }
+    }
+}

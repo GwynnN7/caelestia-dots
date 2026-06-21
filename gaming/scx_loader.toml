@@ -1,0 +1,2 @@
+default_sched = "scx_flow"
+default_mode = "Auto"

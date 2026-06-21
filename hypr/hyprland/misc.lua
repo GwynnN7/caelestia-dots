@@ -2,6 +2,8 @@ local scheme = require("scheme.current")
 
 hl.config({
     misc = {
+        vrr = 2,
+        
         animate_manual_resizes       = false,
         animate_mouse_windowdragging = false,
 
@@ -21,6 +23,7 @@ hl.config({
     },
 
     debug = {
-        error_position = 1
+        error_position = 1,
+        suppress_errors = true,
     }
 })

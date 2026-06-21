@@ -1,0 +1,67 @@
+#!/usr/bin/env bash
+
+NVAPI_STATUS=0
+MANGOAPP_FLAG=0
+USE_GAMESCOPE=0
+
+GAME_CMD=()
+GAME_ENV=(
+    PROTON_PRIORITY_HIGH=1 
+    ENABLE_LAYER_MESA_ANTI_LAG=1
+    PROTON_RDNA3_UPGRADE=1
+    PROTON_XESS_UPGRADE=1
+    PROTON_DISCORD_BRIDGE=1
+)
+
+while [[ $# -gt 0 ]]; do
+    case "$1" in
+        --nvapi) NVAPI_STATUS=1; shift ;;
+        --no-nvapi) NVAPI_STATUS=2; shift ;;
+        --mangoapp) MANGOAPP_FLAG=1; shift ;;
+        --gamescope) USE_GAMESCOPE=1; shift ;;
+        --) shift; GAME_CMD+=("$@"); break ;;
+        -*) echo "Error: Unknown or unsupported flag '$1'"; exit 1 ;;
+        *) GAME_CMD+=("$@"); break ;;
+    esac
+done
+
+if [ ${#GAME_CMD[@]} -eq 0 ]; then
+    echo "Error: No game executable provided."
+    exit 1
+fi
+
+if [ "$NVAPI_STATUS" = "1" ]; then
+    GAME_ENV+=(PROTON_ENABLE_NVAPI=1)
+elif [ "$NVAPI_STATUS" = "2" ]; then
+    GAME_ENV+=(PROTON_DISABLE_NVAPI=1)
+fi
+
+LAUNCH_CMD=(app2unit --)
+WRAPPER=(gamemoderun mangohud "${GAME_CMD[@]}")
+
+if [ "$USE_GAMESCOPE" = "1" ]; then
+    GAMESCOPE_ARGS=(
+        -W 1920 -H 1080 -f -r 165 
+        --adaptive-sync --rt 
+        --force-grab-cursor
+    )
+    
+    if [ "$MANGOAPP_FLAG" = "1" ]; then
+        GAMESCOPE_ARGS+=(--mangoapp)
+        WRAPPER=(gamemoderun "${GAME_CMD[@]}")
+    fi
+
+    LAUNCH_CMD+=(env LD_PRELOAD="" gamescope "${GAMESCOPE_ARGS[@]}" --)
+else
+    GAME_ENV+=(PROTON_ENABLE_WAYLAND=1)
+fi
+
+LAUNCH_CMD+=(env "${GAME_ENV[@]}" "${WRAPPER[@]}")
+
+
+ACTIVE_CLASS=$(hyprctl activewindow -j | jq -r '.class')
+if [[ "${ACTIVE_CLASS,,}" == *"steam"* ]]; then
+    hyprctl dispatch killactive
+fi
+
+exec systemd-inhibit --why "Gaming" powerprofilesctl launch -p performance -- "${LAUNCH_CMD[@]}"

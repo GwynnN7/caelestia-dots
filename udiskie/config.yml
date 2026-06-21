@@ -1,0 +1,5 @@
+program_options:
+    tray: false
+    notify: true
+    automount: false
+    file_manager: xdg-open

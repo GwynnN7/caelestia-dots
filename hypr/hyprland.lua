@@ -40,16 +40,6 @@ end
 -- Maybe set current colours to defaults
 maybe_copy(hypr .. "/scheme/default.lua", hypr .. "/scheme/current.lua")
 
--- User variables
-maybe_create(home .. "/.config/caelestia/hypr-vars.lua", "return {}\n")
-local overrides = require("hypr-vars")
-if type(overrides) == "table" then
-    local vars = require("variables")
-    for k, v in pairs(overrides) do
-        vars[k] = v
-    end
-end
-
 -- Default monitor conf
 hl.monitor({
     output   = "",
@@ -69,8 +59,5 @@ require("hyprland.group")
 require("hyprland.execs")
 require("hyprland.rules")
 require("hyprland.gestures")
+require("hyprland.plugins")
 require("hyprland.keybinds")
-
--- User configs
-maybe_create(home .. "/.config/caelestia/hypr-user.lua")
-require("hypr-user")

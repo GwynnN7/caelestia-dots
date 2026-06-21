@@ -2,7 +2,10 @@ local vars = require("variables")
 
 hl.config({
     input = {
-        kb_layout          = "us",
+        kb_layout = "it",
+        kb_variant = "us",
+        kb_options = "lv3:ralt_switch",
+        kb_options = "fkeys:basic_13-24",
         numlock_by_default = false,
         repeat_delay       = 250,
         repeat_rate        = 35,

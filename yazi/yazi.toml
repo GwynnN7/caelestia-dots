@@ -1,0 +1,16 @@
+[mgr]
+ratio          = [ 1, 2, 5 ]
+
+[preview]
+wrap            = "yes"
+tab_size        = 2
+max_width       = 600
+max_height      = 900
+image_delay     = 50
+image_quality   = 90
+
+[input]
+cursor_blink = true
+
+[opener]
+open = [{ run = 'app2unit "$1"', desc = "Open", for = "linux" }]

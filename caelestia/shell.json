@@ -1,0 +1,531 @@
+{
+    "ai": {
+        "activeOllamaModel": "llama3",
+        "enableCelestialMode": true,
+        "enableOllama": true,
+        "ollamaHistoryJson": "[{\"isUser\":false,\"text\":\"Chat cleared. How can I help you today?\"}]"
+    },
+    "appearance": {
+        "deformScale": 1,
+        "padding": {
+            "scale": 0.8
+        },
+        "pitchBlack": false,
+        "rounding": {
+            "scale": 1
+        },
+        "spacing": {
+            "scale": 0.5
+        },
+        "transparency": {
+            "base": 0.65,
+            "enabled": true,
+            "layers": 0.1
+        }
+    },
+    "audio": {
+        "sounds": {
+            "disabledNotifApps": [
+            ],
+            "enabled": true,
+            "notificationVolume": 0.4,
+            "sfxVolume": 0.4
+        }
+    },
+    "background": {
+        "desktopLyrics": {
+            "autoHide": true,
+            "enabled": true,
+            "position": "bottom-center",
+            "scale": 1.2,
+            "shadow": {
+                "blur": 0.4,
+                "enabled": true,
+                "opacity": 0.9
+            }
+        },
+        "visualiser": {
+            "enabled": true
+        },
+        "wallpaperRecolor": false
+    },
+    "bar": {
+        "activeWindow": {
+            "compact": true,
+            "inverted": false
+        },
+        "clock": {
+            "background": true,
+            "showDate": true,
+            "showIcon": true
+        },
+        "dock": {
+            "monitorCenter": true,
+            "recolourIcons": false
+        },
+        "entries": [
+            {
+                "enabled": true,
+                "id": "logo"
+            },
+            {
+                "enabled": true,
+                "id": "workspaces"
+            },
+            {
+                "enabled": true,
+                "id": "spacer"
+            },
+            {
+                "enabled": true,
+                "id": "dock"
+            },
+            {
+                "enabled": true,
+                "id": "spacer"
+            },
+            {
+                "enabled": true,
+                "id": "tray"
+            },
+            {
+                "enabled": true,
+                "id": "spacer"
+            },
+            {
+                "enabled": true,
+                "id": "clock"
+            },
+            {
+                "enabled": true,
+                "id": "statusIcons"
+            },
+            {
+                "enabled": true,
+                "id": "power"
+            }
+        ],
+        "github": {
+            "background": false
+        },
+        "position": "left",
+        "status": {
+            "showAudio": false,
+            "showKbLayout": false,
+            "showLockStatus": true,
+            "showMicrophone": true,
+            "showNetwork": true,
+            "showNotifications": false,
+            "showPeripheralBattery": false,
+            "showWifi": false
+        },
+        "workspaces": {
+            "activeTrail": false,
+            "maxWindowIcons": 2,
+            "occupiedBg": false,
+            "shown": 4,
+            "useIcon": true
+        }
+    },
+    "border": {
+        "rounding": 25,
+        "smoothing": 20,
+        "thickness": 8
+    },
+    "dashboard": {
+        "colorizeMediaGif": false,
+        "performance": {
+            "showNetwork": true
+        },
+        "profilePicShape": 17,
+        "randomizeMediaShapeColors": true,
+        "showHyprlandSplash": true,
+        "showTerminal": true,
+        "showWeather": false,
+        "syncMediaShapesToBeat": true,
+        "useMediaShapes": false
+    },
+    "general": {
+        "apps": {
+            "playback": [
+                "celluloid"
+            ]
+        },
+        "idle": {
+            "inhibitWhenAudio": true,
+            "lockBeforeSleep": true,
+            "timeouts": [
+                {
+                    "idleAction": "lock",
+                    "timeout": 700
+                },
+                {
+                    "idleAction": "dpms off",
+                    "returnAction": "dpms on",
+                    "timeout": 895
+                },
+                {
+                    "idleAction": [
+                        "systemctl",
+                        "suspend"
+                    ],
+                    "timeout": 900
+                }
+            ]
+        },
+        "logo": "caelestia",
+        "mediaGifSpeedAdjustment": 125
+    },
+    "launcher": {
+        "actionPrefix": ">",
+        "actions": [
+            {
+                "command": [
+                    "autocomplete",
+                    "clipboard"
+                ],
+                "dangerous": false,
+                "description": "Clipboard history",
+                "enabled": true,
+                "icon": "content_paste",
+                "name": "Clipboard"
+            },
+            {
+                "command": [
+                    "autocomplete",
+                    "calc"
+                ],
+                "dangerous": false,
+                "description": "Do simple math equations",
+                "enabled": true,
+                "icon": "calculate",
+                "name": "Calculator"
+            },
+            {
+                "command": [
+                    "autocomplete",
+                    "emoji"
+                ],
+                "dangerous": false,
+                "description": "Emoji Picker",
+                "enabled": true,
+                "icon": "mood",
+                "name": "Emoji"
+            },
+            {
+                "command": [
+                    "autocomplete",
+                    "wallpaper"
+                ],
+                "dangerous": false,
+                "description": "Change the current wallpaper",
+                "enabled": true,
+                "icon": "image",
+                "name": "Wallpaper"
+            },
+            {
+                "command": [
+                    "caelestia",
+                    "wallpaper",
+                    "-r"
+                ],
+                "dangerous": false,
+                "description": "Switch to a random wallpaper",
+                "enabled": true,
+                "icon": "casino",
+                "name": "Random"
+            },
+            {
+                "command": [
+                    "autocomplete",
+                    "scheme"
+                ],
+                "dangerous": false,
+                "description": "Change the current colour scheme",
+                "enabled": true,
+                "icon": "palette",
+                "name": "Scheme"
+            },
+            {
+                "command": [
+                    "autocomplete",
+                    "variant"
+                ],
+                "dangerous": false,
+                "description": "Change the current scheme variant",
+                "enabled": true,
+                "icon": "colors",
+                "name": "Variant"
+            },
+            {
+                "command": [
+                    "autocomplete",
+                    "transparency"
+                ],
+                "dangerous": false,
+                "description": "Change shell transparency",
+                "enabled": false,
+                "icon": "opacity",
+                "name": "Transparency"
+            },
+            {
+                "command": [
+                    "setMode",
+                    "light"
+                ],
+                "dangerous": false,
+                "description": "Change the scheme to light mode",
+                "enabled": false,
+                "icon": "light_mode",
+                "name": "Light"
+            },
+            {
+                "command": [
+                    "setMode",
+                    "dark"
+                ],
+                "dangerous": false,
+                "description": "Change the scheme to dark mode",
+                "enabled": false,
+                "icon": "dark_mode",
+                "name": "Dark"
+            },
+            {
+                "command": [
+                    "caelestia",
+                    "shell",
+                    "drawers",
+                    "toggle",
+                    "session"
+                ],
+                "dangerous": false,
+                "description": "Open session menu",
+                "enabled": true,
+                "icon": "power_settings_new",
+                "name": "Session"
+            },
+            {
+                "command": [
+                    "systemctl",
+                    "poweroff"
+                ],
+                "dangerous": true,
+                "description": "Shutdown the system",
+                "enabled": true,
+                "icon": "power_settings_new",
+                "name": "Shutdown"
+            },
+            {
+                "command": [
+                    "systemctl",
+                    "reboot"
+                ],
+                "dangerous": true,
+                "description": "Reboot the system",
+                "enabled": true,
+                "icon": "cached",
+                "name": "Reboot"
+            },
+            {
+                "command": [
+                    "uwsm",
+                    "stop"
+                ],
+                "dangerous": true,
+                "description": "Log out of the current session",
+                "enabled": true,
+                "icon": "exit_to_app",
+                "name": "Logout"
+            },
+            {
+                "command": [
+                    "loginctl",
+                    "lock-session"
+                ],
+                "dangerous": false,
+                "description": "Lock the current session",
+                "enabled": true,
+                "icon": "lock",
+                "name": "Lock"
+            },
+            {
+                "command": [
+                    "systemctl",
+                    "suspend"
+                ],
+                "dangerous": true,
+                "description": "Suspend then hibernate",
+                "enabled": true,
+                "icon": "bedtime",
+                "name": "Sleep"
+            },
+            {
+                "command": [
+                    "caelestia",
+                    "shell",
+                    "nexus",
+                    "open"
+                ],
+                "dangerous": false,
+                "description": "Configure the shell",
+                "enabled": true,
+                "icon": "settings",
+                "name": "Settings"
+            }
+        ],
+        "enableDangerousActions": false,
+        "favouriteApps": [
+            "zen",
+            "org.telegram.desktop",
+            "equibop",
+            "tidal-hifi",
+            "steam"
+        ],
+        "hiddenApps": [
+            "xfce4-about",
+            "cmake-gui",
+            "vim",
+            "qvidcap",
+            "qv4l2",
+            "bssh",
+            "bvnc",
+            "avahi-discover",
+            "thunar-settings",
+            "org.kde.kdeconnect.nonplasma",
+            "org.kde.kdeconnect.sms",
+            "thunar-bulk-rename",
+            "footclient",
+            "foot-server",
+            "mpv",
+            "uuctl",
+            "net.retrodeck.retrodeck.Configurator",
+            "net.retrodeck.retrodeck",
+            "lstopo"
+        ],
+        "showOnHover": false,
+        "specialPrefix": "@",
+        "useFuzzy": {
+            "apps": true,
+            "wallpapers": true
+        }
+    },
+    "lock": {
+        "lockOnStartup": true,
+        "profilePicShape": 18
+    },
+    "notifs": {
+        "actionOnClick": true,
+        "defaultExpireTimeout": 3000,
+        "groupPreviewNum": 3
+    },
+    "osd": {
+        "enableBrightness": true,
+        "enableMicrophone": true,
+        "enabled": true,
+        "hideDelay": 1000
+    },
+    "paths": {
+        "lyricsDir": "~/Music/Lyrics",
+        "mediaGif": "root:/assets/toothless.gif",
+        "sessionGif": "root:/assets/cortana.png",
+        "wallpaperDir": "~/Pictures/Wallpaper"
+    },
+    "services": {
+        "defaultPlayer": "tidal-hifi",
+        "lyricsBackend": "Auto",
+        "visualiserBars": 60,
+        "weatherLocation": "Orvieto"
+    },
+    "session": {
+        "commands": {
+            "automode": [
+                "sh",
+                "-c",
+                "cortana service &>/dev/null && cortana api -val 0 settings/automaticmode | cortana notify"
+            ],
+            "generic": [
+                "sh",
+                "-c",
+                "cortana service &>/dev/null && cortana api -act toggle devices/generic | cortana notify"
+            ],
+            "lamp": [
+                "sh",
+                "-c",
+                "cortana service &>/dev/null && cortana api -act toggle devices/lamp | cortana notify"
+            ],
+            "logout": [
+                "uwsm",
+                "stop"
+            ],
+            "reboot": [
+                "sh",
+                "-c",
+                "cortana service &>/dev/null && cortana api -cmd reboot computer | cortana notify || systemctl reboot"
+            ],
+            "shutdown": [
+                "sh",
+                "-c",
+                "cortana service &>/dev/null && cortana api -cmd shutdown computer | cortana notify || systemctl poweroff"
+            ]
+        }
+    },
+    "shimeji": {
+        "enabled": false
+    },
+    "utilities": {
+        "enabled": true,
+        "maxToasts": 1,
+        "quickToggles": [
+            {
+                "enabled": true,
+                "id": "wifi"
+            },
+            {
+                "enabled": true,
+                "id": "bluetooth"
+            },
+            {
+                "enabled": true,
+                "id": "mic"
+            },
+            {
+                "enabled": true,
+                "id": "gameMode"
+            },
+            {
+                "enabled": true,
+                "id": "dnd"
+            },
+            {
+                "enabled": false,
+                "id": "vpn"
+            },
+            {
+                "enabled": true,
+                "id": "wallpaper"
+            },
+            {
+                "enabled": true,
+                "id": "settings"
+            },
+            {
+                "enabled": false,
+                "id": "badapple"
+            },
+            {
+                "enabled": false,
+                "id": "pauseWallpaper"
+            }
+        ],
+        "toasts": {
+            "capsLockChanged": true,
+            "kbLayoutChanged": false,
+            "kbLimit": false,
+            "nowPlaying": false,
+            "transparency": true
+        },
+        "vpn": {
+            "enabled": false
+        }
+    }
+}

@@ -12,7 +12,7 @@ hl.window_rule({ match = { float = true, xwayland = false }, center = true }) --
 hl.window_rule({
     match = {
         class =
-        "guifetch|yad|zenity|wev|org.gnome.FileRoller|file-roller|blueman-manager|com.github.GradienceTeam.Gradience|feh|imv|system-config-printer|org.quickshell",
+        "guifetch|yad|zenity|wev|org.gnome.FileRoller|file-roller|blueman-manager|com.github.GradienceTeam.Gradience|feh|imv|system-config-printer|org.quickshell|hyprland-share-picker",
     },
     tag   = "+float",
 })
@@ -33,7 +33,7 @@ hl.window_rule({ match = { tag = "float" }, float = true })
 hl.window_rule({
     match = {
         class =
-        "foot|equibop|org.quickshell|imv|swappy|krita|gimp|inkscape|darktable|resolve|kdenlive|shotcut|blender|godot|(steam_app_(default|[0-9]+))|gamescope",
+        "foot|org.quickshell|imv|swappy|krita|gimp|inkscape|darktable|resolve|kdenlive|shotcut|blender|godot|(steam_app_(default|[0-9]+))|gamescope",
     },
     tag   = "+opaque_app",
 })
@@ -97,13 +97,12 @@ hl.window_rule({ match = { xwayland = true, title = "win[0-9]+" }, no_dim = true
 hl.window_rule({ match = { class = "btop" }, workspace = "special:sysmon" })
 hl.window_rule({
     match     = {
-        class = "feishin|Spotify|Supersonic|Cider|com.github.th_ch.youtube_music|Plexamp|com-maxrave-simpmusic-MainKt",
+        class = "tidal-hifi|feishin|Spotify|Supersonic|Cider|com.github.th_ch.youtube_music|Plexamp|com-maxrave-simpmusic-MainKt",
     },
     workspace = "special:music",
 })
 hl.window_rule({ match = { initial_title = "Spotify( %(?Free%)?)?" } }) -- Spotify wayland, it has no class for some reason
-hl.window_rule({ match = { class = "discord|equibop|vesktop|whatsapp" }, workspace = "special:communication" })
-hl.window_rule({ match = { class = "Todoist" }, workspace = "special:todo" })
+hl.window_rule({ match = { class = "org.telegram.desktop|discord|equibop|vesktop|whatsapp" }, workspace = "special:communication" })
 
 -------------------------
 ---- Workspace rules ----
