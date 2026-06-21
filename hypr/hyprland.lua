@@ -41,12 +41,9 @@ end
 maybe_copy(hypr .. "/scheme/default.lua", hypr .. "/scheme/current.lua")
 
 -- Default monitor conf
-hl.monitor({
-    output   = "",
-    mode     = "preferred",
-    position = "auto",
-    scale    = 1,
-})
+hl.monitor({ output = "DP-1", mode = "1920x1080@165", position = "auto", scale = 1 })
+hl.monitor({ output = "eDP-1", mode = "1920x1080@60", position = "auto", scale = 1 })
+hl.monitor({ output = "HDMI-A-1", mode = "1920x1080@60", position = "auto", scale = 1 })
 
 -- Configs
 require("hyprland.env")

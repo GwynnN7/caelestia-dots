@@ -65,10 +65,11 @@ return {
     kbMoveWin                  = "SUPER + SHIFT + CTRL",
 
     -- Window Action
-    kbPinWindow                = "SUPER + P",
+    kbPinWindow                = "SUPER + Z",
     kbWindowFullscreen         = "SUPER + Return",
     kbWindowBorderedFullscreen = "SUPER + F",
     kbToggleWindowFloating     = "SUPER + G",
+    kbCenter         		   = "SUPER + X",
     kbCloseWindow              = "SUPER + Q",
 
     -- Special workspaces toggles
@@ -81,7 +82,7 @@ return {
     kbBrowser                  = "SUPER + R",
     kbFileExplorer             = "SUPER + E",
     kbYazi                     = "SUPER + Y",
-    kbAudioSettings            = "CTRL + N",
+    kbAudioSettings            = "SUPER + N",
 
     -- Misc
     kbSession                  = "SUPER + Escape",
