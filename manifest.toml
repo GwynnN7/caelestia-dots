@@ -41,7 +41,7 @@ dest = "$XDG_CONFIG_HOME/xdg-desktop-portal"
 
 [[components]]
 name = "caelestia"
-packages = ["quickshell-git", "ddcutil", "brightnessctl", "libcava", "lm-sensors", "aubio", "material-symbols", "caskaydia-cove-nerd", "swappy", "libqalculate", "qt6-base", "qt6-declarative"]
+packages = ["quickshell-git", "ddcutil", "brightnessctl", "app2unit", "libcava", "networkmanager", "lm_sensors", "fish", "aubio", "libpipewire", "glibc", "gcc-libs", "ttf-material-symbols-variable", "power-profiles-daemon", "ttf-rubik-vf", "ttf-cascadia-code-nerd", "swappy", "libqalculate", "bash", "qt6-base", "qt6-declarative", "qt6-imageformats"]
 [[components.entries]]
 src = "caelestia"
 dest = "$XDG_CONFIG_HOME/caelestia"
