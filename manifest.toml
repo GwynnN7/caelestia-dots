@@ -1,10 +1,3 @@
-packages = ["caelestia-shell", "caelestia-cli"]
-post_install = [
-    "test -f ${XDG_STATE_HOME:-$HOME/.local/state}/caelestia/scheme.json || caelestia scheme set -n caelestia",
-    "caelestia shell -d >/dev/null",
-]
-post_update = ["caelestia shell -k; sleep 1; caelestia shell -d >/dev/null"]
-
 # --- Core components ---
 
 [[components]]
@@ -19,12 +12,6 @@ packages = [
 post_install = [
     "hyprctl reload >/dev/null",
     "hyprpm update",
-    "hyprpm add https://github.com/zjeffer/split-monitor-workspaces || true",
-    "hyprpm add https://github.com/yayuuu/hyprland-scroll-overview || true",
-    "hyprpm add https://github.com/gfhdhytghd/hymission || true",
-    "hyprpm enable split-monitor-workspaces || true",
-    "hyprpm enable scrolloverview || true",
-    "hyprpm enable hymission || true",
     "hyprpm reload"
 ]
 post_update = [
@@ -41,15 +28,15 @@ dest = "$XDG_CONFIG_HOME/xdg-desktop-portal"
 
 [[components]]
 name = "caelestia"
-packages = ["quickshell-git", "ddcutil", "brightnessctl", "app2unit", "libcava", "networkmanager", "lm_sensors", "fish", "aubio", "libpipewire", "glibc", "gcc-libs", "ttf-material-symbols-variable", "power-profiles-daemon", "ttf-rubik-vf", "ttf-cascadia-code-nerd", "swappy", "libqalculate", "bash", "qt6-base", "qt6-declarative", "qt6-imageformats"]
+packages = ["quickshell-git"]
 [[components.entries]]
 src = "caelestia"
 dest = "$XDG_CONFIG_HOME/caelestia"
 [[components.manual_packages]]
-name = "caelestia-shell-gwynn7"
+name = "caelestia-shell"
 repo = "https://github.com/GwynnN7/caelestia-shell.git"
 build_cmds = [
-    './scripts/install.sh'
+    'makepkg -si'
 ]
 post_install = [
     "test -f ${XDG_STATE_HOME:-$HOME/.local/state}/caelestia/scheme.json || caelestia scheme set -n caelestia",
@@ -65,11 +52,11 @@ packages = [
     "layer-shell-qt"
 ]
 post_install = [
+    "sudo systemctl daemon-reload",
     "sudo systemctl enable --now sddm.service",
     "sudo /usr/share/sddm/themes/caelestia/scripts/sync.sh >/dev/null"
 ]
 post_update = [
-    "sudo systemctl enable --now sddm.service",
     "sudo /usr/share/sddm/themes/caelestia/scripts/sync.sh >/dev/null"
 ]
 [[components.entries]]
@@ -362,7 +349,7 @@ post_install = [
     'git clone https://github.com/GwynnN7/Cortana "$HOME/Projects/Cortana" --depth=1',
     'mkdir -p "$HOME/Projects/Cortana/CortanaDesktop/out"',
     "systemctl --user daemon-reload",
-    "systemctl --user restart xdg-desktop-portal"
+    "systemctl --user enable cortana-desktop.service"
 ]
 [[components.entries]]
 src = "cortana/Settings.json"
@@ -370,6 +357,9 @@ dest = "$XDG_CONFIG_HOME/cortana/Settings.json"
 [[components.entries]]
 src = "cortana/cortana"
 dest = "$XDG_BIN_HOME/cortana"
+[[components.entries]]
+src = "cortana/cortana-desktop.service"
+dest = "$XDG_CONFIG_HOME/systemd/user/cortana-desktop.service"
 [[components.entries]]
 src = "cortana/efibootmgr"
 dest = "/etc/sudoers.d/efibootmgr"
@@ -389,3 +379,18 @@ dest = "$HOME/.var/app/net.retrodeck.retrodeck/config/ES-DE/custom_systems/es_sy
 [[components.entries]]
 src = "retrodeck/Switch.sh"
 dest = "$HOME/Games/retrodeck/apps/Switch.sh"
+
+[[components]]
+name = "hyprpm"
+packages = []
+post_install = [
+    "hyprpm purge-cache",
+    "hyprpm update",
+    "hyprpm add https://github.com/zjeffer/split-monitor-workspaces || true",
+    "hyprpm add https://github.com/yayuuu/hyprland-scroll-overview || true",
+    "hyprpm add https://github.com/gfhdhytghd/hymission || true",
+    "hyprpm enable split-monitor-workspaces || true",
+    "hyprpm enable scrolloverview || true",
+    "hyprpm enable hymission || true",
+    "hyprpm reload"
+]
