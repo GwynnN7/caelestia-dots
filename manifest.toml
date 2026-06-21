@@ -359,7 +359,7 @@ src = "cortana/cortana"
 dest = "$XDG_BIN_HOME/cortana"
 [[components.entries]]
 src = "cortana/cortana-desktop.service"
-dest = "$XDG_CONFIG_HOME/systemd/user/cortana-desktop.service"
+dest = "$XDG_CONFIG_SERVICE/cortana-desktop.service"
 [[components.entries]]
 src = "cortana/efibootmgr"
 dest = "/etc/sudoers.d/efibootmgr"
