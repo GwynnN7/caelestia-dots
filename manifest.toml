@@ -76,9 +76,6 @@ sudo = true
 name = "fish"
 default = true
 packages = ["fish", "eza", "zoxide", "direnv"]
-post_install = [
-    "mkdir -p ${XDG_CONFIG_HOME:-$HOME/.config}/caelestia"
-]
 [[components.entries]]
 src = "fish"
 dest = "$XDG_CONFIG_HOME/fish"
@@ -143,6 +140,9 @@ dest = "$XDG_CONFIG_HOME/Thunar"
 [[components.entries]]
 src = "mimeapps.list"
 dest = "$XDG_CONFIG_HOME/mimeapps.list"
+[[components.entries]]
+src = "xfce4"
+dest = "$XDG_CONFIG_HOME/xfce4"
 
 [[components]]
 name = "starship"
@@ -204,6 +204,9 @@ packages = [
     "pavucontrol",
     "playerctl"
 ]
+[[components.entries]]
+src = "wireplumber"
+dest = "$XDG_CONFIG_HOME/wireplumber"
 
 [[components]]
 name = "clipboard"
