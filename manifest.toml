@@ -44,35 +44,6 @@ post_install = [
 ]
 
 [[components]]
-name = "sddm"
-default = true
-packages = [
-    "sddm",
-    "caelestia-sddm-minimalistv2-git",
-    "layer-shell-qt"
-]
-post_install = [
-    "sudo systemctl daemon-reload",
-    "sudo systemctl enable --now sddm.service",
-    "sudo /usr/share/sddm/themes/caelestia/scripts/sync.sh >/dev/null"
-]
-post_update = [
-    "sudo /usr/share/sddm/themes/caelestia/scripts/sync.sh >/dev/null"
-]
-[[components.entries]]
-src = "sddm/caelestia.conf"
-dest = "/etc/sddm.conf.d/caelestia.conf"
-sudo = true
-[[components.entries]]
-src = "sddm/sddm.lua"
-dest = "/opt/hypr/sddm.lua"
-sudo = true
-[[components.entries]]
-src = "sddm/caelestia-sddm"
-dest = "/etc/sudoers.d/caelestia-sddm"
-sudo = true
-
-[[components]]
 name = "fish"
 default = true
 packages = ["fish", "eza", "zoxide", "direnv"]
@@ -382,6 +353,34 @@ dest = "$HOME/.var/app/net.retrodeck.retrodeck/config/ES-DE/custom_systems/es_sy
 [[components.entries]]
 src = "retrodeck/Switch.sh"
 dest = "$HOME/Games/retrodeck/apps/Switch.sh"
+
+[[components]]
+name = "sddm"
+packages = [
+    "sddm",
+    "caelestia-sddm-minimalistv2-git",
+    "layer-shell-qt"
+]
+post_install = [
+    "sudo systemctl daemon-reload",
+    "sudo systemctl enable --now sddm.service",
+    "sudo /usr/share/sddm/themes/caelestia/scripts/sync.sh >/dev/null"
+]
+post_update = [
+    "sudo /usr/share/sddm/themes/caelestia/scripts/sync.sh >/dev/null"
+]
+[[components.entries]]
+src = "sddm/caelestia.conf"
+dest = "/etc/sddm.conf.d/caelestia.conf"
+sudo = true
+[[components.entries]]
+src = "sddm/sddm.lua"
+dest = "/opt/hypr/sddm.lua"
+sudo = true
+[[components.entries]]
+src = "sddm/caelestia-sddm"
+dest = "/etc/sudoers.d/caelestia-sddm"
+sudo = true
 
 [[components]]
 name = "hyprpm"
