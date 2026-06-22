@@ -79,21 +79,17 @@ end
 local function toggle_special_ws(action)
     return function()
         if action == "communication" then
-            local active_special = hl.get_active_workspace()
+            local active_ws = hl.get_active_special_workspace() or hl.get_active_workspace()
             
-            if hl.get_active_special_workspace() then
-            	active_special = hl.get_active_special_workspace()
-            end
-
-            if active_special.name == "special:communication" then
+            if active_ws and active_ws.name == "special:communication" then
                 return hl.dispatch(hl.dsp.exec_cmd("caelestia toggle communication"))
-            elseif active_special.name == "special:music" then
+            elseif active_ws and active_ws.name == "special:music" then
                 return hl.dispatch(hl.dsp.exec_cmd("caelestia toggle music"))
             else
                 return hl.dispatch(hl.dsp.exec_cmd("caelestia toggle communication"))
             end
         else
-        	return hl.dispatch(hl.dsp.exec_cmd("caelestia toggle " .. action))
+            return hl.dispatch(hl.dsp.exec_cmd("caelestia toggle " .. action))
         end
     end
 end
