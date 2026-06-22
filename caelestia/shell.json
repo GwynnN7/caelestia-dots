@@ -482,19 +482,23 @@
             },
             {
                 "enabled": true,
-                "id": "bluetooth"
-            },
-            {
-                "enabled": true,
                 "id": "mic"
             },
             {
                 "enabled": true,
-                "id": "gameMode"
+                "id": "sunset"
+            },
+            {
+                "enabled": true,
+                "id": "bluetooth"
             },
             {
                 "enabled": true,
                 "id": "dnd"
+            },
+            {
+                "enabled": true,
+                "id": "gameMode"
             },
             {
                 "enabled": false,
