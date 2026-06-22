@@ -225,6 +225,7 @@ dest = "$XDG_CONFIG_HOME/environment.d"
 name = "tools"
 default = true
 packages = [
+    "git",
     "curl",
     "trash-cli",
     "jq",
@@ -242,43 +243,15 @@ post_install = [
     'git clone https://github.com/GwynnN7/Wallpaper "$HOME/Pictures/Wallpaper" --depth=1'
     ]
 
-[[components]]
-name = "zen"
-default = true
-packages = ["zen-browser-bin"]
-
-[[components]]
-name = "telegram"
-default = true
-packages = ["telegram-desktop"]
-
-[[components]]
-name = "discord"
-default = true
-packages = ["equibop"]
-
-[[components]]
-name = "tidal-hifi"
-default = true
-packages = ["tidal-hifi-bin"]
+# --- Optional components ---
 
 [[components]]
 name = "software"
-default = true
-packages = ["gimp", "vlc", "celluloid", "loupe", "evince", "file-roller", "gparted", "xorg-xhost"]
+packages = ["tidal-hifi-bin", "zen-browser-bin", "telegram-desktop", "equibop"]
 
 [[components]]
 name = "development"
-default = true
-packages = ["git", "github-cli", "android-tools", "rocm-smi-lib"]
-
-
-# --- Optional components ---
-
-
-[[components]]
-name = "vscode"
-packages = ["visual-studio-code-bin"]
+packages = ["visual-studio-code-bin", "git", "github-cli", "android-tools", "rocm-smi-lib"]
 post_install = [
     "code --install-extension $CAELESTIA_DOTS/vscode/caelestia-vscode-integration/caelestia-vscode-integration-*.vsix",
 ]
@@ -293,12 +266,59 @@ src = "vscode/flags.conf"
 dest = "$XDG_CONFIG_HOME/code-flags.conf"
 
 [[components]]
-name = "kde-connect"
+name = "applications"
+packages = ["gimp", "vlc", "celluloid", "loupe", "evince", "file-roller", "gparted", "xorg-xhost"]
+
+[[components]]
+name = "sddm"
+packages = [
+    "sddm",
+    "caelestia-sddm-minimalistv2-git",
+    "layer-shell-qt"
+]
+post_install = [
+    "sudo systemctl daemon-reload",
+    "sudo systemctl enable --now sddm.service",
+    "sudo /usr/share/sddm/themes/caelestia/scripts/sync.sh >/dev/null"
+]
+post_update = [
+    "sudo /usr/share/sddm/themes/caelestia/scripts/sync.sh >/dev/null"
+]
+[[components.entries]]
+src = "sddm/caelestia.conf"
+dest = "/etc/sddm.conf.d/caelestia.conf"
+sudo = true
+[[components.entries]]
+src = "sddm/sddm.lua"
+dest = "/opt/hypr/sddm.lua"
+sudo = true
+[[components.entries]]
+src = "sddm/caelestia-sddm"
+dest = "/etc/sudoers.d/caelestia-sddm"
+sudo = true
+
+[[components]]
+name = "kdeconnect"
 packages = ["kdeconnect", "local:kdeconnect"]
 post_install = [
     "systemctl --user stop hypr-kdeconnect-portal.service",
     "systemctl --user daemon-reload",
     "systemctl --user restart xdg-desktop-portal"
+]
+
+[[components]]
+name = "hyprpm"
+packages = []
+post_install = [
+    "hyprpm purge-cache",
+    "hyprpm update",
+    "hyprpm add https://github.com/zjeffer/split-monitor-workspaces || true",
+    "hyprpm add https://github.com/yayuuu/hyprland-scroll-overview || true",
+    "hyprpm add https://github.com/gfhdhytghd/hymission || true",
+    "hyprpm enable split-monitor-workspaces || true",
+    "hyprpm enable scrolloverview || true",
+    "hyprpm enable hymission || true",
+    "hyprpm reload"
 ]
 
 [[components]]
@@ -338,46 +358,3 @@ dest = "$HOME/.var/app/net.retrodeck.retrodeck/config/ES-DE/custom_systems/es_sy
 [[components.entries]]
 src = "retrodeck/Switch.sh"
 dest = "$HOME/Games/retrodeck/apps/Switch.sh"
-
-[[components]]
-name = "sddm"
-packages = [
-    "sddm",
-    "caelestia-sddm-minimalistv2-git",
-    "layer-shell-qt"
-]
-post_install = [
-    "sudo systemctl daemon-reload",
-    "sudo systemctl enable --now sddm.service",
-    "sudo /usr/share/sddm/themes/caelestia/scripts/sync.sh >/dev/null"
-]
-post_update = [
-    "sudo /usr/share/sddm/themes/caelestia/scripts/sync.sh >/dev/null"
-]
-[[components.entries]]
-src = "sddm/caelestia.conf"
-dest = "/etc/sddm.conf.d/caelestia.conf"
-sudo = true
-[[components.entries]]
-src = "sddm/sddm.lua"
-dest = "/opt/hypr/sddm.lua"
-sudo = true
-[[components.entries]]
-src = "sddm/caelestia-sddm"
-dest = "/etc/sudoers.d/caelestia-sddm"
-sudo = true
-
-[[components]]
-name = "hyprpm"
-packages = []
-post_install = [
-    "hyprpm purge-cache",
-    "hyprpm update",
-    "hyprpm add https://github.com/zjeffer/split-monitor-workspaces || true",
-    "hyprpm add https://github.com/yayuuu/hyprland-scroll-overview || true",
-    "hyprpm add https://github.com/gfhdhytghd/hymission || true",
-    "hyprpm enable split-monitor-workspaces || true",
-    "hyprpm enable scrolloverview || true",
-    "hyprpm enable hymission || true",
-    "hyprpm reload"
-]
