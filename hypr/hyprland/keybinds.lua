@@ -36,10 +36,10 @@ hl.bind("XF86AudioPrev", hl.dsp.global("caelestia:mediaPrev"), { locked = true, 
 hl.bind("XF86AudioStop", hl.dsp.global("caelestia:mediaStop"), { locked = true, description = "Stop media playback" })
 
 -- Kill/restart
-hl.bind("CTRL + ALT + Delete", hl.dsp.exec_cmd("qs -c caelestia kill"), { release = true, description = "Kill Caelestia shell" })
+hl.bind("CTRL + ALT + Delete", hl.dsp.exec_cmd("caelestia shell -k"), { release = true, description = "Kill Caelestia shell" })
 hl.bind(
     "CTRL + SUPER + Delete",
-    hl.dsp.exec_cmd("qs -c caelestia kill; sleep .1; caelestia shell -d"),
+    hl.dsp.exec_cmd("caelestia shell -k; sleep 1; caelestia shell -d"),
     { release = true, description = "Restart Caelestia shell" }
 )
 
