@@ -4,9 +4,9 @@
     },
     "theme": {
         "enableTerm": true,
-        "enableTelegram": true,
         "enableHypr": true,
         "enableDiscord": true,
+        "enableTelegram": true,
         "enableSpicetify": false,
         "enablePandora": false,
         "enableFuzzel": true,
