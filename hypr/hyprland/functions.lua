@@ -1,3 +1,5 @@
+local vars = require("variables")
+
 local function wsaction(action, range, i)
     return function()
         local activews = hl.get_active_workspace()
@@ -195,9 +197,9 @@ local function media_volume(direction)
         else
             os.execute("wpctl set-mute @DEFAULT_AUDIO_SINK@ 0 &")
             if direction == "+" then
-                os.execute("wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+ &")
+                os.execute("wpctl set-mute @DEFAULT_AUDIO_SOURCE@ 0; wpctl set-volume @DEFAULT_AUDIO_SINK@ " .. vars.volumeStep .. "%+ &")
             else
-                os.execute("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%- &")
+                os.execute("wpctl set-mute @DEFAULT_AUDIO_SOURCE@ 0; wpctl set-volume @DEFAULT_AUDIO_SINK@ " .. vars.volumeStep .. "%- &")
             end
         end
     end
