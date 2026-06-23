@@ -135,7 +135,7 @@ packages = ["adw-gtk-theme", "papirus-icon-theme", "papirus-folders"]
 name = "qt"
 default = true
 packages = [
-    "qtengine",
+    "qtengine-git",
     "frameworkintegration", # Darkly has this as a dep but is missing it from its PKGBUILD
     "darkly-bin",
     "papirus-icon-theme",
