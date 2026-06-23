@@ -197,9 +197,9 @@ local function media_volume(direction)
         else
             os.execute("wpctl set-mute @DEFAULT_AUDIO_SINK@ 0 &")
             if direction == "+" then
-                os.execute("wpctl set-mute @DEFAULT_AUDIO_SOURCE@ 0; wpctl set-volume @DEFAULT_AUDIO_SINK@ " .. vars.volumeStep .. "%+ &")
+                os.execute("wpctl set-mute @DEFAULT_AUDIO_SINK@ 0; wpctl set-volume -l " .. (vars.volumeMax / 100) .. " @DEFAULT_AUDIO_SINK@ " .. vars.volumeStep .. "%+" .. " &")
             else
-                os.execute("wpctl set-mute @DEFAULT_AUDIO_SOURCE@ 0; wpctl set-volume @DEFAULT_AUDIO_SINK@ " .. vars.volumeStep .. "%- &")
+                os.execute("wpctl set-mute @DEFAULT_AUDIO_SINK@ 0; wpctl set-volume @DEFAULT_AUDIO_SINK@ " .. vars.volumeStep .. "%-" .. " &")
             end
         end
     end
