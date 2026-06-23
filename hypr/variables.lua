@@ -88,7 +88,7 @@ return {
     -- Misc
     kbSession                  = "SUPER + Escape",
     kbShowSidebar              = "SUPER + Z",
-    kbClearNotifs              = "SUPER + ALT + B",
+    kbClearNotifs              = "SUPER + ALT + Z",
     kbShowPanels               = "SUPER + H",
     kbLock                     = "SUPER + L",
     kbRestoreLock              = "SUPER + ALT + L",
