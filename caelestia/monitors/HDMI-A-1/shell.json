@@ -1,9 +1,4 @@
 {
-    "background": {
-        "visualiser": {
-            "enabled": false
-        }
-    },
     "bar": {
         "entries": [
             {

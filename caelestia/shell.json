@@ -7,6 +7,7 @@
     },
     "appearance": {
         "deformScale": 1,
+        "islands": false,
         "padding": {
             "scale": 0.8
         },
@@ -74,6 +75,10 @@
             },
             {
                 "enabled": true,
+                "id": "activeWindow"
+            },
+            {
+                "enabled": true,
                 "id": "spacer"
             },
             {
@@ -90,10 +95,6 @@
             },
             {
                 "enabled": true,
-                "id": "spacer"
-            },
-            {
-                "enabled": true,
                 "id": "clock"
             },
             {
@@ -105,9 +106,6 @@
                 "id": "power"
             }
         ],
-        "github": {
-            "background": false
-        },
         "position": "left",
         "status": {
             "showAudio": false,
@@ -431,6 +429,8 @@
         "wallpaperDir": "~/Pictures/Wallpaper"
     },
     "services": {
+        "arpcCaelestiaInfo": false,
+        "arpcEnabled": false,
         "defaultPlayer": "tidal-hifi",
         "lyricsBackend": "Auto",
         "visualiserBars": 60,
@@ -474,6 +474,13 @@
     },
     "utilities": {
         "enabled": true,
+        "gameMode": {
+            "autoEnable": true,
+            "autoEnableRegexes": [
+                "^steam_app_.*$",
+                "gamescope"
+            ]
+        },
         "maxToasts": 1,
         "quickToggles": [
             {
