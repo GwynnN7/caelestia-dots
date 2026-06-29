@@ -66,7 +66,6 @@ return {
     kbMoveWin                  = "SUPER + SHIFT + CTRL",
 
     -- Window Action
-    kbPinWindow                = "SUPER + B",
     kbWindowFullscreen         = "SUPER + Return",
     kbWindowBorderedFullscreen = "SUPER + F",
     kbToggleWindowFloating     = "SUPER + G",
@@ -87,7 +86,7 @@ return {
 
     -- Misc
     kbSession                  = "SUPER + Escape",
-    kbShowSidebar              = "SUPER + Z",
+    kbShowSidebar              = "SUPER + B",
     kbClearNotifs              = "SUPER + ALT + Z",
     kbShowPanels               = "SUPER + H",
     kbLock                     = "SUPER + L",

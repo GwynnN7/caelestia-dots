@@ -199,7 +199,7 @@ hl.bind("SUPER + Page_Down", fn.media_volume("-"), { locked = true, repeating = 
 
 -- Clipboard and emoji picker
 hl.bind("SUPER + V", hl.dsp.global("caelestia:clipboard"), { description = "Open clipboard history" })
-hl.bind("SUPER + B", hl.dsp.global("caelestia:cortana"), { description = "Open Cortana assistant" })
+hl.bind("SUPER + Z", hl.dsp.global("caelestia:cortana"), { description = "Open Cortana assistant" })
 hl.bind("SUPER + Period", hl.dsp.global("caelestia:emoji"), { description = "Open emoji picker" })
 hl.bind("SUPER + K", hl.dsp.global("caelestia:keybinds"), { description = "Show active keybinds map" })
 hl.bind("SUPER + ALT + V", hl.dsp.exec_cmd("pkill fuzzel || caelestia clipboard -d"), { description = "Clear clipboard history" })
