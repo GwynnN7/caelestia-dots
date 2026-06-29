@@ -1,11 +1,4 @@
 {
-    "ai": {
-        "activeOllamaModel": "llama3",
-        "defaultOllamaModel": "gemma4:e2b",
-        "enableCelestialMode": true,
-        "enableOllama": true,
-        "ollamaHistoryJson": []
-    },
     "appearance": {
         "deformScale": 1,
         "islands": false,
