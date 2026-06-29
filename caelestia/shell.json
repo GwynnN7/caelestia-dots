@@ -181,6 +181,17 @@
             {
                 "command": [
                     "autocomplete",
+                    "cortana"
+                ],
+                "dangerous": false,
+                "description": "Cortana assistant",
+                "enabled": true,
+                "icon": "android",
+                "name": "Cortana"
+            },
+            {
+                "command": [
+                    "autocomplete",
                     "clipboard"
                 ],
                 "dangerous": false,
@@ -244,6 +255,28 @@
                 "enabled": true,
                 "icon": "palette",
                 "name": "Scheme"
+            },
+            {
+                "command": [
+                    "autocomplete",
+                    "windows"
+                ],
+                "dangerous": false,
+                "description": "List all open windows",
+                "enabled": true,
+                "icon": "window",
+                "name": "Windows"
+            },
+            {
+                "command": [
+                    "autocomplete",
+                    "keybinds"
+                ],
+                "dangerous": false,
+                "description": "List all keybinds",
+                "enabled": true,
+                "icon": "keyboard",
+                "name": "Keybinds"
             },
             {
                 "command": [
