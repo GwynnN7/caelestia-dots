@@ -186,7 +186,7 @@
                 "dangerous": false,
                 "description": "Cortana assistant",
                 "enabled": true,
-                "icon": "android",
+                "icon": "network_intel_node",
                 "name": "Cortana"
             },
             {
