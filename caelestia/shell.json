@@ -1,4 +1,21 @@
 {
+    "ai": {
+        "activeModel": "gemma4:e2b",
+        "agentCaelestiaCommand": true,
+        "agentCortanaApi": true,
+        "agentDateTime": true,
+        "agentFileOps": true,
+        "agentGetWeather": true,
+        "agentLocation": true,
+        "agentOpenApp": true,
+        "agentReadWebpage": true,
+        "agentRunCommand": true,
+        "agentSetTimer": true,
+        "agentTakeScreenshot": true,
+        "agentWebSearch": true,
+        "contextWindow": 131072,
+        "systemPrompt": "You are a helpful AI assistant called Cortana, integrated into gwynn7's OS. You can use tools to assist the user and control his room's devices and sensors."
+    },
     "appearance": {
         "deformScale": 1,
         "islands": false,
@@ -170,6 +187,7 @@
     },
     "launcher": {
         "actionPrefix": ">",
+        "aiHistoryGridView": false,
         "actions": [
             {
                 "command": [
