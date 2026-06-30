@@ -78,6 +78,19 @@ local function move_actions(win)
     end
 end
 
+local function focus_workspace(direction)
+    return function()
+        local active_ws = hl.get_active_special_workspace()
+        if active_ws and active_ws.name then
+            local name_only = active_ws.name:match("^special:(.*)") or active_ws.name
+            return hl.dispatch(hl.dsp.exec_cmd("caelestia toggle " .. name_only))
+        else
+            local smw = hl.plugin.split_monitor_workspaces
+            return hl.dispatch(function() return smw.workspace(direction) end)
+        end
+    end
+end
+
 local function toggle_special_ws(action)
     return function()
         if action == "communication" then
@@ -213,6 +226,7 @@ return {
     resize_active_window = resize_active_window,
     wsaction             = wsaction,
     move_actions         = move_actions,
+    focus_workspace      = focus_workspace,
     toggle_special_ws    = toggle_special_ws,
     toggle_maximize		 = toggle_maximize,
     media_volume		 = media_volume,

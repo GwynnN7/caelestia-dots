@@ -85,9 +85,15 @@ return {
     kbAudioSettings            = "SUPER + N",
 
     -- Misc
+    kbShowClipboard            = "SUPER + V",
+    kbShowEmoji                = "SUPER + Period",
     kbSession                  = "SUPER + Escape",
+    kbShowAI                   = "SUPER + Z",
+    kbShowSidebarAI            = "SUPER + ALT + Z",
     kbShowSidebar              = "SUPER + B",
-    kbClearNotifs              = "SUPER + ALT + Z",
+    kbClearNotifs              = "SUPER + ALT + B",
+    kbShowKeybinds             = "SUPER + K",
+    kbShowWindows              = "SUPER + J",
     kbShowPanels               = "SUPER + H",
     kbLock                     = "SUPER + L",
     kbRestoreLock              = "SUPER + ALT + L",

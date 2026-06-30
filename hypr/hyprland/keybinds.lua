@@ -51,14 +51,15 @@ for i = 1, 8 do
 end
 
 -- Go to workspace -1/+1
-hl.bind(vars.kbFocus .. " + mouse_up", function() return smw.workspace("+1") end, { description = "Focus next workspace" })
-hl.bind(vars.kbFocus .. " + mouse_down", function() return smw.workspace("-1") end, { description = "Focus previous workspace" })
-hl.bind(vars.kbFocus .. " + up", function() return smw.workspace("-1") end, { description = "Focus previous workspace" })
-hl.bind(vars.kbFocus .. " + down", function() return smw.workspace("+1") end, { description = "Focus next workspace" })
-hl.bind(vars.kbFocus .. " + W", function() return smw.workspace("-1") end, { description = "Focus previous workspace" })
-hl.bind(vars.kbFocus .. " + S", function() return smw.workspace("+1") end, { description = "Focus next workspace" })
+hl.bind(vars.kbFocus .. " + mouse_up", fn.focus_workspace("+1"), { description = "Focus next workspace" })
+hl.bind(vars.kbFocus .. " + mouse_down", fn.focus_workspace("-1"), { description = "Focus previous workspace" })
+hl.bind(vars.kbFocus .. " + up", fn.focus_workspace("-1"), { description = "Focus previous workspace" })
+hl.bind(vars.kbFocus .. " + down", fn.focus_workspace("+1"), { description = "Focus next workspace" })
+hl.bind(vars.kbFocus .. " + W", fn.focus_workspace("-1"), { description = "Focus previous workspace" })
+hl.bind(vars.kbFocus .. " + S", fn.focus_workspace("+1"), { description = "Focus next workspace" })
 
 hl.bind(vars.kbFocus .. " + TAB", hl.dsp.focus({ monitor = "+1" }), { description = "Focus next monitor" })
+hl.bind(vars.kbFocus .. " + CTRL + TAB", hl.dsp.workspace.swap_monitors({ monitor1 = "0", monitor2 = "+1" }), { description = "Swap monitors" })
 hl.bind(vars.kbMove .. " + TAB", function() return smw.change_monitor("next") end, { description = "Move workspace to next monitor" })
 
 -- Move window to workspace -1/+1
@@ -198,12 +199,14 @@ hl.bind("SUPER + Page_Up", fn.media_volume("+"), { locked = true, repeating = tr
 hl.bind("SUPER + Page_Down", fn.media_volume("-"), { locked = true, repeating = true, description = "Decrease media volume" })
 
 -- Clipboard and emoji picker
-hl.bind("SUPER + V", hl.dsp.global("caelestia:clipboard"), { description = "Open clipboard history" })
-hl.bind("SUPER + Z", hl.dsp.global("caelestia:cortana"), { description = "Open Cortana assistant" })
-hl.bind("SUPER + Period", hl.dsp.global("caelestia:emoji"), { description = "Open emoji picker" })
-hl.bind("SUPER + K", hl.dsp.global("caelestia:keybinds"), { description = "Show active keybinds map" })
-hl.bind("SUPER + ALT + V", hl.dsp.exec_cmd("pkill fuzzel || caelestia clipboard -d"), { description = "Clear clipboard history" })
-hl.bind("SUPER + ALT + Period", hl.dsp.exec_cmd("pkill fuzzel || caelestia emoji -p"), { description = "Clear emoji history" })
+hl.bind(vars.kbShowClipboard, hl.dsp.global("caelestia:clipboard"), { description = "Open clipboard history" })
+hl.bind(vars.kbShowEmoji, hl.dsp.global("caelestia:emoji"), { description = "Open emoji picker" })
+hl.bind(vars.kbShowAI, hl.dsp.global("caelestia:cortana"), { description = "Open Cortana" })
+hl.bind(vars.kbShowSidebarAI, hl.dsp.global("caelestia:cortanaSidebar"), { description = "Open Sidebar Cortana" })
+hl.bind(vars.kbShowKeybinds, hl.dsp.global("caelestia:keybinds"), { description = "Show active keybinds map" })
+hl.bind(vars.kbShowWindows, hl.dsp.global("caelestia:windowSwitcher"), { description = "Show active windows" })
+hl.bind("ALT + " .. vars.kbShowClipboard, hl.dsp.exec_cmd("pkill fuzzel || caelestia clipboard -d"), { description = "Clear clipboard history" })
+hl.bind("ALT + " .. vars.kbShowEmoji, hl.dsp.exec_cmd("pkill fuzzel || caelestia emoji -p"), { description = "Clear emoji history" })
 
 -- Cortana API
 hl.bind("SUPER + F1", hl.dsp.exec_cmd("cortana api -act on devices/lamp | cortana notify"), { locked = true, description = "Turn on smart lamp" })
