@@ -1,15 +1,15 @@
 {
     "ai": {
-        "activeModel": "gemma4:e2b",
+        "activeModel": "gemma4:e4b",
         "agentCaelestiaCommand": true,
         "agentCortanaApi": true,
         "agentDateTime": true,
-        "agentFileOps": true,
+        "agentFileOps": false,
         "agentGetWeather": true,
         "agentLocation": true,
         "agentOpenApp": true,
         "agentReadWebpage": true,
-        "agentRunCommand": true,
+        "agentRunCommand": false,
         "agentSetTimer": true,
         "agentTakeScreenshot": true,
         "agentWebSearch": true,
@@ -454,7 +454,10 @@
     },
     "lock": {
         "lockOnStartup": true,
-        "profilePicShape": 18
+        "profilePicShape": 18,
+        "enableHowdy": true,
+        "maxHowdyTries": 3,
+        "triggerHowdyOnWake": true
     },
     "notifs": {
         "actionOnClick": true,
