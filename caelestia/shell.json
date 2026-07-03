@@ -455,9 +455,7 @@
     "lock": {
         "lockOnStartup": true,
         "profilePicShape": 18,
-        "enableHowdy": true,
-        "maxHowdyTries": 3,
-        "triggerHowdyOnWake": true
+        "enableHowdy": false
     },
     "notifs": {
         "actionOnClick": true,

@@ -192,8 +192,8 @@ post_install = [
     "systemctl --user enable --now hyprland-focused-booster.service"
 ]
 [[components.entries]]
-src = "gaming/rungame"
-dest = "$XDG_BIN_HOME/rungame"
+src = "gaming/gamerun"
+dest = "$XDG_BIN_HOME/gamerun"
 [[components.entries]]
 src = "mangohud"
 dest = "$XDG_CONFIG_HOME/MangoHud"
