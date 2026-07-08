@@ -1,0 +1,46 @@
+{
+    "bar": {
+        "entries": [
+            {
+                "enabled": true,
+                "id": "logo"
+            },
+            {
+                "enabled": true,
+                "id": "workspaces"
+            },
+            {
+                "enabled": true,
+                "id": "spacer"
+            },
+            {
+                "enabled": true,
+                "id": "dock"
+            },
+            {
+                "enabled": true,
+                "id": "spacer"
+            },
+            {
+                "enabled": true,
+                "id": "tray"
+            },
+            {
+                "enabled": true,
+                "id": "spacer"
+            },
+            {
+                "enabled": true,
+                "id": "clock"
+            },
+            {
+                "enabled": true,
+                "id": "statusIcons"
+            },
+            {
+                "enabled": true,
+                "id": "power"
+            }
+        ]
+    }
+}
