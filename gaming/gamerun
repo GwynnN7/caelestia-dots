@@ -40,11 +40,15 @@ LAUNCH_CMD=(app2unit --)
 WRAPPER=(gamemoderun mangohud "${GAME_CMD[@]}")
 
 if [ "$USE_GAMESCOPE" = "1" ]; then
+    CURRENT_HZ=$(hyprctl monitors -j | jq '.[] | select(.focused) | .refreshRate | round')
+
     GAMESCOPE_ARGS=(
-        -W 1920 -H 1080 -f -r 165 
-        --adaptive-sync --rt 
-        --force-grab-cursor
+        -W 1920 -H 1080 -f -r "$CURRENT_HZ" --force-grab-cursor
     )
+
+    if [ "$CURRENT_HZ" = "165" ]; then
+        GAMESCOPE_ARGS+=( --adaptive-sync )
+    fi
 
     if [ "$MANGOAPP_FLAG" = "1" ]; then
         GAMESCOPE_ARGS+=(--mangoapp)

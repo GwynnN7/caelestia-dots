@@ -4,9 +4,9 @@
   <system>
     <name>switch</name>
     <fullname>Nintendo Switch</fullname>
-    <path>/home/gwynn7/Games/Emulation/retrodeck/roms/switch</path>
+    <path>/home/gwynn7/Games/Retrodeck/retrodeck/roms/switch</path>
     <extension>.nsp .NSP .xci .XCI</extension>
-    <command label="Eden">/home/gwynn7/Games/retrodeck/Eden/AppRun -f -g %ROM%</command>
+    <command label="Eden">/home/gwynn7/Games/Retrodeck/Eden/AppRun -f -g %ROM%</command>
     <platform>switch</platform>
     <theme>switch</theme>
   </system>
@@ -14,7 +14,7 @@
   <system>
       <name>apps</name>
       <fullname>Emulators</fullname>
-      <path>/home/gwynn7/Games/retrodeck/roms/apps</path>
+      <path>/home/gwynn7/Games/Retrodeck/retrodeck/roms/apps</path>
       <extension>.sh</extension>
       <command>bash %ROM%</command>
       <platform>pc</platform>

@@ -136,7 +136,7 @@ name = "qt"
 default = true
 packages = [
     "qtengine-git",
-    "frameworkintegration", # Darkly has this as a dep but is missing it from its PKGBUILD
+    "frameworkintegration",
     "darkly-bin",
     "papirus-icon-theme",
     "papirus-folders",
@@ -240,7 +240,7 @@ packages = [
 post_install = [
     "systemctl --user enable --now hyprsunset", 
     "xdg-user-dirs-update", 
-    'git clone https://github.com/GwynnN7/Wallpaper "$HOME/Pictures/Wallpaper" --depth=1'
+    'git clone https://github.com/GwynnN7/Wallpaper "$HOME/Pictures/Wallpaper" 2>/dev/null || git -C "$HOME/Projects/Wallpaper" pull'
     ]
 
 # --- Optional components ---
@@ -298,6 +298,22 @@ dest = "/etc/sudoers.d/caelestia-sddm"
 sudo = true
 
 [[components]]
+name = "openrgb"
+packages = [
+    "openrgb-git",
+    "caelestia-rgb-sync"
+]
+post_install = [
+    "caelestia-rgb-sync init",
+    "caelestia-rgb-sync calibrate device",
+    "caelestia-rgb-sync calibrate global",
+    "caelestia-rgb-sync enable"
+]
+post_update = [
+    "caelestia-rgb-sync apply"
+]
+
+[[components]]
 name = "kdeconnect"
 packages = ["kdeconnect", "local:kdeconnect"]
 post_install = [
@@ -325,7 +341,7 @@ post_install = [
 name = "cortana"
 packages = ["dotnet-sdk"]
 post_install = [
-    'git clone https://github.com/GwynnN7/Cortana "$HOME/Projects/Cortana" --depth=1',
+    'git clone https://github.com/GwynnN7/Cortana "$HOME/Projects/Cortana" 2>/dev/null || git -C "$HOME/Projects/Cortana" pull',
     'mkdir -p "$HOME/Projects/Cortana/CortanaDesktop/out"',
     "systemctl --user daemon-reload",
     "systemctl --user enable cortana-desktop.service"
@@ -350,11 +366,12 @@ packages = ["flatpak"]
 post_install = [
     "flatpak install net.retrodeck.retrodeck",
     "flatpak override --user --talk-name=org.freedesktop.Flatpak net.retrodeck.retrodeck",
-    "mkdir -p $HOME/Games/retrodeck/Eden"
+    "mkdir -p /home/gwynn7/Games/Retrodeck/Eden",
+    "mkdir -p /home/gwynn7/Games/Retrodeck/retrodeck/apps",
 ]
 [[components.entries]]
 src = "retrodeck/es_systems.xml"
 dest = "$HOME/.var/app/net.retrodeck.retrodeck/config/ES-DE/custom_systems/es_systems.xml"
 [[components.entries]]
 src = "retrodeck/Switch.sh"
-dest = "$HOME/Games/retrodeck/apps/Switch.sh"
+dest = "/home/gwynn7/Games/Retrodeck/retrodeck/apps/Switch.sh"

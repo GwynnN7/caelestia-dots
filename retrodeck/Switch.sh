@@ -1,3 +1,3 @@
 #!/bin/bash
-cd /home/gwynn7/Games/retrodeck/Eden
+cd $RETRODECK_PATH/Eden
 ./AppRun

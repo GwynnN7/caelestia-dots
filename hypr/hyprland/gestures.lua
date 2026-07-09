@@ -1,4 +1,5 @@
 local vars = require("variables")
+local fn   = require("hyprland.functions")
 
 hl.config({
     gestures = {
@@ -11,19 +12,12 @@ hl.config({
     },
 })
 
-hl.gesture({ fingers = vars.workspaceSwipeFingers, direction = "horizontal", action = "workspace" })
-hl.gesture({ fingers = vars.gestureFingers, direction = "up", action = "special", workspace_name = "special" })
-hl.gesture({
-    fingers   = vars.gestureFingers,
-    direction = "down",
-    action    = function()
-        hl.exec_cmd("caelestia toggle specialws")
-    end,
-})
-hl.gesture({
-    fingers   = vars.gestureFingersMore,
-    direction = "down",
-    action    = function()
-        hl.exec_cmd(vars.sleepGestureCmd)
-    end,
-})
+hl.gesture({ fingers = 3, direction = "up", action = fn.focus_workspace("-1") })
+hl.gesture({ fingers = 3, direction = "down", action = fn.focus_workspace("+1") })
+hl.gesture({ fingers = 3, direction = "left", action = hl.dsp.layout("focus l") })
+hl.gesture({ fingers = 3, direction = "right", action = hl.dsp.layout("focus r") })
+
+hl.gesture({ fingers = 4, direction = "up", action = "fullscreen"})
+hl.gesture({ fingers = 4, direction = "down", action = "fullscreen" mode = "maximize"})
+
+hl.gesture({ fingers = 2, direction = "pinch", action = "cursorZoom", zoom_level = 1, mode = "live" })
