@@ -325,15 +325,15 @@ post_install = [
     "flatpak install net.retrodeck.retrodeck",
     "flatpak override --user --talk-name=org.freedesktop.Flatpak net.retrodeck.retrodeck",
     "mkdir -p $HOME/Games/Retrodeck/Switch",
-    "mkdir -p $HOME/Games/Retrodeck/retrodeck/apps",
-    "curl -fsSL https://raw.githubusercontent.com/Abdess/retrobios/main/install.sh | sh -s -- --platform retrodeck --dest $HOME/Games/Retrodeck/retrodeck"
+    "mkdir -p $HOME/Games/Retrodeck/retrodeck/roms/apps",
+    "curl -fsSL https://raw.githubusercontent.com/Abdess/retrobios/main/install.sh | sh -s -- --platform retrodeck --dest $HOME/Games/Retrodeck/retrodeck/bios"
 ]
 [[components.entries]]
 src = "retrodeck/es_systems.xml"
 dest = "$HOME/.var/app/net.retrodeck.retrodeck/config/ES-DE/custom_systems/es_systems.xml"
 [[components.entries]]
 src = "retrodeck/Switch.sh"
-dest = "$HOME/Games/Retrodeck/retrodeck/apps/Switch.sh"
+dest = "$HOME/Games/Retrodeck/retrodeck/roms/apps/Switch.sh"
 
 # --- Only desktop ---
 
