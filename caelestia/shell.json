@@ -514,6 +514,11 @@
                 "sh",
                 "-c",
                 "cortana service &>/dev/null && cortana api -cmd shutdown computer | cortana notify || systemctl poweroff"
+            ],
+            "windows": [
+                "sh",
+                "-c",
+                "cortana service &>/dev/null && cortana api -cmd system computer | cortana notify || systemctl reboot"
             ]
         }
     },

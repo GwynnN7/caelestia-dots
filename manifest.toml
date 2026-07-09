@@ -39,6 +39,38 @@ src = "caelestia"
 dest = "$XDG_CONFIG_HOME/caelestia"
 
 [[components]]
+name = "system"
+default = true
+packages = ["gnome-keyring", "networkmanager", "bluez", "bluez-utils"]
+
+[[components]]
+name = "audio"
+default = true
+packages = [
+    "pipewire",
+    "pipewire-pulse",
+    "pipewire-audio",
+    "pipewire-alsa",
+    "pipewire-jack",
+    "wireplumber",
+    "pavucontrol",
+    "playerctl"
+]
+[[components.entries]]
+src = "wireplumber"
+dest = "$XDG_CONFIG_HOME/wireplumber"
+
+[[components]]
+name = "monitor"
+default = true
+packages = ["btop", "nvtop", "ncdu"]
+post_install = ["killall -USR2 btop 2>/dev/null || true"]
+post_update = ["killall -USR2 btop 2>/dev/null || true"]
+[[components.entries]]
+src = "btop"
+dest = "$XDG_CONFIG_HOME/btop"
+
+[[components]]
 name = "fish"
 default = true
 packages = ["fish", "eza", "zoxide", "direnv"]
@@ -55,12 +87,29 @@ src = "foot"
 dest = "$XDG_CONFIG_HOME/foot"
 
 [[components]]
-name = "fastfetch"
+name = "micro"
 default = true
-packages = ["fastfetch"]
+packages = ["micro"]
 [[components.entries]]
-src = "fastfetch"
-dest = "$XDG_CONFIG_HOME/fastfetch"
+src = "micro"
+dest = "$XDG_CONFIG_HOME/micro"
+[[components.entries]]
+src = "applications/micro.desktop"
+dest = "$XDG_DATA_HOME/applications/micro.desktop"
+
+[[components]]
+name = "thunar"
+default = true
+packages = ["thunar", "thunar-archive-plugin", "sshfs"]
+[[components.entries]]
+src = "thunar"
+dest = "$XDG_CONFIG_HOME/Thunar"
+[[components.entries]]
+src = "mimeapps.list"
+dest = "$XDG_CONFIG_HOME/mimeapps.list"
+[[components.entries]]
+src = "xfce4"
+dest = "$XDG_CONFIG_HOME/xfce4"
 
 [[components]]
 name = "yazi"
@@ -79,36 +128,12 @@ src = "pacseek"
 dest = "$XDG_CONFIG_HOME/pacseek"
 
 [[components]]
-name = "system"
+name = "fastfetch"
 default = true
-packages = ["btop", "nvtop", "ncdu"]
-post_install = ["killall -USR2 btop 2>/dev/null || true"]
-post_update = ["killall -USR2 btop 2>/dev/null || true"]
+packages = ["fastfetch"]
 [[components.entries]]
-src = "btop"
-dest = "$XDG_CONFIG_HOME/btop"
-
-[[components]]
-name = "micro"
-default = true
-packages = ["micro"]
-[[components.entries]]
-src = "micro"
-dest = "$XDG_CONFIG_HOME/micro"
-
-[[components]]
-name = "thunar"
-default = true
-packages = ["thunar", "thunar-archive-plugin", "sshfs"]
-[[components.entries]]
-src = "thunar"
-dest = "$XDG_CONFIG_HOME/Thunar"
-[[components.entries]]
-src = "mimeapps.list"
-dest = "$XDG_CONFIG_HOME/mimeapps.list"
-[[components.entries]]
-src = "xfce4"
-dest = "$XDG_CONFIG_HOME/xfce4"
+src = "fastfetch"
+dest = "$XDG_CONFIG_HOME/fastfetch"
 
 [[components]]
 name = "starship"
@@ -143,36 +168,9 @@ packages = [
 ]
 
 [[components]]
-name = "auth"
+name = "fonts"
 default = true
-packages = ["gnome-keyring"]
-
-[[components]]
-name = "network"
-default = true
-packages = ["networkmanager"]
-
-[[components]]
-name = "bluetooth"
-default = true
-packages = ["bluez", "bluez-utils"]
-
-[[components]]
-name = "pipewire"
-default = true
-packages = [
-    "pipewire",
-    "pipewire-pulse",
-    "pipewire-audio",
-    "pipewire-alsa",
-    "pipewire-jack",
-    "wireplumber",
-    "pavucontrol",
-    "playerctl"
-]
-[[components.entries]]
-src = "wireplumber"
-dest = "$XDG_CONFIG_HOME/wireplumber"
+packages = ["noto-fonts", "noto-fonts-cjk", "noto-fonts-emoji"]
 
 [[components]]
 name = "clipboard"
@@ -180,16 +178,12 @@ default = true
 packages = ["wl-clipboard", "cliphist", "wtype"]
 
 [[components]]
-name = "fonts"
-default = true
-packages = ["noto-fonts", "noto-fonts-cjk", "noto-fonts-emoji"]
-
-[[components]]
 name = "gaming"
 default = true
-packages = ["cachyos-gaming-applications", "gamemode", "hyprland-focused-booster"]
+packages = ["cachyos-gaming-applications", "gamemode", "hyprland-focused-booster", "flatpak"]
 post_install = [
-    "systemctl --user enable --now hyprland-focused-booster.service"
+    "systemctl --user enable --now hyprland-focused-booster.service",
+    "flatpak install net.retrodeck.retrodeck"
 ]
 [[components.entries]]
 src = "gaming/gamerun"
@@ -246,30 +240,6 @@ post_install = [
 # --- Optional components ---
 
 [[components]]
-name = "software"
-packages = ["tidal-hifi-bin", "zen-browser-bin", "telegram-desktop", "equibop"]
-
-[[components]]
-name = "development"
-packages = ["visual-studio-code-bin", "git", "github-cli", "android-tools", "rocm-smi-lib"]
-post_install = [
-    "code --install-extension $CAELESTIA_DOTS/vscode/caelestia-vscode-integration/caelestia-vscode-integration-*.vsix",
-]
-[[components.entries]]
-src = "vscode/settings.json"
-dest = "$XDG_CONFIG_HOME/Code/User/settings.json"
-[[components.entries]]
-src = "vscode/keybindings.json"
-dest = "$XDG_CONFIG_HOME/Code/User/keybindings.json"
-[[components.entries]]
-src = "vscode/flags.conf"
-dest = "$XDG_CONFIG_HOME/code-flags.conf"
-
-[[components]]
-name = "applications"
-packages = ["gimp", "vlc", "celluloid", "loupe", "evince", "file-roller", "gparted", "xorg-xhost"]
-
-[[components]]
 name = "sddm"
 packages = [
     "sddm",
@@ -298,20 +268,31 @@ dest = "/etc/sudoers.d/caelestia-sddm"
 sudo = true
 
 [[components]]
-name = "openrgb"
-packages = [
-    "openrgb-git",
-    "caelestia-rgb-sync"
-]
+name = "software"
+packages = ["tidal-hifi-bin", "zen-browser-bin", "telegram-desktop", "equibop"]
+[[components.entries]]
+src = "applications/zen.desktop"
+dest = "$XDG_DATA_HOME/applications/zen.desktop"
+
+[[components]]
+name = "applications"
+packages = ["gimp", "vlc", "celluloid", "loupe", "evince", "file-roller", "gparted", "xorg-xhost"]
+
+[[components]]
+name = "development"
+packages = ["visual-studio-code-bin", "git", "github-cli", "android-tools"]
 post_install = [
-    "caelestia-rgb-sync init",
-    "caelestia-rgb-sync calibrate device",
-    "caelestia-rgb-sync calibrate global",
-    "caelestia-rgb-sync enable"
+    "code --install-extension $CAELESTIA_DOTS/vscode/caelestia-vscode-integration/caelestia-vscode-integration-*.vsix",
 ]
-post_update = [
-    "caelestia-rgb-sync apply"
-]
+[[components.entries]]
+src = "vscode/settings.json"
+dest = "$XDG_CONFIG_HOME/Code/User/settings.json"
+[[components.entries]]
+src = "vscode/keybindings.json"
+dest = "$XDG_CONFIG_HOME/Code/User/keybindings.json"
+[[components.entries]]
+src = "vscode/flags.conf"
+dest = "$XDG_CONFIG_HOME/code-flags.conf"
 
 [[components]]
 name = "kdeconnect"
@@ -338,6 +319,45 @@ post_install = [
 ]
 
 [[components]]
+name = "retrodeck-bios"
+packages = ["flatpak"]
+post_install = [
+    "flatpak install net.retrodeck.retrodeck",
+    "flatpak override --user --talk-name=org.freedesktop.Flatpak net.retrodeck.retrodeck",
+    "mkdir -p $HOME/Games/Retrodeck/Switch",
+    "mkdir -p $HOME/Games/Retrodeck/retrodeck/apps",
+    "curl -fsSL https://raw.githubusercontent.com/Abdess/retrobios/main/install.sh | sh -s -- --platform retrodeck --dest $HOME/Games/Retrodeck/retrodeck"
+]
+[[components.entries]]
+src = "retrodeck/es_systems.xml"
+dest = "$HOME/.var/app/net.retrodeck.retrodeck/config/ES-DE/custom_systems/es_systems.xml"
+[[components.entries]]
+src = "retrodeck/Switch.sh"
+dest = "$HOME/Games/Retrodeck/retrodeck/apps/Switch.sh"
+
+# --- Only desktop ---
+
+[[components]]
+name = "rocm"
+packages = ["rocm-hip-sdk", "rocm-opencl-sdk", "rocm-ml-sdk", "rocminfo", "rocm-smi-lib", "ollama-rocm"]
+
+[[components]]
+name = "openrgb"
+packages = [
+    "openrgb-git",
+    "caelestia-rgb-sync"
+]
+post_install = [
+    "caelestia-rgb-sync init",
+    "caelestia-rgb-sync calibrate device",
+    "caelestia-rgb-sync calibrate global",
+    "caelestia-rgb-sync enable"
+]
+post_update = [
+    "caelestia-rgb-sync apply"
+]
+
+[[components]]
 name = "cortana"
 packages = ["dotnet-sdk"]
 post_install = [
@@ -359,19 +379,3 @@ dest = "$XDG_CONFIG_SERVICE/cortana-desktop.service"
 src = "cortana/efibootmgr"
 dest = "/etc/sudoers.d/efibootmgr"
 sudo = true
-
-[[components]]
-name = "retrodeck"
-packages = ["flatpak"]
-post_install = [
-    "flatpak install net.retrodeck.retrodeck",
-    "flatpak override --user --talk-name=org.freedesktop.Flatpak net.retrodeck.retrodeck",
-    "mkdir -p /home/gwynn7/Games/Retrodeck/Eden",
-    "mkdir -p /home/gwynn7/Games/Retrodeck/retrodeck/apps",
-]
-[[components.entries]]
-src = "retrodeck/es_systems.xml"
-dest = "$HOME/.var/app/net.retrodeck.retrodeck/config/ES-DE/custom_systems/es_systems.xml"
-[[components.entries]]
-src = "retrodeck/Switch.sh"
-dest = "/home/gwynn7/Games/Retrodeck/retrodeck/apps/Switch.sh"
