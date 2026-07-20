@@ -6,9 +6,7 @@ hl.bind("SUPER + SUPER_L", hl.dsp.global("caelestia:launcher"), { release = true
 hl.bind("SUPER + Space", function()
     hl.plugin.scrolloverview.overview("toggle")
 end, { description = "Toggle workspace overview" })
-hl.bind("ALT + Tab", function()
-    hl.plugin.scrolloverview.overview("toggle")
-end, { description = "Toggle workspace overview" })
+hl.bind("ALT + Tab", hl.dsp.global("caelestia:workspaceOverview"), { description = "Toggle vertical workspace overview" })
 
 -- Misc
 hl.bind(vars.kbSession, hl.dsp.global("caelestia:session"), { description = "Open session menu" })
@@ -99,7 +97,7 @@ hl.bind(vars.kbMove .. " + A", hl.dsp.layout("swapcol l"), { description = "Swap
 hl.bind(vars.kbMoveWin .. " + left", hl.dsp.layout("consume_or_expel prev"), { description = "Consume or expel previous" })
 hl.bind(vars.kbMoveWin .. " + right", hl.dsp.layout("consume_or_expel next"), { description = "Consume or expel next" })
 hl.bind(vars.kbMoveWin .. " + A", hl.dsp.layout("consume_or_expel prev"), { description = "Consume or expel previous" })
-hl.bind(vars.kbMoveWin .. " + D", hl.dsp.layout("consume_or_expel next"), { description = "Cconsume or expel next" })
+hl.bind(vars.kbMoveWin .. " + D", hl.dsp.layout("consume_or_expel next"), { description = "Consume or expel next" })
 
 hl.bind("SUPER + Minus", hl.dsp.layout("colresize -0.15"), { description = "Decrease column width" })
 hl.bind("SUPER + Equal", hl.dsp.layout("colresize +0.15"), { description = "Increase column width" })

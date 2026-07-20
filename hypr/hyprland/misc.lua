@@ -24,6 +24,6 @@ hl.config({
 
     debug = {
         error_position = 1,
-        suppress_errors = false,
+        suppress_errors = true,
     }
 })
