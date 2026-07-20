@@ -280,7 +280,7 @@ packages = ["gimp", "vlc", "celluloid", "loupe", "evince", "file-roller", "gpart
 
 [[components]]
 name = "development"
-packages = ["visual-studio-code-bin", "git", "github-cli", "android-tools"]
+packages = ["visual-studio-code-bin", "git", "github-cli", "android-tools", "eigen", "python-numpy", "python-pandas", "python-matplotlib"]
 post_install = [
     "code --install-extension $CAELESTIA_DOTS/vscode/caelestia-vscode-integration/caelestia-vscode-integration-*.vsix",
 ]

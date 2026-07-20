@@ -28,7 +28,7 @@ hl.on("hyprland.start", function()
 
     -- Start shell
     hl.exec_cmd("hyprpm reload")
-    hl.exec_cmd("caelestia shell -d && caelestia-rgb-sync apply")
+    hl.exec_cmd("caelestia shell -d && sleep 5 && caelestia-rgb-sync apply")
 end)
 
 -- Resizer listener

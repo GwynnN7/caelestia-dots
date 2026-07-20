@@ -187,7 +187,6 @@
     },
     "launcher": {
         "actionPrefix": ">",
-        "aiHistoryGridView": false,
         "actions": [
             {
                 "command": [
@@ -416,6 +415,7 @@
                 "name": "Settings"
             }
         ],
+        "aiHistoryGridView": false,
         "enableDangerousActions": false,
         "favouriteApps": [
             "zen",
@@ -453,9 +453,9 @@
         }
     },
     "lock": {
+        "enableHowdy": false,
         "lockOnStartup": true,
-        "profilePicShape": 18,
-        "enableHowdy": false
+        "profilePicShape": 18
     },
     "notifs": {
         "actionOnClick": true,

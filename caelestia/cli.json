@@ -27,7 +27,7 @@
     "toggles": {
         "communication": {
             "discord": {
-                "enable": true,
+                "enable": false,
                 "match": [{ "class": "equibop" }],
                 "command": ["equibop"],
                 "move": true

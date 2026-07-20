@@ -29,6 +29,7 @@ set -gx HSA_ENABLE_SDMA 0
 set -gx HSA_NO_SCRATCH_VRAM 1
 set -gx PYTORCH_HIP_ALLOC_CONF "garbage_collection_threshold:0.8,max_split_size_mb:512"
 fish_add_path /opt/rocm/bin
+fish_add_path $UNSLOTH_STUDIO_HOME/bin
 
 if status is-interactive
     # Starship custom prompt

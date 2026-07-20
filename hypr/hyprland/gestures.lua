@@ -14,10 +14,10 @@ hl.config({
 
 hl.gesture({ fingers = 3, direction = "up", action = fn.focus_workspace("-1") })
 hl.gesture({ fingers = 3, direction = "down", action = fn.focus_workspace("+1") })
-hl.gesture({ fingers = 3, direction = "left", action = hl.dsp.layout("focus l") })
-hl.gesture({ fingers = 3, direction = "right", action = hl.dsp.layout("focus r") })
+hl.gesture({ fingers = 3, direction = "left", action = function() hl.dispatch(hl.dsp.layout("focus l")) end })
+hl.gesture({ fingers = 3, direction = "right", action = function() hl.dispatch(hl.dsp.layout("focus r")) end })
 
 hl.gesture({ fingers = 4, direction = "up", action = "fullscreen"})
-hl.gesture({ fingers = 4, direction = "down", action = "fullscreen" mode = "maximize"})
+hl.gesture({ fingers = 4, direction = "down", action = "fullscreen", mode = "maximize"})
 
 hl.gesture({ fingers = 2, direction = "pinch", action = "cursorZoom", zoom_level = 1, mode = "live" })
