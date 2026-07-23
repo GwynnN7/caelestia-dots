@@ -1,5 +1,3 @@
-local vars = require("variables")
-
 local function wsaction(action, range, i)
     return function()
         local activews = hl.get_active_workspace()
@@ -30,12 +28,16 @@ local function resize_by_screen(x, y)
 end
 
 local function resize_active_window(x, y)
-    local win = hl.get_active_window()
-    if win and win.size then
-        local w = (win.size.x * (x / 100)) or 800
-        local h = (win.size.y * (y / 100)) or 600
+    return function() -- returning the function so hl reloads everytime correctly
+        local win = hl.get_active_window()
+        if win and win.size then
+            local w = (win.size.x * (x / 100)) or 800
+            local h = (win.size.y * (y / 100)) or 600
 
-        return { x = w, y = h, relative = true }
+            hl.dispatch(hl.dsp.window.resize({ x = w, y = h, relative = true }))
+        else
+            hl.dispatch(hl.dsp.no_op())
+        end
     end
 end
 
@@ -78,6 +80,190 @@ local function move_actions(win)
     end
 end
 
+-- Toggle function
+local home       = os.getenv("HOME")
+local config_dir = os.getenv("XDG_CONFIG_HOME") or (home .. "/.config")
+local json       = require("utils.json") -- rxi's peak library
+        }
+
+-- Default config
+local function default_config()
+    return {
+        communication = {
+            discord  = { enable = true, match = { { class = "equibop" } }, command = { "equibop" }, move = true },
+            telegram = { enable = true, match = { { class = "org.telegram.desktop" } }, command = { "Telegram" }, move = true },
+        },
+        music = {
+            spotify = {
+                enable  = true,
+                match   = { { class = "tidal-hifi" } },
+                command = { "tidal-hifi" },
+                move    = true,
+}
+        },
+        sysmon = {
+            btop = {
+                enable  = true,
+                match   = { { class = "btop", title = "btop", workspace = { name = "special:sysmon" } } },
+                command = { "foot", "-a", "btop", "-T", "btop", "fish", "-C", "exec btop" },
+            },
+        },
+        todo = {
+            todoist = { enable = true, match = { { class = "todoist" } }, command = { "todoist" }, move = true },
+        },
+    }
+end
+
+local function merge(default_conf, user_conf)
+    for category, apps in pairs(user_conf) do
+        default_conf[category] = default_conf[category] or {}
+
+        for app_name, options in pairs(apps) do
+            default_conf[category][app_name] = default_conf[category][app_name] or {}
+
+            for key, value in pairs(options) do
+                default_conf[category][app_name][key] = value
+            end
+        end
+    end
+end
+
+-- Get a field from an object. Allows mapping camelCase to snake_case fields.
+local function get_field(obj, key)
+    local value = obj[key]
+    if value == nil and type(key) == "string" then
+        value = obj[(key:gsub("(%u)", "_%1")):lower()] -- Try convert camelCase to snake_case
+    end
+    return value
+end
+
+local function deep_match(actual, expected)
+    if type(expected) == "table" then
+        if type(actual) ~= "table" and type(actual) ~= "userdata" then
+            return false
+        end
+
+        for key, sub_expected in pairs(expected) do
+            if not deep_match(get_field(actual, key), sub_expected) then
+                return false
+            end
+        end
+        return true
+    else
+        return actual and string.find(tostring(actual), tostring(expected), 1, true)
+    end
+end
+
+local function get_clients(clients, app_config, target_special)
+    local matched_clients = {}
+    if app_config and app_config.match then
+        for _, window in ipairs(clients) do
+            for _, rule in ipairs(app_config.match) do
+                local is_a_match = true
+                for key, expected_value in pairs(rule) do
+                    if not deep_match(get_field(window, key), expected_value) then
+                        is_a_match = false
+                        break
+                    end
+                end
+                if is_a_match then
+                    local client_workspace = window.workspace and window.workspace.name
+                    table.insert(matched_clients, {
+                        window = window,
+                        is_in_place = (client_workspace == "special:" .. target_special),
+                    })
+                    break
+                end
+            end
+        end
+        return #matched_clients > 0, matched_clients
+    end
+    return false, matched_clients
+end
+
+local function shell_join(argv) -- uhh praise danny for this
+    local quoted = {}
+    for i, arg in ipairs(argv) do
+        quoted[i] = "'" .. tostring(arg):gsub("'", [['"'"']]) .. "'"
+    end
+    return table.concat(quoted, " ")
+end
+
+local function load_toggle_config()
+    local config = default_config()
+
+    local user_file = io.open(config_dir .. "/caelestia/cli.json", "r") -- CLI config
+    if not user_file then
+        return config
+    end
+
+    local content = user_file:read("*a")
+    user_file:close()
+
+    local recognized, conf_or_error = pcall(json.decode, content)
+    if recognized and type(conf_or_error) == "table" then
+        merge(config, conf_or_error.toggles or {})
+    else
+        -- Invalid cli.json: notify and fall back to defaults.
+        -- conf_or_error holds the parse error (string) or a non-table value on success.
+        local reason = recognized and "Expected a JSON object" or tostring(conf_or_error):gsub("^.-:%d+: ", "")
+        hl.exec_cmd("caelestia shell toaster error " ..
+            shell_join({ "Failed to parse CLI config", reason }) .. " error")
+    end
+
+    return config
+end
+
+-
+local function place_apps(apps, special_workspace)
+    local target = "special:" .. special_workspace
+    local clients = hl.get_windows() or {}
+
+    for _, app in pairs(apps) do
+        if app.enable then
+            local is_running, target_clients = get_clients(clients, app, special_workspace)
+
+            if not is_running then
+                if app.command then
+                    hl.dispatch(hl.dsp.exec_cmd(shell_join(app.command), { workspace = target }))
+                end
+            elseif app.move then
+                for _, target_client in ipairs(target_clients) do
+                    if not target_client.is_in_place then
+                        hl.dispatch(hl.dsp.window.move({ window = target_client.window, workspace = target, follow = false }))
+                    end
+                end
+            end
+        end
+    end
+end
+
+local function toggle_special_ws(special_workspace)
+    return function()
+        local active_workspace = hl.get_active_special_workspace()
+
+        if special_workspace == "specialws" then
+            local target = active_workspace and active_workspace.name:gsub("^special:", "") or "special"
+            return hl.dispatch(hl.dsp.workspace.toggle_special(target))
+        end
+
+        local on_correct_ws = active_workspace and active_workspace.name == "special:" .. special_workspace
+
+        if not on_correct_ws then
+            hl.dispatch(hl.dsp.focus({ workspace = "special:" .. special_workspace }))
+        end
+
+        local apps = load_toggle_config()[special_workspace]
+        if apps then
+            place_apps(apps, special_workspace)
+        end
+
+        if on_correct_ws then
+            hl.dispatch(hl.dsp.workspace.toggle_special(special_workspace))
+        end
+    end
+end
+
 local function focus_workspace(direction)
     return function()
         local active_ws = hl.get_active_special_workspace()
@@ -90,25 +276,6 @@ local function focus_workspace(direction)
         end
     end
 end
-
-local function toggle_special_ws(action)
-    return function()
-        if action == "communication" then
-            local active_ws = hl.get_active_special_workspace() or hl.get_active_workspace()
-            
-            if active_ws and active_ws.name == "special:communication" then
-                return hl.dispatch(hl.dsp.exec_cmd("caelestia toggle communication"))
-            elseif active_ws and active_ws.name == "special:music" then
-                return hl.dispatch(hl.dsp.exec_cmd("caelestia toggle music"))
-            else
-                return hl.dispatch(hl.dsp.exec_cmd("caelestia toggle communication"))
-            end
-        else
-            return hl.dispatch(hl.dsp.exec_cmd("caelestia toggle " .. action))
-        end
-    end
-end
-
 
 
 local saved_ratios = {}
@@ -149,7 +316,7 @@ local function media_volume(direction)
 
         local sinks = {}
         local current_id, current_name, current_vol
-        
+
         local handle = io.popen("pactl list sink-inputs")
         if handle then
             for line in handle:lines() do
@@ -166,7 +333,7 @@ local function media_volume(direction)
                     if v and not current_vol then 
                         current_vol = tonumber(v) 
                     end
-                    
+
                     local bin = line:match('application%.process%.binary = "(.-)"')
                     if bin then 
                         current_name = bin 
@@ -218,8 +385,6 @@ local function media_volume(direction)
     end
 end
 
-
-
 return {
     resizer              = resizer,
     resize_by_screen     = resize_by_screen,
@@ -229,5 +394,5 @@ return {
     focus_workspace      = focus_workspace,
     toggle_special_ws    = toggle_special_ws,
     toggle_maximize		 = toggle_maximize,
-    media_volume		 = media_volume,
+    media_volume		 = media_volume
 }

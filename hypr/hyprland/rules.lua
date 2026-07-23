@@ -91,17 +91,29 @@ hl.window_rule({ match = { class = "^(ueberzugpp_.*)$" }, float = true, no_initi
 hl.window_rule({ match = { class = "fusion360.exe", title = "Fusion360|(Marking Menu)" }, no_blur = true })
 
 -- Ugh xwayland popups
-hl.window_rule({ match = { xwayland = true, title = "win[0-9]+" }, no_dim = true, no_shadow = true, rounding = 10 })
+hl.window_rule({ match = { xwayland = true, title = "win[0-9]+" }, tag = "+xwl_popup" })
+hl.window_rule({
+    match = { xwayland = true, title = "", class = "", initial_title = "", initial_class = "" },
+    tag   = "+xwl_popup",
+})
+hl.window_rule({
+    match     = { tag = "xwl_popup" },
+    no_dim    = true,
+    no_shadow = true,
+    no_blur   = true,
+    opaque    = true,
+    rounding  = 10,
+})
 
 -- Special workspaces
 hl.window_rule({ match = { class = "btop" }, workspace = "special:sysmon" })
 hl.window_rule({
     match     = {
-        class = "tidal-hifi|feishin|Spotify|Supersonic|Cider|com.github.th_ch.youtube_music|Plexamp|com-maxrave-simpmusic-MainKt",
+        class = "tidal-hifi|feishin|Spotify|Supersonic|Cider|com.github.th-ch.youtube-music|Plexamp|com-maxrave-simpmusic-MainKt",
     },
     workspace = "special:music",
 })
-hl.window_rule({ match = { initial_title = "Spotify( %(?Free%)?)?" }, workspace = "special:music" }) -- Spotify wayland, it has no class for some reason
+hl.window_rule({ match = { initial_title = "^(Spotify|Spotify Free)$" }, workspace = "special:music" }) -- Spotify wayland, it has no class for some reason
 hl.window_rule({ match = { class = "org.telegram.desktop|discord|equibop|vesktop|whatsapp" }, workspace = "special:communication" })
 
 -------------------------

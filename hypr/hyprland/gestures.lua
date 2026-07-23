@@ -1,5 +1,5 @@
 local vars = require("variables")
-local fn   = require("hyprland.functions")
+local fn   = require("utils.functions")
 
 hl.config({
     gestures = {
@@ -12,10 +12,10 @@ hl.config({
     },
 })
 
-hl.gesture({ fingers = 3, direction = "up", action = fn.focus_workspace("-1") })
-hl.gesture({ fingers = 3, direction = "down", action = fn.focus_workspace("+1") })
-hl.gesture({ fingers = 3, direction = "left", action = function() hl.dispatch(hl.dsp.layout("focus l")) end })
-hl.gesture({ fingers = 3, direction = "right", action = function() hl.dispatch(hl.dsp.layout("focus r")) end })
+hl.gesture({ fingers = 3, direction = "up", action = fn.focus_workspace("+1") })
+hl.gesture({ fingers = 3, direction = "down", action = fn.focus_workspace("-1") })
+hl.gesture({ fingers = 3, direction = "left", action = function() hl.dispatch(hl.dsp.layout("focus r")) end })
+hl.gesture({ fingers = 3, direction = "right", action = function() hl.dispatch(hl.dsp.layout("focus l")) end })
 
 hl.gesture({ fingers = 4, direction = "up", action = "fullscreen"})
 hl.gesture({ fingers = 4, direction = "down", action = "fullscreen", mode = "maximize"})

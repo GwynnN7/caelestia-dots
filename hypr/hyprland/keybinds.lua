@@ -1,5 +1,5 @@
 local vars = require("variables")
-local fn   = require("hyprland.functions")
+local fn   = require("utils.functions")
 
 -- Launcher
 hl.bind("SUPER + SUPER_L", hl.dsp.global("caelestia:launcher"), { release = true, description = "Open application launcher" })
@@ -107,8 +107,8 @@ hl.bind("SUPER + ALT + A", hl.dsp.layout("colresize -0.15"), { description = "De
 hl.bind("SUPER + ALT + D", hl.dsp.layout("colresize +0.15"), { description = "Increase column width" })
 hl.bind("SUPER + SHIFT + Minus", hl.dsp.layout("colresize -conf"), { description = "Decrease preset column width" })
 hl.bind("SUPER + SHIFT + Equal", hl.dsp.layout("colresize +conf"), { description = "Increase preset column width" })
-hl.bind("SUPER + ALT + Minus", hl.dsp.window.resize(fn.resize_active_window(-5, 0)), { repeating = true, description = "Decrease active window size" })
-hl.bind("SUPER + ALT + Equal", hl.dsp.window.resize(fn.resize_active_window(5, 0)), { repeating = true, description = "Increase active window size" })
+hl.bind("SUPER + ALT + Minus", fn.resize_active_window(-5, 0), { repeating = true, description = "Decrease active window size" })
+hl.bind("SUPER + ALT + Equal", fn.resize_active_window(5, 0), { repeating = true, description = "Increase active window size" })
 hl.bind("SUPER + mouse:272", hl.dsp.window.drag(), { mouse = true, description = "Drag window with mouse" })
 hl.bind("SUPER + mouse:273", hl.dsp.window.resize(), { mouse = true, description = "Resize window with mouse" })
 
