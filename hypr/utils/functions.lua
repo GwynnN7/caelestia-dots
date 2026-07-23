@@ -84,7 +84,6 @@ end
 local home       = os.getenv("HOME")
 local config_dir = os.getenv("XDG_CONFIG_HOME") or (home .. "/.config")
 local json       = require("utils.json") -- rxi's peak library
-        }
 
 -- Default config
 local function default_config()
@@ -214,7 +213,6 @@ local function load_toggle_config()
     return config
 end
 
--
 local function place_apps(apps, special_workspace)
     local target = "special:" .. special_workspace
     local clients = hl.get_windows() or {}
@@ -250,7 +248,11 @@ local function toggle_special_ws(special_workspace)
         local on_correct_ws = active_workspace and active_workspace.name == "special:" .. special_workspace
 
         if not on_correct_ws then
-            hl.dispatch(hl.dsp.focus({ workspace = "special:" .. special_workspace }))
+            if special_workspace == "communication" and active_workspace and active_workspace.name == "special:music" then
+                hl.dispatch(hl.dsp.workspace.toggle_special("music"))
+            else
+                hl.dispatch(hl.dsp.focus({ workspace = "special:" .. special_workspace }))
+            end 
         end
 
         local apps = load_toggle_config()[special_workspace]
