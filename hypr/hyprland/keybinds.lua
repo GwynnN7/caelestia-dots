@@ -146,7 +146,7 @@ end, { long_press = true, description = "Toggle PIP or focus fit method" })
 
 hl.bind(vars.kbPinWindow, hl.dsp.window.pin(), { description = "Pin floating window" })
 hl.bind(vars.kbWindowFullscreen, hl.dsp.window.fullscreen({ mode = "fullscreen" }), { description = "Toggle fullscreen mode" })
-hl.bind(vars.kbWindowBorderedFullscreen, fn.toggle_maximize(), { description = "Toggle maximized bordered fullscreen" })
+hl.bind(vars.kbWindowBorderedFullscreen, hl.dsp.window.fullscreen({ mode = "maximized" }), { description = "Toggle maximized mode" })
 hl.bind(vars.kbCloseWindow, hl.dsp.window.close(), { description = "Close active window" })
 
 -- Special workspace toggles

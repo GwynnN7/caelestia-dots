@@ -279,37 +279,6 @@ local function focus_workspace(direction)
     end
 end
 
-
-local saved_ratios = {}
-local MAXIMIZED_THRESHOLD = 1808
-local BASE_WIDTH = 1823
-
-local function toggle_maximize()
-    return function()
-        local win = hl.get_active_window()
-        if not (win and win.address and win.size) then return end
-
-        local current_width = win.size.x
-        local address = win.address
-        if current_width >= MAXIMIZED_THRESHOLD then
-            local saved_ratio = saved_ratios[address]
-
-            if saved_ratio then
-                hl.dispatch(hl.dsp.layout("colresize " .. saved_ratio))
-                saved_ratios[address] = nil
-            else
-                hl.dispatch(hl.dsp.layout("colresize 0.5"))
-            end
-        else
-            local current_ratio = string.format("%.2f", current_width / BASE_WIDTH)
-            saved_ratios[address] = current_ratio
-
-            hl.dispatch(hl.dsp.window.fullscreen({ mode = "maximized" }))
-        end
-    end
-end
-
-
 local PREFERRED_PLAYERS = { "tidal-hifi", "zen-bin", "spotify", "celluloid", "mpv", "vlc" }
 
 local function media_volume(direction)
@@ -395,6 +364,5 @@ return {
     move_actions         = move_actions,
     focus_workspace      = focus_workspace,
     toggle_special_ws    = toggle_special_ws,
-    toggle_maximize		 = toggle_maximize,
     media_volume		 = media_volume
 }
