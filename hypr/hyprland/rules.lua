@@ -32,7 +32,6 @@ local xwl_popup_tag = "xwl_popup"
 local system_monitor_tag = "system_monitor"
 local music_player_tag = "music_player"
 local communication_app_tag = "communication_app"
-local todo_app_tag = "todo_app"
 
 create_tag(opaque_tag, { opaque = true })
 create_tag(float_tag, { float = true })
@@ -50,7 +49,6 @@ create_tag(xwl_popup_tag, {
 create_tag(system_monitor_tag, { workspace = "special:sysmon" })
 create_tag(music_player_tag, { workspace = "special:music" })
 create_tag(communication_app_tag, { workspace = "special:communication" })
-create_tag(todo_app_tag, { workspace = "special:todo" })
 
 ----------------------
 ---- Window rules ----
@@ -78,7 +76,6 @@ hl.window_rule({
 -- Opaque apps
 tagged_rule(opaque_tag, {
     "foot",                                   -- Terminal
-    "equibop",                                -- Discord client
     "org.quickshell",                         -- Quickshell
     "feh|imv|swappy",                         -- Image viewers
     "krita|gimp|inkscape|darktable",          -- Image editors
@@ -99,6 +96,7 @@ tagged_rule(float_tag, {
     "feh|imv|swappy",                     -- Image viewers
     "system-config-printer",              -- Printer config
     "org.quickshell",                     -- Quickshell
+    "hyprland-share-picker",              -- Hyprland share picker
 }, "class")
 tagged_rule(float_tag, {
     "File (Operation|Upload)( Progress)?", -- File manager operation progress (upload, move, copy, etc)
@@ -154,16 +152,14 @@ tagged_rule(music_player_tag, {
     "Spotify",                                                     -- Spotify
     "Cider",                                                       -- Apple music
     "com.github.th-ch.youtube-music|com-maxrave-simpmusic-MainKt", -- YouTube music
+    "tidal-hifi",                                                  -- Tidal
 })
 tagged_rule(music_player_tag, {
     "Spotify|Spotify Free" -- Spotify wayland, it has no class for some reason
 }, "initial_title")
 tagged_rule(communication_app_tag, {
     "discord|equibop|vesktop", -- Discord clients
-    "whatsapp"                 -- Whatsapp
-}, "class")
-tagged_rule(todo_app_tag, {
-    "todoist" -- Todoist
+    "org.telegram.desktop"     -- Telegram
 }, "class")
 
 

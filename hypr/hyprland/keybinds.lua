@@ -6,7 +6,13 @@ hl.bind("SUPER + SUPER_L", hl.dsp.global("caelestia:launcher"), { release = true
 hl.bind("SUPER + Space", function()
     hl.plugin.scrolloverview.overview("toggle")
 end, { description = "Toggle workspace overview" })
-hl.bind("ALT + Tab", hl.dsp.global("caelestia:workspaceOverview"), { description = "Toggle vertical workspace overview" })
+if hl.plugin.hymission ~= nil then
+    hl.bind("ALT + Tab", function()
+        hl.plugin.hymission.toggle("onlycurrentworkspace")
+    end, { description = "Toggle workspace overview" })
+else
+    hl.bind("ALT + Tab", hl.dsp.global("caelestia:workspaceOverview"), { description = "Toggle workspace overview" })
+end
 
 -- Misc
 hl.bind(vars.kbSession, hl.dsp.global("caelestia:session"), { description = "Open session menu" })
