@@ -34,6 +34,9 @@ post_install = [
     "test -f ${XDG_STATE_HOME:-$HOME/.local/state}/caelestia/scheme.json || caelestia scheme set -n caelestia",
     "caelestia shell -k >/dev/null; sleep 1; caelestia shell -d >/dev/null",
 ]
+post_update = [
+    "caelestia shell -k >/dev/null; sleep 1; caelestia shell -d >/dev/null",
+]
 [[components.entries]]
 src = "caelestia"
 dest = "$XDG_CONFIG_HOME/caelestia"
@@ -180,14 +183,15 @@ packages = ["wl-clipboard", "cliphist", "wtype"]
 [[components]]
 name = "gaming"
 default = true
-packages = ["cachyos-gaming-applications", "gamemode", "hyprland-focused-booster", "flatpak"]
+packages = ["cachyos-gaming-applications", "gamemode", "hyprland-focused-booster", "gamescope-session-cachyos", "flatpak"]
 post_install = [
     "systemctl --user enable --now hyprland-focused-booster.service",
-    "flatpak install net.retrodeck.retrodeck"
+    "flatpak install -y net.retrodeck.retrodeck"
 ]
 [[components.entries]]
 src = "gaming/gamerun"
-dest = "$XDG_BIN_HOME/gamerun"
+dest = "/usr/local/bin/gamerun"
+sudo=true
 [[components.entries]]
 src = "mangohud"
 dest = "$XDG_CONFIG_HOME/MangoHud"
@@ -202,6 +206,14 @@ sudo=true
 [[components.entries]]
 src = "gaming/gaming"
 dest = "/etc/sudoers.d/gaming"
+sudo=true
+[[components.entries]]
+src = "steamos/steam-set-session"
+dest = "/usr/lib/steamos/steam-set-session"
+sudo=true
+[[components.entries]]
+src = "steamos/steamos-session-select"
+dest = "/usr/bin/steamos-session-select"
 sudo=true
 
 [[components]]
@@ -236,8 +248,31 @@ post_install = [
     "xdg-user-dirs-update", 
     'git clone https://github.com/GwynnN7/Wallpaper "$HOME/Pictures/Wallpaper" 2>/dev/null || git -C "$HOME/Pictures/Wallpaper" pull'
     ]
+post_update = [
+    "xdg-user-dirs-update",
+    'git clone https://github.com/GwynnN7/Wallpaper "$HOME/Pictures/Wallpaper" 2>/dev/null || git -C "$HOME/Pictures/Wallpaper" pull'
+]
 
 # --- Optional components ---
+
+[[components]]
+name = "greetd"
+packages = [
+    "greetd",
+    "greetd-tuigreet"
+]
+post_install = [
+    "sudo systemctl daemon-reload",
+    "sudo systemctl enable --now greetd.service"
+]
+[[components.entries]]
+src = "greetd/config.toml"
+dest = "/etc/greetd/config.toml"
+sudo = true
+[[components.entries]]
+src = "greetd/greetd-switcher"
+dest = "/usr/local/bin/greetd-switcher"
+sudo = true
 
 [[components]]
 name = "sddm"
@@ -322,7 +357,7 @@ post_install = [
 name = "retrodeck-bios"
 packages = ["flatpak"]
 post_install = [
-    "flatpak install net.retrodeck.retrodeck",
+    "flatpak install -y net.retrodeck.retrodeck",
     "flatpak override --user --talk-name=org.freedesktop.Flatpak net.retrodeck.retrodeck",
     "mkdir -p $HOME/Games/Retrodeck/Switch",
     "mkdir -p $HOME/Games/Retrodeck/retrodeck/roms/apps",
@@ -365,6 +400,9 @@ post_install = [
     'mkdir -p "$HOME/Projects/Cortana/CortanaDesktop/out"',
     "systemctl --user daemon-reload",
     "systemctl --user enable cortana-desktop.service"
+]
+post_update = [
+    'git clone https://github.com/GwynnN7/Cortana "$HOME/Projects/Cortana" 2>/dev/null || git -C "$HOME/Projects/Cortana" pull',
 ]
 [[components.entries]]
 src = "cortana/Settings.json"

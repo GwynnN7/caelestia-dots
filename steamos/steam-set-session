@@ -1,0 +1,31 @@
+#!/bin/bash
+set -e
+
+DISPLAY_MANAGER="$(systemctl show -p Id --value display-manager)"
+SESSION="${1:-gamescope-session.desktop}"
+
+case "${DISPLAY_MANAGER%.service}" in
+    plasmalogin)
+        CONF_FILE="/etc/plasmalogin.conf.d/zz-steamos-autologin.conf"
+        mkdir -p "$(dirname "$CONF_FILE")"
+        cat <<EOF > "$CONF_FILE"
+[Autologin]
+Relogin=true
+Session=$SESSION
+EOF
+        ;;
+    sddm)
+        CONF_FILE="/etc/sddm.conf.d/zz-steamos-autologin.conf"
+        mkdir -p "$(dirname "$CONF_FILE")"
+        cat <<EOF > "$CONF_FILE"
+[Autologin]
+Relogin=true
+Session=$SESSION
+EOF
+        ;;
+    greetd)
+    	sudo mkdir -p /run/greetd
+        echo "$SESSION" > /run/greetd/next-session
+        exit 0
+        ;;
+esac

@@ -26,9 +26,16 @@ hl.on("hyprland.start", function()
     -- Forward bluetooth media commands to MPRIS
     hl.exec_cmd("mpris-proxy")
 
+    -- Hyprland services
+    hl.exec_cmd("systemctl --user start hyprsunset.service")
+    hl.exec_cmd("systemctl --user start hyprland-focused-booster.service")
+
     -- Start shell
     hl.exec_cmd("hyprpm reload")
-    hl.exec_cmd("caelestia shell -d && sleep 5 && caelestia-rgb-sync apply")
+    hl.exec_cmd("caelestia shell -d")
+
+    -- OpenRGB
+    hl.exec_cmd("systemctl --user start caelestia-rgb.service && sleep 2 && caelestia-rgb-sync apply")
 end)
 
 -- Resizer listeners

@@ -127,7 +127,7 @@ hl.bind(vars.kbCenter, function()
         hl.dispatch(hl.dsp.window.resize(fn.resize_by_screen(55, 70)))
         hl.dispatch(hl.dsp.window.center())
     else
-        hl.dispatch(hl.dsp.layout("fit visible"))
+        hl.dispatch(hl.dsp.layout("fit expand"))
     end
 end, { description = "Center floating window or fit tiled window" })
 

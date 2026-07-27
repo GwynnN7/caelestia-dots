@@ -519,6 +519,11 @@
                 "sh",
                 "-c",
                 "cortana service &>/dev/null && cortana api -cmd system computer | cortana notify || systemctl reboot"
+            ],
+            "steam": [
+                "sh",
+                "-c",
+                "steamos-session-select gamescope || systemctl reboot"
             ]
         }
     },
@@ -565,8 +570,12 @@
                 "id": "vpn"
             },
             {
-                "enabled": true,
+                "enabled": false,
                 "id": "wallpaper"
+            },
+            {
+                "enabled": true,
+                "id": "quickshare"
             },
             {
                 "enabled": true,
