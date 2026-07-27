@@ -97,7 +97,7 @@ local json       = require("utils.json") -- rxi's peak library
 local function default_config()
     return {
         communication = {
-            discord  = { enable = true, match = { { class = "equibop" } }, command = { "equibop" }, move = true },
+            discord  = { enable = false, match = { { class = "equibop" } }, command = { "equibop" }, move = true },
             telegram = { enable = true, match = { { class = "org.telegram.desktop" } }, command = { "Telegram" }, move = true },
         },
         music = {
@@ -114,9 +114,6 @@ local function default_config()
                 match   = { { class = "btop", title = "btop", workspace = { name = "special:sysmon" } } },
                 command = { "foot", "-a", "btop", "-T", "btop", "fish", "-C", "exec btop" },
             },
-        },
-        todo = {
-            todoist = { enable = true, match = { { class = "todoist" } }, command = { "todoist" }, move = true },
         },
     }
 end
@@ -269,7 +266,7 @@ local function toggle_special_ws(special_workspace)
         end
 
         if on_correct_ws then
-            hl.dispatch(hl.dsp.workspace.toggle_special(special_workspace))
+            return hl.dispatch(hl.dsp.workspace.toggle_special(special_workspace))
         end
     end
 end
@@ -279,7 +276,7 @@ local function focus_workspace(direction)
         local active_ws = hl.get_active_special_workspace()
         if active_ws and active_ws.name then
             local name_only = active_ws.name:match("^special:(.*)") or active_ws.name
-            return hl.dispatch(hl.dsp.exec_cmd("caelestia toggle " .. name_only))
+            return toggle_special_ws(name_only)
         else
             local smw = hl.plugin.split_monitor_workspaces
             return hl.dispatch(function() return smw.workspace(direction) end)
