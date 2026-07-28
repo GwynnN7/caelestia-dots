@@ -35,7 +35,10 @@ hl.on("hyprland.start", function()
     hl.exec_cmd("caelestia shell -d")
 
     -- OpenRGB
-    hl.exec_cmd("systemctl --user start caelestia-rgb.service")
+    hl.exec_cmd("systemctl --user start openrgb.service")
+
+    -- Ollama
+    hl.exec_cmd("systemctl start ollama.service")
 end)
 
 -- Resizer listeners
