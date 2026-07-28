@@ -1,7 +1,7 @@
 _pkgname='caelestia-shell'
 pkgname="$_pkgname-git"
-pkgver=2.0.1.r0.g8f49fdb
-pkgrel=2
+pkgver=2.1.0.r209.g4b76ef8
+pkgrel=1
 pkgdesc='The desktop shell for the Caelestia dotfiles'
 arch=('x86_64' 'aarch64')
 url='https://github.com/GwynnN7/caelestia-shell'

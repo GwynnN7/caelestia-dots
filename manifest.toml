@@ -185,7 +185,6 @@ name = "gaming"
 default = true
 packages = ["cachyos-gaming-applications", "gamemode", "hyprland-focused-booster", "gamescope-session-cachyos", "flatpak"]
 post_install = [
-    "systemctl --user enable --now hyprland-focused-booster.service",
     "flatpak install -y net.retrodeck.retrodeck"
 ]
 [[components.entries]]
@@ -244,7 +243,6 @@ packages = [
     "xdg-user-dirs",
 ]
 post_install = [
-    "systemctl --user enable --now hyprsunset", 
     "xdg-user-dirs-update", 
     'git clone https://github.com/GwynnN7/Wallpaper "$HOME/Pictures/Wallpaper" 2>/dev/null || git -C "$HOME/Pictures/Wallpaper" pull'
     ]
@@ -263,7 +261,7 @@ packages = [
 ]
 post_install = [
     "sudo systemctl daemon-reload",
-    "sudo systemctl enable --now greetd.service"
+    "sudo systemctl enable --now greetd.service || true"
 ]
 [[components.entries]]
 src = "greetd/config.toml"
@@ -283,7 +281,7 @@ packages = [
 ]
 post_install = [
     "sudo systemctl daemon-reload",
-    "sudo systemctl enable --now sddm.service",
+    "sudo systemctl enable --now sddm.service || true",
     "sudo /usr/share/sddm/themes/caelestia/scripts/sync.sh >/dev/null"
 ]
 post_update = [
@@ -343,6 +341,7 @@ name = "hyprpm"
 packages = []
 post_install = [
     "hyprpm purge-cache",
+    "hyprpm reload",
     "hyprpm update",
     "hyprpm add https://github.com/zjeffer/split-monitor-workspaces || true",
     "hyprpm add https://github.com/yayuuu/hyprland-scroll-overview || true",
@@ -383,6 +382,7 @@ packages = [
     "caelestia-rgb-sync"
 ]
 post_install = [
+    "rm -f $XDG_CONFIG_HOME/caelestia-rgb/config.toml 2>/dev/null || true",
     "caelestia-rgb-sync init",
     "caelestia-rgb-sync calibrate device",
     "caelestia-rgb-sync calibrate global",
