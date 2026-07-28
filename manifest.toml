@@ -331,8 +331,8 @@ dest = "$XDG_CONFIG_HOME/code-flags.conf"
 name = "kdeconnect"
 packages = ["kdeconnect", "local:kdeconnect"]
 post_install = [
-    "systemctl --user stop hypr-kdeconnect-portal.service",
     "systemctl --user daemon-reload",
+    "systemctl --user stop hypr-kdeconnect-portal.service",
     "systemctl --user restart xdg-desktop-portal"
 ]
 

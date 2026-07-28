@@ -1,6 +1,6 @@
 #!/bin/bash
 
-SESSION_FILE="/tmp/next-wayland-session"
+SESSION_FILE="${XDG_RUNTIME_DIR:-/tmp}/next-wayland-session"
 SESSIONS_DIR="/usr/share/wayland-sessions"
 
 DEFAULT_CMD="uwsm start -e -D Hyprland hyprland.desktop"

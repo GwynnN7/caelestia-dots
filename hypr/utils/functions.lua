@@ -276,7 +276,7 @@ local function focus_workspace(direction)
         local active_ws = hl.get_active_special_workspace()
         if active_ws and active_ws.name then
             local name_only = active_ws.name:match("^special:(.*)") or active_ws.name
-            return toggle_special_ws(name_only)
+            return toggle_special_ws(name_only)()
         else
             local smw = hl.plugin.split_monitor_workspaces
             return hl.dispatch(function() return smw.workspace(direction) end)

@@ -24,7 +24,7 @@ Session=$SESSION
 EOF
         ;;
     greetd)
-        echo "$SESSION" > /tmp/next-wayland-session
+        echo "$SESSION" > "${XDG_RUNTIME_DIR:-/tmp}/next-wayland-session"
         exit 0
         ;;
 esac
