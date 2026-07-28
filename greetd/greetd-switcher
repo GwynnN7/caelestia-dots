@@ -1,9 +1,21 @@
 #!/bin/bash
 
-sudo mkdir -p /run/greetd
+SESSION_FILE="/tmp/next-wayland-session"
+SESSIONS_DIR="/usr/share/wayland-sessions"
 
-SESSION_NAME=$(cat /run/greetd/next-session 2>/dev/null || echo "hyprland-uwsm.desktop")
-SESSION_PATH="/usr/share/wayland-sessions/$SESSION_NAME"
+DEFAULT_CMD="uwsm start -e -D Hyprland hyprland.desktop"
 
-EXEC_CMD=$(grep -m 1 '^Exec=' "$SESSION_PATH" | cut -d '=' -f 2-)
-exec $EXEC_CMD
+if [ -f "$SESSION_FILE" ]; then
+    TARGET_SESSION=$(cat "$SESSION_FILE")
+    rm "$SESSION_FILE"
+    DESKTOP_FILE="$SESSIONS_DIR/$TARGET_SESSION"
+
+    if [ -f "$DESKTOP_FILE" ]; then
+        EXEC_CMD=$(grep -m 1 '^Exec=' "$DESKTOP_FILE" | cut -d'=' -f2-)
+        eval "exec $EXEC_CMD"
+    else
+        exec $DEFAULT_CMD
+    fi
+else
+    exec $DEFAULT_CMD
+fi

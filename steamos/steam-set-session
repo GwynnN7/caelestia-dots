@@ -24,8 +24,7 @@ Session=$SESSION
 EOF
         ;;
     greetd)
-    	sudo mkdir -p /run/greetd
-        echo "$SESSION" > /run/greetd/next-session
+        echo "$SESSION" > /tmp/next-wayland-session
         exit 0
         ;;
 esac
