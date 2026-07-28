@@ -1,13 +1,12 @@
 #!/bin/bash
 
-SESSION_FILE="${XDG_RUNTIME_DIR:-/tmp}/next-wayland-session"
+SESSION_FILE="/tmp/next-wayland-session"
 SESSIONS_DIR="/usr/share/wayland-sessions"
 
 DEFAULT_CMD="uwsm start -e -D Hyprland hyprland.desktop"
 
 if [ -f "$SESSION_FILE" ]; then
     TARGET_SESSION=$(cat "$SESSION_FILE")
-    rm "$SESSION_FILE"
     DESKTOP_FILE="$SESSIONS_DIR/$TARGET_SESSION"
 
     if [ -f "$DESKTOP_FILE" ]; then

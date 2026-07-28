@@ -185,7 +185,8 @@ name = "gaming"
 default = true
 packages = ["cachyos-gaming-applications", "gamemode", "hyprland-focused-booster", "gamescope-session-cachyos", "flatpak"]
 post_install = [
-    "flatpak install -y net.retrodeck.retrodeck"
+    "flatpak install -y net.retrodeck.retrodeck",
+    "steamos-session-select persistent",
 ]
 [[components.entries]]
 src = "gaming/gamerun"
