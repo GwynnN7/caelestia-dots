@@ -386,10 +386,9 @@ post_install = [
     "caelestia-rgb-sync init",
     "caelestia-rgb-sync calibrate device",
     "caelestia-rgb-sync calibrate global",
-    "caelestia-rgb-sync enable"
 ]
 post_update = [
-    "caelestia-rgb-sync apply"
+    "caelestia-rgb-sync apply",
 ]
 
 [[components]]

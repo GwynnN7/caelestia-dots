@@ -35,7 +35,7 @@ hl.on("hyprland.start", function()
     hl.exec_cmd("caelestia shell -d")
 
     -- OpenRGB
-    hl.exec_cmd("systemctl --user start caelestia-rgb.service && sleep 2 && caelestia-rgb-sync apply")
+    hl.exec_cmd("caelestia-rgb-sync daemon")
 end)
 
 -- Resizer listeners
