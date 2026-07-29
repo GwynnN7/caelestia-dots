@@ -222,10 +222,10 @@ dest = "/usr/bin/steamos-session-select"
 sudo=true
 [[components.entries]]
 src = "homebrew"
-dest = "$XDG_HOME/homebrew"
+dest = "$HOME/homebrew"
 [[components.entries]]
 src = "gaming/dlo"
-dest = "$XDG_HOME/.dlo"
+dest = "$HOME/.dlo"
 [[components.entries]]
 src = "gaming/override.conf"
 dest = "$XDG_CONFIG_HOME/systemd/user/hyprland-focused-booster.service.d/override.conf"
