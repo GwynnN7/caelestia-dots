@@ -269,6 +269,7 @@ post_update = [
 # --- Optional components ---
 
 [[components]]
+name = "plymouth"
 packages = ["plymouth", "plymouth-theme-darth-vader-git"]
 post_install = [
     "sudo plymouth-set-default-theme -R darth-vader",
