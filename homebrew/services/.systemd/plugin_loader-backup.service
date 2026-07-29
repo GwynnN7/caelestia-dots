@@ -1,0 +1,15 @@
+[Unit]
+Description=SteamDeck Plugin Loader
+After=network-online.target
+Wants=network-online.target
+[Service]
+Type=simple
+User=root
+Restart=always
+ExecStart=/home/gwynn7/homebrew/services/PluginLoader
+WorkingDirectory=/home/gwynn7/homebrew/services
+KillSignal=SIGKILL
+Environment=PLUGIN_PATH=/home/gwynn7/homebrew/plugins
+Environment=LOG_LEVEL=INFO
+[Install]
+WantedBy=multi-user.target

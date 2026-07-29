@@ -21,6 +21,7 @@ hl.bind(vars.kbShowSidebar, hl.dsp.global("caelestia:sidebar"), { description = 
 hl.bind(vars.kbClearNotifs, hl.dsp.global("caelestia:clearNotifs"), { locked = true, description = "Clear all notifications" })
 hl.bind(vars.kbShowPanels, hl.dsp.global("caelestia:showall"), { description = "Show all panels" })
 hl.bind(vars.kbLock, hl.dsp.global("caelestia:lock"), { description = "Lock screen" })
+hl.bind("SUPER + F4", hl.dsp.global("caelestia:wallpaper"), { description = "Open wallpaper selector" })
 
 -- Restore lock
 hl.bind(vars.kbRestoreLock, function()
@@ -159,7 +160,6 @@ hl.bind(vars.kbCloseWindow, hl.dsp.window.close(), { description = "Close active
 hl.bind(vars.kbScratchpad, fn.toggle_special_ws("specialws"), { description = "Toggle scratchpad workspace" })
 hl.bind("SHIFT + " .. vars.kbScratchpad, function() return smw.move_to_workspace_silent("special") end, { description = "Move window to scratchpad" })
 hl.bind(vars.kbSystemMonitorWs, fn.toggle_special_ws("sysmon"), { description = "Toggle system monitor workspace" })
-hl.bind("SUPER + F4", fn.toggle_special_ws("sysmon"), { description = "Toggle system monitor workspace" })
 hl.bind(vars.kbSpecialWs, fn.toggle_special_ws("music"), { long_press = true, description = "Toggle music workspace" })
 hl.bind(vars.kbSpecialWs, fn.toggle_special_ws("communication"), { description = "Toggle communication workspace" })
 hl.bind("SHIFT + " .. vars.kbCloseWindow, function() return smw.move_to_workspace("e+0") end, { description = "Move window out of special workspace" })

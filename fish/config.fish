@@ -20,6 +20,11 @@ function y
 	command rm -f -- "$tmp"
 end
 
+function fish_user_key_bindings
+    bind ctrl-backspace backward-kill-path-component
+    bind ctrl-enter "clear && exec fish"
+end
+
 set -gx EDITOR micro
 
 # AMD ROCm AI Stack Config for RX 6650 XT (RDNA2)

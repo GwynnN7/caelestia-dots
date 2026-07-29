@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+if [[ -n "$HYPRLAND_INSTANCE_SIGNATURE" ]]; then
+    ACTIVE_CLASS=$(hyprctl activewindow -j 2>/dev/null | jq -r '.class' 2>/dev/null)
+    if [[ "${ACTIVE_CLASS,,}" == *"steam"* ]]; then
+        hyprctl dispatch killactive
+    fi
+
+    exec systemd-inhibit --why "Booster" powerprofilesctl launch -p performance -- app2unit -- "$@"
+else
+	sudo systemctl stop ananicy-cpp
+	sudo scxctl switch --sched cake
+	
+    exec powerprofilesctl launch -p performance -- "$@"
+fi

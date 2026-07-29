@@ -1,0 +1,6 @@
+#!/bin/bash
+if command -v python &> /dev/null && [ -f "/home/gwynn7/homebrew/plugins/decky-launch-options/run.py" ]; then
+    python "/home/gwynn7/homebrew/plugins/decky-launch-options/run.py" "$@"
+else
+    exec "$@"
+fi

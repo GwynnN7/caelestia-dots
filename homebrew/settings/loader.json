@@ -1,0 +1,27 @@
+{
+    "branch": 2,
+    "pluginOrder": [
+        "Launch Options",
+        "Storage Cleaner",
+        "Volume Mixer",
+        "CSS Loader",
+        "ProtonDB Badges",
+        "Game Theme Music",
+        "Game Theme Music",
+        "Game Theme Music",
+        "Better Keyboard",
+        "HLTB for Deck",
+        "TabMaster"
+    ],
+    "user_info.user_name": "gwynn7",
+    "user_info.user_home": "/home/gwynn7",
+    "store": 0,
+    "developer.enabled": true,
+    "hiddenPlugins": [
+        "Better Keyboard",
+        "ProtonDB Badges",
+        "Game Theme Music",
+        "TabMaster",
+        "SteamGridDB"
+    ]
+}

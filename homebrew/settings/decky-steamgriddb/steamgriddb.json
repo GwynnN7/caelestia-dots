@@ -1,0 +1,46 @@
+{
+    "plugin_use_count": 22,
+    "motd_last_fetched": 1785248581,
+    "nonsteam_3255933224": {
+        "id": 5248354,
+        "name": "Discord (Program)",
+        "verified": true,
+        "types": [],
+        "release_date": 1431475200
+    },
+    "zoomlevel_grid_l": 200,
+    "filters_hero": {
+        "styles": [
+            "alternate",
+            "blurred",
+            "material"
+        ],
+        "dimensions": [
+            "1920x620",
+            "3840x1240",
+            "1600x650"
+        ],
+        "mimes": [
+            "image/png",
+            "image/jpeg",
+            "image/webp"
+        ],
+        "animated": true,
+        "_static": true,
+        "adult": false,
+        "humor": true,
+        "epilepsy": true,
+        "untagged": true
+    },
+    "nonsteam_206440": {
+        "id": 1882,
+        "name": "To the Moon",
+        "verified": true,
+        "types": [
+            "steam",
+            "gog",
+            "origin"
+        ],
+        "release_date": 1320130800
+    }
+}

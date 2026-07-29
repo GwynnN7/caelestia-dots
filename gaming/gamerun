@@ -123,13 +123,4 @@ fi
 
 LAUNCH_CMD+=(env "${GAME_ENV[@]}" "${WRAPPER[@]}")
 
-if [[ "$SESSION_TYPE" == "hyprland" ]]; then
-    ACTIVE_CLASS=$(hyprctl activewindow -j 2>/dev/null | jq -r '.class' 2>/dev/null)
-    if [[ "${ACTIVE_CLASS,,}" == *"steam"* ]]; then
-        hyprctl dispatch killactive
-    fi
-
-    exec systemd-inhibit --why "Gaming" powerprofilesctl launch -p performance -- "${LAUNCH_CMD[@]}"
-else
-    exec powerprofilesctl launch -p performance -- "${LAUNCH_CMD[@]}"
-fi
+exec booster "${LAUNCH_CMD[@]}"

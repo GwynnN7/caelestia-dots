@@ -1,0 +1,11 @@
+{
+  "name": "Storage Cleaner",
+  "author": "Matt Carlucci",
+  "api_version": 1,
+  "flags": [],
+  "publish": {
+    "tags": ["storage", "cleaner", "shader", "cache", "compatdata", "compatibility", "data", "disk", "utility", "other"],
+    "description": "Quickly visualize, select and clear shader cache and compatibility data.",
+    "image": "https://raw.githubusercontent.com/mcarlucci/decky-storage-cleaner/main/assets/Screenshot-1.png"
+  }
+}

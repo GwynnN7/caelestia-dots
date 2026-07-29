@@ -1,0 +1,9 @@
+{
+    "settings": {
+        "defaultMuted": false,
+        "useYtDlp": true,
+        "downloadAudio": false,
+        "invidiousInstance": "https://invidious.tiekoetter.com",
+        "volume": 0.5
+    }
+}

@@ -1,0 +1,291 @@
+{
+    "profiles": {
+        "206440": {
+            "state": {},
+            "originalLaunchOptions": ""
+        },
+        "275850": {
+            "state": {
+                "mangohud": false
+            },
+            "originalLaunchOptions": ""
+        },
+        "292030": {
+            "state": {},
+            "originalLaunchOptions": ""
+        },
+        "312520": {
+            "state": {},
+            "originalLaunchOptions": ""
+        },
+        "314650": {
+            "state": {},
+            "originalLaunchOptions": "MESA_LOADER_DRIVER_OVERRIDE=zink %command%"
+        },
+        "753640": {
+            "state": {},
+            "originalLaunchOptions": ""
+        },
+        "976730": {
+            "state": {},
+            "originalLaunchOptions": ""
+        },
+        "1057090": {
+            "state": {},
+            "originalLaunchOptions": ""
+        },
+        "1061910": {
+            "state": {},
+            "originalLaunchOptions": ""
+        },
+        "1888930": {
+            "state": {},
+            "originalLaunchOptions": ""
+        },
+        "1903340": {
+            "state": {
+                "optiscaler": true,
+                "mangohud": false
+            },
+            "originalLaunchOptions": ""
+        },
+        "2131630": {
+            "state": {},
+            "originalLaunchOptions": ""
+        },
+        "3500550": {
+            "state": {
+                "mangohud": false
+            },
+            "originalLaunchOptions": ""
+        },
+        "2501829966": {
+            "state": {
+                "wayland": false
+            },
+            "originalLaunchOptions": "%command% run net.retrodeck.retrodeck"
+        }
+    },
+    "launchOptions": [
+        {
+            "id": "cachyos",
+            "name": "Booster",
+            "on": "booster %command%",
+            "off": "",
+            "enableGlobally": true,
+            "group": "Wrappers",
+            "priority": 3,
+            "valueId": "",
+            "valueName": "",
+            "fallbackValue": false
+        },
+        {
+            "id": "gamemode",
+            "name": "Game Mode",
+            "on": "gamemoderun %command%",
+            "off": "",
+            "enableGlobally": true,
+            "group": "Wrappers",
+            "valueId": "",
+            "valueName": "",
+            "fallbackValue": false,
+            "priority": 1
+        },
+        {
+            "id": "gamescope-off",
+            "name": "Gamescope Settings",
+            "on": "",
+            "enableGlobally": true,
+            "group": "Wrappers",
+            "valueId": "gamerun-gamescope-dropdown",
+            "valueName": "Disabled",
+            "fallbackValue": true,
+            "priority": 2
+        },
+        {
+            "id": "gamescope",
+            "name": "Gamescope Settings",
+            "on": "gamescope -W 1920 -H 1080 -f -r 165 --force-grab-cursor --adaptive-sync -- %command%",
+            "enableGlobally": false,
+            "group": "Wrappers",
+            "valueId": "gamerun-gamescope-dropdown",
+            "valueName": "Desktop",
+            "fallbackValue": false,
+            "priority": 2
+        },
+        {
+            "id": "gamescope-laptop",
+            "name": "Gamescope Settings",
+            "on": "gamescope -W 1920 -H 1080 -f -r 60 --force-grab-cursor -- %command%",
+            "enableGlobally": false,
+            "group": "Wrappers",
+            "valueId": "gamerun-gamescope-dropdown",
+            "valueName": "Laptop",
+            "fallbackValue": false,
+            "priority": 2
+        },
+        {
+            "id": "gamescope-mango",
+            "name": "Gamescope Settings",
+            "on": "gamescope -W 1920 -H 1080 -f -r 165 --force-grab-cursor --adaptive-sync --mangoapp -- %command%",
+            "enableGlobally": false,
+            "group": "Wrappers",
+            "valueId": "gamerun-gamescope-dropdown",
+            "valueName": "Desktop (MangoHUD)",
+            "fallbackValue": false,
+            "priority": 2
+        },
+        {
+            "id": "gamescope-laptop-mango",
+            "name": "Gamescope Settings",
+            "on": "gamescope -W 1920 -H 1080 -f -r 60 --force-grab-cursor --mangoapp -- %command%",
+            "enableGlobally": false,
+            "group": "Wrappers",
+            "valueId": "gamerun-gamescope-dropdown",
+            "valueName": "Laptop (MangoHUD)",
+            "fallbackValue": false,
+            "priority": 2
+        },
+        {
+            "id": "mangohud",
+            "name": "MangoHud",
+            "on": "mangohud %command%",
+            "off": "",
+            "enableGlobally": false,
+            "group": "Wrappers",
+            "valueId": "",
+            "valueName": "",
+            "fallbackValue": false,
+            "priority": 0
+        },
+        {
+            "id": "priority",
+            "name": "Proton Priority High",
+            "on": "PROTON_PRIORITY_HIGH=1 %command%",
+            "off": "",
+            "enableGlobally": true,
+            "group": "Environment",
+            "valueId": "",
+            "valueName": "",
+            "fallbackValue": false
+        },
+        {
+            "id": "local-shader",
+            "name": "Proton Local Shader Cache",
+            "on": "PROTON_LOCAL_SHADER_CACHE=1 %command%",
+            "off": "",
+            "enableGlobally": true,
+            "group": "Environment",
+            "valueId": "",
+            "valueName": "",
+            "fallbackValue": false
+        },
+        {
+            "id": "discord",
+            "name": "Proton Discord Bridge",
+            "on": "PROTON_DISCORD_BRIDGE=1 %command%",
+            "off": "",
+            "enableGlobally": true,
+            "group": "Environment",
+            "valueId": "",
+            "valueName": "",
+            "fallbackValue": false
+        },
+        {
+            "id": "optiscaler",
+            "name": "OptiScaler",
+            "on": "PROTON_USE_OPTISCALER=1 PROTON_OPTISCALER_CONFIG=\"Upscalers.Dx11Upscaler=fsr31_12;Upscalers.Dx12Upscaler=fsr31;Upscalers.VulkanUpscaler=fsr31_12;FrameGen.Enabled=true;FrameGen.FGInput=DLSSG;FrameGen.FGOutput=XeFG;FSR.Fsr4Update=auto;FSR.Fsr4ForceEnableInt8=true;Menu.ShortcutKey=0x24;Menu.FpsShortcutKey=0x2d\" WINEDLLOVERRIDES=\"dxgi=n,b\" %command%",
+            "off": "",
+            "enableGlobally": false,
+            "group": "Environment",
+            "valueId": "",
+            "valueName": "",
+            "fallbackValue": false
+        },
+        {
+            "id": "wayland",
+            "name": "Enable Wayland",
+            "on": "PROTON_ENABLE_WAYLAND=1 %command%",
+            "off": "",
+            "enableGlobally": true,
+            "group": "Environment",
+            "valueId": "",
+            "valueName": "",
+            "fallbackValue": false
+        },
+        {
+            "id": "nvapi-default",
+            "name": "NVAPI",
+            "on": "",
+            "enableGlobally": true,
+            "group": "Environment",
+            "valueId": "nvapi-dropdown",
+            "valueName": "Unset",
+            "fallbackValue": true
+        },
+        {
+            "id": "nvapi-enable",
+            "name": "NVAPI",
+            "on": "PROTON_ENABLE_NVAPI=1 %command%",
+            "enableGlobally": false,
+            "group": "Environment",
+            "valueId": "nvapi-dropdown",
+            "valueName": "Enabled",
+            "fallbackValue": false
+        },
+        {
+            "id": "nvapi-disable",
+            "name": "NVAPI",
+            "on": "PROTON_DISABLE_NVAPI=1 %command%",
+            "enableGlobally": false,
+            "group": "Environment",
+            "valueId": "nvapi-dropdown",
+            "valueName": "Disabled",
+            "fallbackValue": false
+        },
+        {
+            "id": "low-latency-dxvk",
+            "name": "DXVK Low Latency",
+            "on": "PROTON_DXVK_LOWLATENCY=1 %command%",
+            "off": "",
+            "enableGlobally": true,
+            "group": "Low Latency",
+            "valueId": "",
+            "valueName": "",
+            "fallbackValue": false
+        },
+        {
+            "id": "low-latency-vkd3d",
+            "name": "VKD3D Low Latency",
+            "on": "PROTON_VKD3D_LOWLATENCY=1 %command%",
+            "off": "",
+            "enableGlobally": true,
+            "group": "Low Latency",
+            "valueId": "",
+            "valueName": "",
+            "fallbackValue": false
+        },
+        {
+            "id": "low-latency-layer",
+            "name": "Low Latency Layer",
+            "on": "LOW_LATENCY_LAYER=1 %command%",
+            "off": "",
+            "enableGlobally": true,
+            "group": "Low Latency",
+            "valueId": "",
+            "valueName": "",
+            "fallbackValue": false
+        },
+        {
+            "id": "low-latency-reflex",
+            "name": "Reflex Low Latency",
+            "on": "LOW_LATENCY_LAYER_REFLEX=1 %command%",
+            "off": "",
+            "enableGlobally": true,
+            "group": "Low Latency",
+            "valueId": "",
+            "valueName": "",
+            "fallbackValue": false
+        }
+    ]
+}
