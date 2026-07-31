@@ -39,7 +39,15 @@ local communication_app_tag = "communication_app"
 ----------------------
 
 -- Apply default opacity to all windows except fullscreen
-hl.window_rule({ match = { fullscreen = false }, opacity = vars.windowOpacity .. " override" })
+local opacity_override = vars.windowOpacity .. " override"
+hl.window_rule({ 
+    match = { fullscreen_state_client = 0 }, 
+    opacity = opacity_override 
+})
+hl.window_rule({ 
+    match = { fullscreen_state_client = 1 }, 
+    opacity = opacity_override 
+})
 
 -- Center all floating windows except xwayland windows (xwayland popups count as windows)
 hl.window_rule({ match = { float = true, xwayland = false }, center = true })

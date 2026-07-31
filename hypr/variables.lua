@@ -56,24 +56,54 @@ return {
     ---- KEYBINDS ----
     ------------------
 
-    -- Workspaces & Navigation
+    -- Launcher
+    kbLauncher                 = "SUPER + SUPER_L",
+
+    -- Misc
+    kbSession                  = { "SUPER + Escape", "SUPER + F3" },
+    kbShowSidebar              = "SUPER + B",
+    kbClearNotifs              = "SUPER + ALT + B",
+    kbShowPanels               = "SUPER + H",
+    kbLock                     = "SUPER + L",
+
+    -- Plugins
+    kbOverview                 = "SUPER + Space",
+    kbOverview2                = "ALT + Tab",
+
+    -- Restore lock
+    kbRestoreLock              = "SUPER + ALT + L",
+
+    -- Kill/restart
+    kbKillRestart              = "CTRL + ALT + Delete",
+
+    -- Monitor
     kbFocus                    = "SUPER",
     kbMove                     = "SUPER + SHIFT",
+
+    -- Workspace and Windows
     kbFocusWin                 = "SUPER + CTRL",
     kbMoveWin                  = "SUPER + SHIFT + CTRL",
 
-    -- Window Action
-    kbWindowFullscreen         = "SUPER + Return",
-    kbWindowBorderedFullscreen = "SUPER + F",
-    kbToggleWindowFloating     = "SUPER + G",
-    kbCenter         		   = "SUPER + X",
-    kbPinWindow				   = "SUPER + P",
+    -- Special workspace toggles
+    kbScratchpad               = "SUPER + Comma",
+    kbSystemMonitorWs          = "CTRL + Escape",
+    kbSpecialWs                = "SUPER + C",
     kbCloseWindow              = "SUPER + Q",
 
-    -- Special workspaces toggles
-    kbScratchpad               = "SUPER + Comma",
-    kbSpecialWs                = "SUPER + C",
-    kbSystemMonitorWs          = "CTRL + Escape",
+    -- Resize and drag
+    kbResizeColShrink          = { "SUPER + Minus", "SUPER + ALT + A", "SUPER + ALT + left" },
+    kbResizeColGrow            = { "SUPER + Equal", "SUPER + ALT + D", "SUPER + ALT + right" },
+    kbResizeColShrinkConf      = "SUPER + SHIFT + Minus",
+    kbResizeColGrowConf        = "SUPER + SHIFT + Equal",
+    kbResizeWinShrink          = "SUPER + ALT + Minus",
+    kbResizeWinGrow            = "SUPER + ALT + Equal",
+
+    -- Window utility
+    kbPinWindow                = "SUPER + P",
+    kbFullscreen               = "SUPER + Return",
+    kbBorderless               = "SUPER + F",
+    kbFloating                 = "SUPER + G",
+    kbCenter                   = "SUPER + X",
 
     -- Apps
     kbTerminal                 = "SUPER + T",
@@ -82,17 +112,24 @@ return {
     kbYazi                     = "SUPER + Y",
     kbAudioSettings            = "SUPER + N",
 
-    -- Misc
-    kbShowClipboard            = "SUPER + V",
-    kbShowEmoji                = "SUPER + Period",
-    kbSession                  = "SUPER + Escape",
-    kbShowAI                   = "SUPER + Z",
-    kbShowSidebarAI            = "SUPER + ALT + Z",
-    kbShowSidebar              = "SUPER + B",
-    kbClearNotifs              = "SUPER + ALT + B",
-    kbShowKeybinds             = "SUPER + K",
-    kbShowWindows              = "SUPER + J",
-    kbShowPanels               = "SUPER + H",
-    kbLock                     = "SUPER + L",
-    kbRestoreLock              = "SUPER + ALT + L",
+    -- Utilities
+    kbScreenshot               = "Print",
+    kbScreenshotFreeze         = "SUPER + Print",
+    kbScreenshotRegion         = "SHIFT + ALT + S",
+    kbRecord                   = "SUPER + SHIFT + R",
+    kbRecordSound              = "SUPER + ALT + R",
+    kbRecordRegion             = "SUPER + CTRL + R",
+    kbColorPicker              = "SUPER + CTRL + C",
+
+    -- Utils
+    kbClipboard                = "SUPER + V",
+    kbEmoji                    = "SUPER + Period",
+    kbAI                       = "SUPER + Z",
+    kbSidebarAI                = "SUPER + ALT + Z",
+    kbKeybinds                 = "SUPER + K",
+    kbWindows                  = "SUPER + J",
+    kbWallpaper                = "SUPER + F4",
+
+    -- Submaps
+    kbSubmap                   = "SUPER + Home",
 }
