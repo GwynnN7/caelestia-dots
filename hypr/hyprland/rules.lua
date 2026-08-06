@@ -74,7 +74,6 @@ tagged_rule(opaque_tag, {
     "krita|gimp|inkscape|darktable",          -- Image editors
     "resolve|kdenlive|shotcut",               -- Video editors
     "blender|godot",                          -- 3D editors
-    "(steam_app_(default|[0-9]+))|gamescope", -- Games
 }, "class")
 
 
@@ -128,7 +127,7 @@ tagged_rule(game_tag, {
     "steam_app_[0-9]+",  -- Steam games
     "steam_app_default", -- Lutris games
     "gamescope",         -- Gamescope
-})
+}, "class")
 
 
 -- Xwayland popups
@@ -146,7 +145,7 @@ tagged_rule(music_player_tag, {
     "Cider",                                                       -- Apple music
     "com.github.th-ch.youtube-music|com-maxrave-simpmusic-MainKt", -- YouTube music
     "tidal-hifi",                                                  -- Tidal
-})
+}, "class")
 tagged_rule(music_player_tag, {
     "Spotify|Spotify Free" -- Spotify wayland, it has no class for some reason
 }, "initial_title")
@@ -187,7 +186,7 @@ create_tag(float_tag, { float = true })
 create_tag(float_50_60_tag, { float = true, size = "(monitor_w*0.5) (monitor_h*0.6)", center = true })
 create_tag(float_60_70_tag, { float = true, size = "(monitor_w*0.6) (monitor_h*0.7)", center = true })
 create_tag(float_70_80_tag, { float = true, size = "(monitor_w*0.7) (monitor_h*0.8)", center = true })
-create_tag(game_tag, { immediate = true, idle_inhibit = "always" })
+create_tag(game_tag, { opaque = true, immediate = true, idle_inhibit = "always" })
 create_tag(xwl_popup_tag, {
     no_dim = true,
     no_shadow = true,
