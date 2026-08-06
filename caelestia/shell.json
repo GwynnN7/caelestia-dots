@@ -75,36 +75,6 @@
             "monitorCenter": true,
             "recolourIcons": false
         },
-        "statusIcons": [
-            {
-                "id": "lockStatus",
-                "enabled": true
-            },
-            {
-                "id": "audio",
-                "enabled": true
-            },
-            {
-                "id": "microphone",
-                "enabled": true
-            },
-            {
-                "id": "kbLayout",
-                "enabled": false
-            },
-            {
-                "id": "network",
-                "enabled": true
-            },
-            {
-                "id": "bluetooth",
-                "enabled": true
-            },
-            {
-                "id": "battery",
-                "enabled": true
-            }
-        ],
         "entries": [
             {
                 "enabled": true,
@@ -145,6 +115,45 @@
             {
                 "enabled": true,
                 "id": "power"
+            }
+        ],
+        "peripheralBatteryExcluded": [],
+        "statusIcons": [
+            {
+                "id": "lockStatus",
+                "enabled": true
+            },
+            {
+                "id": "audio",
+                "enabled": false
+            },
+            {
+                "id": "microphone",
+                "enabled": true
+            },
+            {
+                "id": "kbLayout",
+                "enabled": false
+            },
+            {
+                "id": "network",
+                "enabled": true
+            },
+            {
+                "id": "bluetooth",
+                "enabled": true
+            },
+            {
+                "id": "battery",
+                "enabled": true
+            },
+            {
+                "id": "peripheralBattery",
+                "enabled": false
+            },
+            {
+                "id": "notifications",
+                "enabled": true
             }
         ],
         "position": "left",
