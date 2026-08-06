@@ -51,7 +51,6 @@ create_bind(
         return normalise_keybind(key) == launcher_default and release or nil
     end
 )
-create_bind(vars.kbLauncher, fn.toggle_special_ws("communication"), hold)
 
 -- Misc
 create_bind(vars.kbSession, hl.dsp.global("caelestia:session"))
@@ -74,7 +73,7 @@ else
 end
 
 if has_scrolloverview and has_hymission then
-    create_bind(vars.kbOverview2, function() hl.plugin.hymission.toggle("onlycurrentworkspace") end)
+    create_bind(vars.kbOverview2, function() hl.plugin.scrolloverview.overview("toggle") end)
 else
     create_bind(vars.kbOverview2, hl.dsp.global("caelestia:workspaceOverview"))
 end
@@ -118,28 +117,28 @@ for _, key in ipairs({ "mouse_down", "down", "S" }) do
 end
 
 for _, key in ipairs({ "left", "right", "up", "down" }) do
-    create_bind(vars.kbFocusWin .. " + " .. key, hl.dsp.focus({ direction = key }))
+    create_bind(vars.kbFocusWin .. " + " .. key, hl.dsp.focus({ direction = key }), repeating_unless_mouse)
     if key == "up" or key == "down" then
-        create_bind(vars.kbMoveWin .. " + " .. key, hl.dsp.window.move({ direction = key }))
+        create_bind(vars.kbMoveWin .. " + " .. key, hl.dsp.window.move({ direction = key }), repeating_unless_mouse)
     elseif key == "left" or key == "right" then
         local abbr = key == "left" and "l" or "r"
-        create_bind(vars.kbFocus .. " + " .. key, hl.dsp.layout("focus " .. abbr))
-        create_bind(vars.kbMove .. " + " .. key, hl.dsp.layout("swapcol " .. abbr))
+        create_bind(vars.kbFocus .. " + " .. key, hl.dsp.layout("focus " .. abbr), repeating_unless_mouse)
+        create_bind(vars.kbMove .. " + " .. key, hl.dsp.layout("swapcol " .. abbr), repeating_unless_mouse)
         local direction = key == "left" and "prev" or "next"
-        create_bind(vars.kbMoveWin .. " + " .. key, hl.dsp.layout("consume_or_expel " .. direction))
+        create_bind(vars.kbMoveWin .. " + " .. key, hl.dsp.layout("consume_or_expel " .. direction), repeating_unless_mouse)
     end
 end
 
 for _, key in ipairs({ "W", "A", "S", "D" }) do
     local direction = key == "W" and "up" or key == "S" and "down" or key == "A" and "left" or "right"
-    create_bind(vars.kbFocusWin .. " + " .. key, hl.dsp.focus({ direction = direction }))
+    create_bind(vars.kbFocusWin .. " + " .. key, hl.dsp.focus({ direction = direction }), repeating_unless_mouse)
 
     if key == "A" or key == "D" then
         local abbr = key == "A" and "l" or "r"
-        create_bind(vars.kbFocus .. " + " .. key, hl.dsp.layout("focus " .. abbr))
-        create_bind(vars.kbMove .. " + " .. key, hl.dsp.layout("swapcol " .. abbr))
+        create_bind(vars.kbFocus .. " + " .. key, hl.dsp.layout("focus " .. abbr), repeating_unless_mouse)
+        create_bind(vars.kbMove .. " + " .. key, hl.dsp.layout("swapcol " .. abbr), repeating_unless_mouse)
         local direction = key == "A" and "prev" or "next"
-        create_bind(vars.kbMoveWin .. " + " .. key, hl.dsp.layout("consume_or_expel " .. direction))
+        create_bind(vars.kbMoveWin .. " + " .. key, hl.dsp.layout("consume_or_expel " .. direction), repeating_unless_mouse)
     end
 end
 

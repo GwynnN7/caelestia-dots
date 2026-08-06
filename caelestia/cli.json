@@ -1,6 +1,6 @@
 {
     "wallpaper": {
-        "postHook": "sudo /usr/share/sddm/themes/caelestia/scripts/sync.sh --posthook"
+        "postHook": "caelestia-rgb-sync apply"
     },
     "theme": {
         "enableTerm": true,
@@ -22,7 +22,7 @@
         "iconTheme": "Papirus-Dark",
         "iconThemeLight": "Papirus-Light",
         "iconThemeDark": "Papirus-Dark",
-        "postHook": "echo $SCHEME_NAME $SCHEME_FLAVOUR $SCHEME_MODE $SCHEME_VARIANT $SCHEME_COLOURS; caelestia-rgb-sync apply; sudo /usr/share/sddm/themes/caelestia/scripts/sync.sh --posthook"
+        "postHook": "echo $SCHEME_NAME $SCHEME_FLAVOUR $SCHEME_MODE $SCHEME_VARIANT $SCHEME_COLOURS"
     },
     "toggles": {
         "communication": {

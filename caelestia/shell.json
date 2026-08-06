@@ -148,6 +148,7 @@
         },
         "profilePicShape": 17,
         "randomizeMediaShapeColors": true,
+        "replaceMediaLyricsWithVisuals": false,
         "showHyprlandSplash": true,
         "showTerminal": false,
         "showWeather": false,
@@ -515,15 +516,15 @@
                 "-c",
                 "cortana service &>/dev/null && cortana api -cmd shutdown computer | cortana notify || systemctl poweroff"
             ],
-            "windows": [
-                "sh",
-                "-c",
-                "cortana service &>/dev/null && cortana api -cmd system computer | cortana notify || systemctl reboot"
-            ],
             "steam": [
                 "sh",
                 "-c",
                 "steamos-session-select gamescope || systemctl reboot"
+            ],
+            "windows": [
+                "sh",
+                "-c",
+                "cortana service &>/dev/null && cortana api -cmd system computer | cortana notify || systemctl reboot"
             ]
         }
     },

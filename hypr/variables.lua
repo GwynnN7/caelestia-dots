@@ -85,10 +85,10 @@ return {
     kbMoveWin                  = "SUPER + SHIFT + CTRL",
 
     -- Special workspace toggles
-    kbScratchpad               = "SUPER + Comma",
     kbSystemMonitorWs          = "CTRL + Escape",
     kbSpecialWs                = "SUPER + C",
     kbCloseWindow              = "SUPER + Q",
+    kbScratchpad               = "SUPER + Z",
 
     -- Resize and drag
     kbResizeColShrink          = { "SUPER + Minus", "SUPER + ALT + A", "SUPER + ALT + left" },
@@ -124,8 +124,8 @@ return {
     -- Utils
     kbClipboard                = "SUPER + V",
     kbEmoji                    = "SUPER + Period",
-    kbAI                       = "SUPER + Z",
-    kbSidebarAI                = "SUPER + ALT + Z",
+    kbAI                       = "SUPER + Comma",
+    kbSidebarAI                = "SUPER + ALT + Comma",
     kbKeybinds                 = "SUPER + K",
     kbWindows                  = "SUPER + J",
     kbWallpaper                = "SUPER + F4",
