@@ -75,6 +75,36 @@
             "monitorCenter": true,
             "recolourIcons": false
         },
+        "statusIcons": [
+            {
+                "id": "lockStatus",
+                "enabled": true
+            },
+            {
+                "id": "audio",
+                "enabled": true
+            },
+            {
+                "id": "microphone",
+                "enabled": true
+            },
+            {
+                "id": "kbLayout",
+                "enabled": false
+            },
+            {
+                "id": "network",
+                "enabled": true
+            },
+            {
+                "id": "bluetooth",
+                "enabled": true
+            },
+            {
+                "id": "battery",
+                "enabled": true
+            }
+        ],
         "entries": [
             {
                 "enabled": true,
@@ -118,16 +148,6 @@
             }
         ],
         "position": "left",
-        "status": {
-            "showAudio": false,
-            "showKbLayout": false,
-            "showLockStatus": true,
-            "showMicrophone": true,
-            "showNetwork": true,
-            "showNotifications": false,
-            "showPeripheralBattery": false,
-            "showWifi": false
-        },
         "workspaces": {
             "activeTrail": false,
             "maxWindowIcons": 2,
