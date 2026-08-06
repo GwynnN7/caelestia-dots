@@ -222,7 +222,7 @@ dest = "/usr/bin/steamos-session-select"
 sudo=true
 [[components.entries]]
 src = "homebrew"
-dest = "$HOME/homebrew.new"
+dest = "$HOME/homebrew"
 [[components.entries]]
 src = "gaming/dlo"
 dest = "$HOME/.dlo"
