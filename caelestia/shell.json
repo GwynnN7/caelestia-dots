@@ -484,6 +484,7 @@
     },
     "lock": {
         "enableHowdy": false,
+        "useWallpaper": true,
         "lockOnStartup": true,
         "profilePicShape": 18
     },
