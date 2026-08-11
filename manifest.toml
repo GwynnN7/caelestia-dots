@@ -101,6 +101,16 @@ src = "applications/micro.desktop"
 dest = "$XDG_DATA_HOME/applications/micro.desktop"
 
 [[components]]
+name = "nvim"
+packages = ["neovim"]
+[[components.entries]]
+src = "nvim/colors/caelestia.lua"
+dest = "$XDG_CONFIG_HOME/nvim/colors/caelestia.lua"
+[[components.entries]]
+src = "nvim/lua/plugins/caelestia.lua"
+dest = "$XDG_CONFIG_HOME/nvim/lua/plugins/caelestia.lua"
+
+[[components]]
 name = "thunar"
 default = true
 packages = ["thunar", "thunar-archive-plugin", "sshfs"]
@@ -396,16 +406,6 @@ src = "retrodeck/Switch.sh"
 dest = "$HOME/Games/Retrodeck/retrodeck/roms/apps/Switch.sh"
 
 # --- Only desktop ---
-
-[[components]]
-name = "nvim"
-packages = ["neovim"]
-[[components.entries]]
-src = "nvim/colors/caelestia.lua"
-dest = "$XDG_CONFIG_HOME/nvim/colors/caelestia.lua"
-[[components.entries]]
-src = "nvim/lua/plugins/caelestia.lua"
-dest = "$XDG_CONFIG_HOME/nvim/lua/plugins/caelestia.lua"
 
 [[components]]
 name = "rocm"

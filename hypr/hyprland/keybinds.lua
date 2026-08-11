@@ -14,6 +14,10 @@ local function normalise_keybind(key)
     return key:gsub("%s+", ""):lower()
 end
 
+local function valid_keybind(key)
+    return type(key) == "string" and key:match("%S") ~= nil
+end
+
 local function repeating_unless_mouse(key)
     return not normalise_keybind(key):find("mouse", 1, true) and repeating or nil
 end
@@ -22,10 +26,10 @@ local function flatten_keybinds(keybinds, keys)
     keys = keys or {}
 
     if type(keybinds) == "table" then
-        for _, keybind in ipairs(keybinds) do
+        for _, keybind in pairs(keybinds) do
             flatten_keybinds(keybind, keys)
         end
-    elseif keybinds ~= nil then
+    elseif valid_keybind(keybinds) then
         keys[#keys + 1] = keybinds
     end
 
@@ -41,6 +45,11 @@ local function create_bind(keybinds, action, flags)
         hl.bind(key, action, get_flags(key))
     end
 end
+
+local function combine(base, suffix)
+    return valid_keybind(base) and base .. " + " .. suffix or nil
+end
+
 
 -- Launcher
 local launcher_default = normalise_keybind("SUPER + SUPER_L")
@@ -93,62 +102,62 @@ create_bind(
 )
 
 -- Monitor
-create_bind(vars.kbFocus .. " + TAB", hl.dsp.focus({ monitor = "+1" }))
-create_bind(vars.kbMove .. " + TAB", function() return smw.change_monitor("next") end)
-create_bind(vars.kbFocus .. " + CTRL + TAB", hl.dsp.workspace.swap_monitors({ monitor1 = "0", monitor2 = "+1" }))
+create_bind(combine(vars.kbFocus, "TAB"), hl.dsp.focus({ monitor = "+1" }))
+create_bind(combine(vars.kbMove, "TAB"), function() return smw.change_monitor("next") end)
+create_bind(combine(vars.kbFocus, "CTRL + TAB"), hl.dsp.workspace.swap_monitors({ monitor1 = "0", monitor2 = "+1" }))
 
 -- Workspace and Windows
 for i = 1, 8 do
     local key = tostring(i)
-    create_bind(vars.kbFocus .. " + " .. key, function() return smw.workspace(i) end, repeating_unless_mouse)
-    create_bind(vars.kbMove .. " + " .. key, function() return smw.move_to_workspace(i) end, repeating_unless_mouse)
+    create_bind(combine(vars.kbFocus, key), function() return smw.workspace(i) end, repeating_unless_mouse)
+    create_bind(combine(vars.kbMove, key), function() return smw.move_to_workspace(i) end, repeating_unless_mouse)
 end
 
 for _, key in ipairs({ "mouse_up", "up", "W", }) do
-    create_bind(vars.kbFocus .. " + " .. key, fn.focus_workspace("-1"), repeating_unless_mouse)
-    create_bind(vars.kbMove .. " + " .. key, function() return smw.move_to_workspace("-1") end, repeating_unless_mouse)
-    create_bind(vars.kbMoveWin .. " + " .. key, hl.dsp.window.move({ direction = "up" }), repeating_unless_mouse)
+    create_bind(combine(vars.kbFocus, key), fn.focus_workspace("-1"), repeating_unless_mouse)
+    create_bind(combine(vars.kbMove, key), function() return smw.move_to_workspace("-1") end, repeating_unless_mouse)
+    create_bind(combine(vars.kbMoveWin, key), hl.dsp.window.move({ direction = "up" }), repeating_unless_mouse)
 end
 
 for _, key in ipairs({ "mouse_down", "down", "S" }) do
-    create_bind(vars.kbFocus .. " + " .. key, fn.focus_workspace("+1"), repeating_unless_mouse)
-    create_bind(vars.kbMove .. " + " .. key, function() return smw.move_to_workspace("+1") end, repeating_unless_mouse)
-    create_bind(vars.kbMoveWin .. " + " .. key, hl.dsp.window.move({ direction = "down" }), repeating_unless_mouse)
+    create_bind(combine(vars.kbFocus, key), fn.focus_workspace("+1"), repeating_unless_mouse)
+    create_bind(combine(vars.kbMove, key), function() return smw.move_to_workspace("+1") end, repeating_unless_mouse)
+    create_bind(combine(vars.kbMoveWin, key), hl.dsp.window.move({ direction = "down" }), repeating_unless_mouse)
 end
 
 for _, key in ipairs({ "left", "right", "up", "down" }) do
-    create_bind(vars.kbFocusWin .. " + " .. key, hl.dsp.focus({ direction = key }), repeating_unless_mouse)
+    create_bind(combine(vars.kbFocusWin, key), hl.dsp.focus({ direction = key }), repeating_unless_mouse)
     if key == "up" or key == "down" then
-        create_bind(vars.kbMoveWin .. " + " .. key, hl.dsp.window.move({ direction = key }), repeating_unless_mouse)
+        create_bind(combine(vars.kbMoveWin, key), hl.dsp.window.move({ direction = key }), repeating_unless_mouse)
     elseif key == "left" or key == "right" then
         local abbr = key == "left" and "l" or "r"
-        create_bind(vars.kbFocus .. " + " .. key, hl.dsp.layout("focus " .. abbr), repeating_unless_mouse)
-        create_bind(vars.kbMove .. " + " .. key, hl.dsp.layout("swapcol " .. abbr), repeating_unless_mouse)
+        create_bind(combine(vars.kbFocus, key), hl.dsp.layout("focus " .. abbr), repeating_unless_mouse)
+        create_bind(combine(vars.kbMove, key), hl.dsp.layout("swapcol " .. abbr), repeating_unless_mouse)
         local direction = key == "left" and "prev" or "next"
-        create_bind(vars.kbMoveWin .. " + " .. key, hl.dsp.layout("consume_or_expel " .. direction), repeating_unless_mouse)
+        create_bind(combine(vars.kbMoveWin, key), hl.dsp.layout("consume_or_expel " .. direction), repeating_unless_mouse)
     end
 end
 
 for _, key in ipairs({ "W", "A", "S", "D" }) do
     local direction = key == "W" and "up" or key == "S" and "down" or key == "A" and "left" or "right"
-    create_bind(vars.kbFocusWin .. " + " .. key, hl.dsp.focus({ direction = direction }), repeating_unless_mouse)
+    create_bind(combine(vars.kbFocusWin, key), hl.dsp.focus({ direction = direction }), repeating_unless_mouse)
 
     if key == "A" or key == "D" then
         local abbr = key == "A" and "l" or "r"
-        create_bind(vars.kbFocus .. " + " .. key, hl.dsp.layout("focus " .. abbr), repeating_unless_mouse)
-        create_bind(vars.kbMove .. " + " .. key, hl.dsp.layout("swapcol " .. abbr), repeating_unless_mouse)
+        create_bind(combine(vars.kbFocus, key), hl.dsp.layout("focus " .. abbr), repeating_unless_mouse)
+        create_bind(combine(vars.kbMove, key), hl.dsp.layout("swapcol " .. abbr), repeating_unless_mouse)
         local direction = key == "A" and "prev" or "next"
-        create_bind(vars.kbMoveWin .. " + " .. key, hl.dsp.layout("consume_or_expel " .. direction), repeating_unless_mouse)
+        create_bind(combine(vars.kbMoveWin, key), hl.dsp.layout("consume_or_expel " .. direction), repeating_unless_mouse)
     end
 end
 
 -- Special workspace toggles
 create_bind(vars.kbScratchpad, fn.toggle_special_ws("specialws"))
-create_bind("SHIFT + " .. vars.kbScratchpad, function() return smw.move_to_workspace_silent("special") end)
+create_bind(combine("SHIFT", vars.kbScratchpad), function() return smw.move_to_workspace_silent("special") end)
 create_bind(vars.kbSystemMonitorWs, fn.toggle_special_ws("sysmon"))
 create_bind(vars.kbSpecialWs, fn.toggle_special_ws("music"), hold)
 create_bind(vars.kbSpecialWs, fn.toggle_special_ws("communication"))
-create_bind("SHIFT + " .. vars.kbCloseWindow, function() return smw.move_to_workspace("e+0") end)
+create_bind(combine("SHIFT", vars.kbCloseWindow), function() return smw.move_to_workspace("e+0") end)
 
 -- Resize and drag
 create_bind(vars.kbResizeColShrink, hl.dsp.layout("colresize -0.15"))
@@ -253,8 +262,8 @@ create_bind(vars.kbSidebarAI, hl.dsp.global("caelestia:cortanaSidebar"))
 create_bind(vars.kbKeybinds, hl.dsp.global("caelestia:keybinds"))
 create_bind(vars.kbWindows, hl.dsp.global("caelestia:windowSwitcher"))
 create_bind(vars.kbWallpaper, hl.dsp.global("caelestia:wallpaper"))
-create_bind("ALT + " .. vars.kbClipboard, hl.dsp.exec_cmd("pkill fuzzel || caelestia clipboard -d"))
-create_bind("ALT + " .. vars.kbEmoji, hl.dsp.exec_cmd("pkill fuzzel || caelestia emoji -p"))
+create_bind(combine("ALT", vars.kbClipboard), hl.dsp.exec_cmd("pkill fuzzel || caelestia clipboard -d"))
+create_bind(combine("ALT", vars.kbEmoji), hl.dsp.exec_cmd("pkill fuzzel || caelestia emoji -p"))
 
 -- Cortana API
 create_bind("SUPER + F1", hl.dsp.exec_cmd("cortana api -act on devices/lamp | cortana notify"), locked)
