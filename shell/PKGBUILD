@@ -1,6 +1,6 @@
 _pkgname='caelestia-shell'
 pkgname="$_pkgname-git"
-pkgver=2.1.0.r209.g4b76ef8
+pkgver=2.1.0.r282.g8a07cfd
 pkgrel=1
 pkgdesc='The desktop shell for the Caelestia dotfiles'
 arch=('x86_64' 'aarch64')
