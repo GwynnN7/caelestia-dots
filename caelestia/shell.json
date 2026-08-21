@@ -564,7 +564,7 @@
             "suspend": "bedtime",
             "logout": "exit_to_app",
             "reboot": "cached",
-            "steam": "games",
+            "steam": "stadia_controller",
             "windows": "window"
         }
     },
