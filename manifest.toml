@@ -29,7 +29,7 @@ dest = "$XDG_CONFIG_HOME/xdg-desktop-portal"
 [[components]]
 name = "caelestia"
 default=true
-packages = ["local:shell"]
+packages = ["local:shell", "astra-airlock-git", "astra-atlas-git", "astra-foundry-git"]
 post_install = [
     "test -f ${XDG_STATE_HOME:-$HOME/.local/state}/caelestia/scheme.json || caelestia scheme set -n caelestia",
     "caelestia shell -k >/dev/null; sleep 1; caelestia shell -d >/dev/null",
@@ -422,7 +422,7 @@ sudo = true
 [[components]]
 name = "openrgb"
 packages = [
-    "openrgb-git",
+    "openrgb",
     "caelestia-rgb-sync"
 ]
 post_install = [
