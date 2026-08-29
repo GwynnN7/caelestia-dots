@@ -43,7 +43,6 @@ if hl.plugin.hymission ~= nil then
                 column_spacing = 28,
                 layout_engine = "grid",
 
-                expand_selected_window = 1,
                 overview_focus_follows_mouse = 1,
                 multi_workspace_sort_recent_first = 0,
                 toggle_switch_mode = 0,

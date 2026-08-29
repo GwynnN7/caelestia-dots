@@ -233,6 +233,7 @@ sudo=true
 [[components.entries]]
 src = "homebrew"
 dest = "$HOME/homebrew"
+sudo=true
 [[components.entries]]
 src = "gaming/dlo"
 dest = "$HOME/.dlo"
