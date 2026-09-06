@@ -5,13 +5,13 @@
                 {
                     "enabled": true,
                     "id": "dock"
-                }
-            ],
-            "end": [
+                },
                 {
                     "enabled": true,
                     "id": "tray"
-                },
+                }
+            ],
+            "end": [
                 {
                     "enabled": true,
                     "id": "clock"

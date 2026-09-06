@@ -410,15 +410,7 @@ dest = "$HOME/Games/Retrodeck/retrodeck/roms/apps/Switch.sh"
 
 [[components]]
 name = "rocm"
-packages = ["rocm-hip-sdk", "rocm-opencl-sdk", "rocm-ml-sdk", "rocminfo", "rocm-smi-lib", "ollama-rocm"]
-[[components.entries]]
-src = "ollama/10-ollama.rules"
-dest = "/etc/polkit-1/rules.d/10-ollama.rules"
-sudo = true
-[[components.entries]]
-src = "ollama/override.conf"
-dest = "/etc/systemd/system/ollama.service.d/override.conf"
-sudo = true
+packages = ["rocm-hip-sdk", "rocm-opencl-sdk", "rocm-ml-sdk", "rocminfo", "rocm-smi-lib", "unsloth-bin"]
 
 [[components]]
 name = "openrgb"

@@ -27,6 +27,7 @@ hl.on("hyprland.start", function()
     hl.exec_cmd("mpris-proxy")
 
     -- Hyprland services
+    hl.exec_cmd("systemctl --user start hypridle.service")
     hl.exec_cmd("systemctl --user start hyprsunset.service")
     hl.exec_cmd("systemctl --user start hyprland-focused-booster.service")
 
@@ -36,9 +37,6 @@ hl.on("hyprland.start", function()
 
     -- OpenRGB
     hl.exec_cmd("systemctl --user start openrgb.service")
-
-    -- Ollama
-    hl.exec_cmd("systemctl start ollama.service")
 end)
 
 -- Resizer listeners

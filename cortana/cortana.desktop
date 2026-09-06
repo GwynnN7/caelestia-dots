@@ -1,0 +1,7 @@
+[Desktop Entry]
+Version=1.0
+Terminal=false
+Type=Application
+Name=Cortana
+Exec=brave-origin --app="https://cortana.pleco-allosaurus.ts.net/" --new-window
+Icon=/home/gwynn7/Projects/Cortana/CortanaWeb/wwwroot/badge.png
