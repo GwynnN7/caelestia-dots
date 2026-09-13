@@ -266,10 +266,10 @@ create_bind(combine("ALT", vars.kbClipboard), hl.dsp.exec_cmd("pkill fuzzel || c
 create_bind(combine("ALT", vars.kbEmoji), hl.dsp.exec_cmd("pkill fuzzel || caelestia emoji -p"))
 
 -- Cortana API
-create_bind("SUPER + F1", hl.dsp.exec_cmd("cortana api -act on devices/lamp | cortana notify"), locked)
-create_bind("SUPER + F2", hl.dsp.exec_cmd("cortana api -act off devices/lamp | cortana notify"), locked)
-create_bind("SUPER + F5", hl.dsp.exec_cmd("cortana api -val 0 settings/automaticmode | cortana notify"), locked)
-create_bind("SUPER + F6", hl.dsp.exec_cmd("cortana api -val 1 settings/automaticmode | cortana notify"), locked)
+create_bind("SUPER + F1", hl.dsp.exec_cmd("cortana api devices/lamp -act toggle | cortana notify"), locked)
+create_bind("SUPER + F2", hl.dsp.exec_cmd("cortana api devices/speakers -act toggle | cortana notify"), locked)
+create_bind("SUPER + F5", hl.dsp.exec_cmd("cortana api automation -act off | cortana notify"), locked)
+create_bind("SUPER + F6", hl.dsp.exec_cmd("cortana api automation -act on | cortana notify"), locked)
 
 -- Submaps
 create_bind(vars.kbSubmap, hl.dsp.submap("passthru"))

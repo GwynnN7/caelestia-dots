@@ -156,9 +156,12 @@
             "compact": true
         },
         "workspaces": {
-            "activeTrail": false,
+            "activeIndicator": true,
+            "activeTrail": true,
             "maxWindowIcons": 2,
             "occupiedBg": false,
+            "showWindows": true,
+            "showWindowsOnSpecialWorkspaces": true,
             "shown": 4,
             "useIcon": true
         }
@@ -192,22 +195,6 @@
             "inhibitWhenAudio": true,
             "lockBeforeSleep": true,
             "timeouts": [
-                {
-                    "idleAction": "lock",
-                    "timeout": 700
-                },
-                {
-                    "idleAction": "dpms off",
-                    "returnAction": "dpms on",
-                    "timeout": 895
-                },
-                {
-                    "idleAction": [
-                        "systemctl",
-                        "suspend"
-                    ],
-                    "timeout": 900
-                }
             ]
         },
         "logo": "caelestia",
@@ -450,7 +437,8 @@
             "org.telegram.desktop",
             "equibop",
             "tidal-hifi",
-            "steam"
+            "steam",
+            "cortana"
         ],
         "hiddenApps": [
             "xfce4-about",
@@ -471,7 +459,11 @@
             "uuctl",
             "net.retrodeck.retrodeck.Configurator",
             "net.retrodeck.retrodeck",
-            "lstopo"
+            "lstopo",
+            "designer",
+            "qdbusviewer",
+            "assistant",
+            "linguist"
         ],
         "showOnHover": false,
         "specialPrefix": "@",
@@ -519,7 +511,7 @@
             "shutdown": [
                 "sh",
                 "-c",
-                "cortana service &>/dev/null && cortana api -cmd shutdown computer | cortana notify || systemctl poweroff"
+                "cortana service &>/dev/null && cortana api computer -cmd shutdown | cortana notify || systemctl poweroff"
             ],
             "suspend": [
                 "suspend"
@@ -546,17 +538,17 @@
             "automode": [
                 "sh",
                 "-c",
-                "cortana service &>/dev/null && cortana api -val 0 settings/automaticmode | cortana notify"
+                "cortana service &>/dev/null && cortana api automation -act toggle | cortana notify"
             ],
             "generic": [
                 "sh",
                 "-c",
-                "cortana service &>/dev/null && cortana api -act toggle devices/generic | cortana notify"
+                "cortana service &>/dev/null && cortana api devices/speakers -act toggle | cortana notify"
             ],
             "lamp": [
                 "sh",
                 "-c",
-                "cortana service &>/dev/null && cortana api -act toggle devices/lamp | cortana notify"
+                "cortana service &>/dev/null && cortana api devices/lamp -act toggle | cortana notify"
             ]
         },
         "icons": {
