@@ -1,0 +1,12 @@
+{
+    "blacklist": [
+        "Valve Software Steam Controller",
+        "Valve Software Steam Deck Controller",
+        "steamos-manager",
+        "usb-0000:2f:00.3-4/input1",
+        "usb-0000:2f:00.3-2/input2",
+        "usb-0000:2f:00.3-2/input0"
+    ],
+    "version": 1,
+    "debug": false
+}

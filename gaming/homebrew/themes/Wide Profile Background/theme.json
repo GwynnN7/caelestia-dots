@@ -1,0 +1,12 @@
+{
+  "name": "Wide Profile Background",
+  "author": "Niko",
+  "version": "v2.0",
+  "manifest_version": 9,
+  "inject": {
+    "shared.css": [
+      "bigpicture"
+    ]
+  },
+  "id": "51905e98-e925-4f6e-aa0c-3096527ab938"
+}

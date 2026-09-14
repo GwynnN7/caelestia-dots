@@ -1,18 +1,9 @@
 #!/usr/bin/env bash
 
-gpu_perf() {
-    local node
-    for node in /sys/class/drm/card*/device/power_dpm_force_performance_level; do
-        [[ -w $node ]] && echo "$1" > "$node" 2>/dev/null
-    done
-    return 0
-}
+COMMAND=(powerprofilesctl launch -p performance)
 
 if [[ -n "$HYPRLAND_INSTANCE_SIGNATURE" ]]; then
-    exec app2unit -- systemd-inhibit --why "Booster" -- powerprofilesctl launch -p performance -- env "$@"
+    exec app2unit -- "${COMMAND[@]}" -- env "$@"
 else
-    sudo scxctl switch --sched cake
-    gpu_perf high
-
-    exec powerprofilesctl launch -p performance -- "$@"
+    exec "${COMMAND[@]}" -- "$@"
 fi

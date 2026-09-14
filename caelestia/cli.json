@@ -1,12 +1,22 @@
 {
+    "screenshot": {
+        "app": "swappy",
+        "action": "edit",
+        "regionAction": "edit",
+        "fullscreenAction": "notify",
+        "copyOnSave": true
+    },
+    "record": {
+        "refreshRate": 60,
+        "extraArgs": []
+    },
     "wallpaper": {
-        "postHook": "caelestia-rgb-sync apply"
+        "postHook": "echo $WALLPAPER_PATH $SCHEME_NAME $SCHEME_FLAVOUR $SCHEME_MODE $SCHEME_VARIANT $SCHEME_COLOURS && caelestia-rgb-sync apply"
     },
     "theme": {
         "enableTerm": true,
         "enableHypr": true,
         "enableDiscord": true,
-        "enableTelegram": true,
         "enableSpicetify": false,
         "enablePandora": false,
         "enableFuzzel": true,
@@ -15,8 +25,8 @@
         "enableHtop": true,
         "enableGtk": true,
         "enableQt": true,
-        "enableWarp": false,
-        "enableChromium": false,
+        "enableWarp": true,
+        "enableChromium": true,
         "enableZed": false,
         "enableCava": true,
         "iconTheme": "Papirus-Dark",
@@ -28,37 +38,90 @@
         "communication": {
             "discord": {
                 "enable": false,
-                "match": [{ "class": "equibop" }],
-                "command": ["equibop"],
+                "match": [
+                    {
+                        "class": "equibop"
+                    }
+                ],
+                "command": [
+                    "equibop"
+                ],
                 "move": true
             },
             "telegram": {
                 "enable": true,
-                "match": [{ "class": "org.telegram.desktop" }],
-                "command": ["Telegram"],
+                "match": [
+                    {
+                        "class": "org.telegram.desktop"
+                    }
+                ],
+                "command": [
+                    "Telegram"
+                ],
                 "move": true
             }
         },
         "music": {
             "spotify": {
                 "enable": false,
-                "match": [{ "class": "Spotify" }, { "initialTitle": "Spotify" }, { "initialTitle": "Spotify Free" }],
-                "command": ["spicetify", "watch", "-s"],
+                "match": [
+                    {
+                        "class": "Spotify"
+                    },
+                    {
+                        "initialTitle": "Spotify"
+                    },
+                    {
+                        "initialTitle": "Spotify Free"
+                    }
+                ],
+                "command": [
+                    "spicetify",
+                    "watch",
+                    "-s"
+                ],
                 "move": true
             },
             "tidal-hifi": {
                 "enable": true,
-                "match": [{ "class": "tidal-hifi" }],
-                "command": ["tidal-hifi"],
+                "match": [
+                    {
+                        "class": "tidal-hifi"
+                    }
+                ],
+                "command": [
+                    "tidal-hifi"
+                ],
                 "move": true
             }
         },
         "sysmon": {
             "btop": {
                 "enable": true,
-                "match": [{ "class": "btop", "title": "btop", "workspace": { "name": "special:sysmon" } }],
-                "command": ["foot", "-a", "btop", "-T", "btop", "fish", "-C", "exec btop"]
+                "match": [
+                    {
+                        "class": "btop",
+                        "title": "btop",
+                        "workspace": {
+                            "name": "special:sysmon"
+                        }
+                    }
+                ],
+                "command": [
+                    "foot",
+                    "-a",
+                    "btop",
+                    "-T",
+                    "btop",
+                    "fish",
+                    "-C",
+                    "exec btop"
+                ]
             }
         }
+    },
+    "dots": {
+        "url": "https://github.com/GwynnN7/caelestia-dots.git",
+        "branch": "main"
     }
 }

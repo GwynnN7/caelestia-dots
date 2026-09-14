@@ -1,0 +1,16 @@
+[Unit]
+Description=SteamDeck Plugin Loader
+After=network.target
+[Service]
+Type=simple
+User=root
+Restart=always
+KillMode=process
+TimeoutStopSec=15
+ExecStart=/home/gwynn7/homebrew/services/PluginLoader
+WorkingDirectory=/home/gwynn7/homebrew/services
+Environment=UNPRIVILEGED_PATH=/home/gwynn7/homebrew
+Environment=PRIVILEGED_PATH=/home/gwynn7/homebrew
+Environment=LOG_LEVEL=INFO
+[Install]
+WantedBy=multi-user.target

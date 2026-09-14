@@ -1,0 +1,79 @@
+# Better Keyboard
+
+Adds physical keyboard support to the virtual keyboard overlay, so you can use built-in IME, the emoji panel, etc. It can also hide the full virtual keyboard for easier use with a physical keyboard.
+
+给虚拟键盘添加物理键盘支持，便于使用内置的IME、Emoji面板等。还增加了紧凑模式，隐藏了虚拟键盘中的全键盘，便于使用物理键盘。
+
+![Screenshot](logo.png)
+
+**Currently only tested with US English keyboard layout and Chinese (Simplified) IME, more testing is needed.**
+
+**目前仅测试了英文键盘和简体中文输入法，还需要更多测试。**
+
+## Installation 安装
+
+*Make sure you have installed [Decky Loader](https://github.com/SteamDeckHomebrew/decky-loader) first.*
+
+**请先确保已安装 [Decky Loader](https://github.com/SteamDeckHomebrew/decky-loader) 。**
+
+Download the latest release from [Releases](https://github.com/chenx-dust/BetterKeyboard/releases/latest) and unzip to `~/homebrew/plugins`.
+
+从 [Releases](https://github.com/chenx-dust/BetterKeyboard/releases/latest) 下载最新版本，并解压到 `~/homebrew/plugins` 。
+
+## Tips & Tricks 技巧提示
+
+- You can click the **Space** virtual key to leave compact mode temporarily.
+- You can use **Space** and number keys to accept IME candidates.
+- You can use **PageUp/PageDown**, **[/]** or **-/=** to switch IME candidate pages.
+- You can short press **LeftShift** key to switch between input methods.
+- You can press **Escape** key to leave the virtual keyboard.
+
+- 可以通过点击 **空格** 键临时退出紧凑模式。
+- 可以通过 **空格** 和数字键接受输入法候选项。
+- 可以通过 **PageUp/PageDown**、**[/]** 或 **-/=** 翻页输入法候选项。
+- 可以通过短按 **左 Shift** 键切换输入法。
+- 可以通过按 **Esc** 键退出虚拟键盘。
+
+## Config 配置
+
+Config can be found in `~/homebrew/plugins/BetterKeyboard/config.json`.
+
+配置可以在 `~/homebrew/plugins/BetterKeyboard/config.json` 中找到。
+
+```json
+{
+  "blacklist": [
+    "Valve Software Steam Controller",
+    "Valve Software Steam Deck Controller",
+    "steamos-manager"
+  ],
+  "debug": false,
+  "version": 1
+}
+```
+
+- `blacklist`: A list of devices that should not be recognized as physical keyboards (match by `name`, `path`, `phys`, `uniq`, or `udevadm` property line).
+- `debug`: Enable backend debug logs. Default is `false`.
+- `version`: Internal config schema version used for migration. Do not edit manually.
+
+- `blacklist`: 不应当被识别为物理键盘的设备黑名单（可以使用名称、路径、物理路径或唯一标识符）。
+- `debug`: 是否开启后端调试日志，默认值为 `false`。
+- `version`: 配置迁移使用的内部版本号，不建议手动修改。
+
+## How it Works
+
+This plugin works with the steps below:
+
+1. Hijack the virtual keyboard triggers.
+2. Modify the keyboard layout.
+3. Use `evdev` to block and receive keyboard events.
+4. Send keyboard events to Steam.
+5. Map keys to correct actions.
+
+## License
+
+Copyright (c) 2026 Chenx Dust. This project is licensed under the BSD 3-Clause license.
+
+## Acknowledgement
+
+This plugin uses a modified version of [gvalkov/python-evdev](https://github.com/gvalkov/python-evdev). It removes the CPython-specific parts and works out of the box.

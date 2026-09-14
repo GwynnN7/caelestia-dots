@@ -28,6 +28,7 @@ local float_60_70_tag = "float_60_70"
 local float_70_80_tag = "float_70_80"
 local float_50_60_tag = "float_50_60"
 local game_tag = "game"
+local cortana_tag = "cortana"
 local xwl_popup_tag = "xwl_popup"
 local system_monitor_tag = "system_monitor"
 local music_player_tag = "music_player"
@@ -94,6 +95,9 @@ tagged_rule(float_tag, {
     ".* Properties",                       -- File properties
     'Rename ".*"',                         -- File renaming
 }, "title")
+tagged_rule(cortana_tag, {
+    "brave-cortana.pleco-allosaurus.ts.net__-Default", -- Cortana
+}, "class")
 
 
 -- Sized floaters
@@ -187,6 +191,7 @@ create_tag(float_tag, { float = true })
 create_tag(float_50_60_tag, { float = true, size = "(monitor_w*0.5) (monitor_h*0.6)", center = true })
 create_tag(float_60_70_tag, { float = true, size = "(monitor_w*0.6) (monitor_h*0.7)", center = true })
 create_tag(float_70_80_tag, { float = true, size = "(monitor_w*0.7) (monitor_h*0.8)", center = true })
+create_tag(cortana_tag, { float = true, size = "(monitor_w*0.35) (monitor_h*0.9)", center = true })
 create_tag(game_tag, { opaque = true, immediate = true, idle_inhibit = "always" })
 create_tag(xwl_popup_tag, {
     no_dim = true,

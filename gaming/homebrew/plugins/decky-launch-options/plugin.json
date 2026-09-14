@@ -1,0 +1,16 @@
+{
+  "name": "Launch Options",
+  "author": "Wurielle",
+  "flags": [
+    "debug"
+  ],
+  "api_version": 1,
+  "publish": {
+    "tags": [
+      "launch options",
+      "quality of life"
+    ],
+    "description": "Manage launch options for your games with ease.",
+    "image": "https://raw.githubusercontent.com/Wurielle/decky-launch-options/main/assets/screenshot.png"
+  }
+}

@@ -1,33 +1,17 @@
 {
     "ai": {
-        "activeModel": "gemma4:e4b",
-        "agentCaelestiaCommand": true,
-        "agentCortanaApi": true,
-        "agentDateTime": true,
-        "agentFileOps": false,
-        "agentGetWeather": true,
-        "agentLocation": true,
-        "agentOpenApp": true,
-        "agentReadWebpage": true,
-        "agentRunCommand": false,
-        "agentSetTimer": true,
-        "agentTakeScreenshot": true,
-        "agentWebSearch": true,
-        "contextWindow": 131072,
-        "systemPrompt": "You are a helpful AI assistant called Cortana, integrated into gwynn7's OS. You can use tools to assist the user and control his room's devices and sensors."
+        "enableCelestialMode": true
     },
     "appearance": {
         "deformScale": 1,
-        "islands": false,
         "padding": {
             "scale": 0.8
         },
-        "pitchBlack": false,
         "rounding": {
             "scale": 1
         },
         "spacing": {
-            "scale": 0.5
+            "scale": 1
         },
         "transparency": {
             "base": 0.65,
@@ -37,8 +21,6 @@
     },
     "audio": {
         "sounds": {
-            "disabledNotifApps": [
-            ],
             "enabled": true,
             "notificationVolume": 0.4,
             "sfxVolume": 0.4
@@ -46,7 +28,6 @@
     },
     "background": {
         "desktopLyrics": {
-            "autoHide": true,
             "enabled": true,
             "position": "bottom-center",
             "scale": 1.2,
@@ -58,21 +39,20 @@
         },
         "visualiser": {
             "enabled": true
-        },
-        "wallpaperRecolor": false
+        }
     },
     "bar": {
         "activeWindow": {
-            "compact": true,
-            "inverted": false
+            "compact": true
         },
         "clock": {
-            "background": true,
+            "background": false,
             "showDate": true,
-            "showIcon": true
+            "showIcon": false,
+            "showSeconds": false
         },
         "dock": {
-            "monitorCenter": true,
+            "monitorCenter": false,
             "recolourIcons": false
         },
         "entries": {
@@ -108,12 +88,15 @@
                 {
                     "enabled": true,
                     "id": "workspaces"
+                },
+                {
+                    "enabled": true,
+                    "id": "activeWindow"
                 }
             ]
         },
-        "peripheralBatteryExcluded": [
-        ],
-        "position": "left",
+        "persistent": true,
+        "position": "bottom",
         "statusIcons": [
             {
                 "enabled": true,
@@ -148,18 +131,19 @@
                 "id": "peripheralBattery"
             },
             {
-                "enabled": false,
+                "enabled": true,
                 "id": "notifications"
             }
         ],
         "tray": {
-            "compact": true
+            "compact": false
         },
         "workspaces": {
             "activeIndicator": true,
             "activeTrail": true,
-            "maxWindowIcons": 2,
+            "maxWindowIcons": 3,
             "occupiedBg": false,
+            "showUnoccupied": true,
             "showWindows": true,
             "showWindowsOnSpecialWorkspaces": true,
             "shown": 4,
@@ -172,30 +156,27 @@
         "thickness": 8
     },
     "dashboard": {
-        "colorizeMediaGif": false,
-        "performance": {
-            "showNetwork": true
-        },
         "profilePicShape": 17,
         "randomizeMediaShapeColors": true,
         "replaceMediaLyricsWithVisuals": false,
         "showHyprlandSplash": true,
         "showTerminal": false,
-        "showWeather": false,
-        "syncMediaShapesToBeat": true,
-        "useMediaShapes": false
+        "showWeather": false
     },
     "general": {
         "apps": {
+            "explorer": [
+                "atlas"
+            ],
             "playback": [
                 "celluloid"
             ]
         },
+        "developerMode": true,
         "idle": {
             "inhibitWhenAudio": true,
             "lockBeforeSleep": true,
-            "timeouts": [
-            ]
+            "timeouts": []
         },
         "logo": "caelestia",
         "mediaGifSpeedAdjustment": 125
@@ -206,55 +187,45 @@
             {
                 "command": [
                     "autocomplete",
-                    "cortana"
-                ],
-                "dangerous": false,
-                "description": "Cortana assistant",
-                "enabled": true,
-                "icon": "network_intel_node",
-                "name": "Cortana"
-            },
-            {
-                "command": [
-                    "autocomplete",
                     "clipboard"
                 ],
-                "dangerous": false,
-                "description": "Clipboard history",
-                "enabled": true,
+                "description": "View clipboard history",
                 "icon": "content_paste",
                 "name": "Clipboard"
             },
             {
                 "command": [
                     "autocomplete",
+                    "emoji"
+                ],
+                "description": "Pick an emoji to copy",
+                "icon": "emoji_emotions",
+                "name": "Emoji"
+            },
+            {
+                "command": [
+                    "autocomplete",
                     "calc"
                 ],
-                "dangerous": false,
-                "description": "Do simple math equations",
-                "enabled": true,
+                "description": "Do simple math equations (powered by Qalc)",
                 "icon": "calculate",
                 "name": "Calculator"
             },
             {
                 "command": [
                     "autocomplete",
-                    "emoji"
+                    "scheme"
                 ],
-                "dangerous": false,
-                "description": "Emoji Picker",
-                "enabled": true,
-                "icon": "mood",
-                "name": "Emoji"
+                "description": "Change the current colour scheme",
+                "icon": "palette",
+                "name": "Scheme"
             },
             {
                 "command": [
                     "autocomplete",
                     "wallpaper"
                 ],
-                "dangerous": false,
                 "description": "Change the current wallpaper",
-                "enabled": true,
                 "icon": "image",
                 "name": "Wallpaper"
             },
@@ -264,75 +235,25 @@
                     "wallpaper",
                     "-r"
                 ],
-                "dangerous": false,
                 "description": "Switch to a random wallpaper",
-                "enabled": true,
                 "icon": "casino",
                 "name": "Random"
             },
             {
                 "command": [
                     "autocomplete",
-                    "scheme"
-                ],
-                "dangerous": false,
-                "description": "Change the current colour scheme",
-                "enabled": true,
-                "icon": "palette",
-                "name": "Scheme"
-            },
-            {
-                "command": [
-                    "autocomplete",
-                    "windows"
-                ],
-                "dangerous": false,
-                "description": "List all open windows",
-                "enabled": true,
-                "icon": "window",
-                "name": "Windows"
-            },
-            {
-                "command": [
-                    "autocomplete",
-                    "keybinds"
-                ],
-                "dangerous": false,
-                "description": "List all keybinds",
-                "enabled": true,
-                "icon": "keyboard",
-                "name": "Keybinds"
-            },
-            {
-                "command": [
-                    "autocomplete",
                     "variant"
                 ],
-                "dangerous": false,
                 "description": "Change the current scheme variant",
-                "enabled": true,
                 "icon": "colors",
                 "name": "Variant"
-            },
-            {
-                "command": [
-                    "autocomplete",
-                    "transparency"
-                ],
-                "dangerous": false,
-                "description": "Change shell transparency",
-                "enabled": false,
-                "icon": "opacity",
-                "name": "Transparency"
             },
             {
                 "command": [
                     "setMode",
                     "light"
                 ],
-                "dangerous": false,
                 "description": "Change the scheme to light mode",
-                "enabled": false,
                 "icon": "light_mode",
                 "name": "Light"
             },
@@ -341,45 +262,27 @@
                     "setMode",
                     "dark"
                 ],
-                "dangerous": false,
                 "description": "Change the scheme to dark mode",
-                "enabled": false,
                 "icon": "dark_mode",
                 "name": "Dark"
             },
             {
                 "command": [
-                    "caelestia",
-                    "shell",
-                    "drawers",
-                    "toggle",
-                    "session"
-                ],
-                "dangerous": false,
-                "description": "Open session menu",
-                "enabled": true,
-                "icon": "power_settings_new",
-                "name": "Session"
-            },
-            {
-                "command": [
-                    "systemctl",
+                    "loginctl",
                     "poweroff"
                 ],
                 "dangerous": true,
                 "description": "Shutdown the system",
-                "enabled": true,
                 "icon": "power_settings_new",
                 "name": "Shutdown"
             },
             {
                 "command": [
-                    "systemctl",
+                    "loginctl",
                     "reboot"
                 ],
                 "dangerous": true,
                 "description": "Reboot the system",
-                "enabled": true,
                 "icon": "cached",
                 "name": "Reboot"
             },
@@ -390,7 +293,6 @@
                 ],
                 "dangerous": true,
                 "description": "Log out of the current session",
-                "enabled": true,
                 "icon": "exit_to_app",
                 "name": "Logout"
             },
@@ -399,20 +301,16 @@
                     "loginctl",
                     "lock-session"
                 ],
-                "dangerous": false,
                 "description": "Lock the current session",
-                "enabled": true,
                 "icon": "lock",
                 "name": "Lock"
             },
             {
                 "command": [
-                    "systemctl",
+                    "loginctl",
                     "suspend"
                 ],
-                "dangerous": true,
                 "description": "Suspend then hibernate",
-                "enabled": true,
                 "icon": "bedtime",
                 "name": "Sleep"
             },
@@ -423,14 +321,30 @@
                     "nexus",
                     "open"
                 ],
-                "dangerous": false,
                 "description": "Configure the shell",
-                "enabled": true,
                 "icon": "settings",
                 "name": "Settings"
+            },
+            {
+                "command": [
+                    "autocomplete",
+                    "windows"
+                ],
+                "description": "Switch to another window",
+                "enabled": true,
+                "icon": "apps",
+                "name": "Windows"
+            },
+            {
+                "command": [
+                    "autocomplete",
+                    "keybinds"
+                ],
+                "description": "View all keybinds",
+                "icon": "keyboard",
+                "name": "Keybinds"
             }
         ],
-        "aiHistoryGridView": false,
         "enableDangerousActions": false,
         "favouriteApps": [
             "zen",
@@ -498,7 +412,7 @@
     "services": {
         "arpcCaelestiaInfo": false,
         "arpcEnabled": false,
-        "defaultPlayer": "tidal-hifi",
+        "defaultPlayer": "Tidal Hi-Fi",
         "lyricsBackend": "Auto",
         "pipFollowFocus": true,
         "pipPaused": false,
@@ -508,14 +422,6 @@
     },
     "session": {
         "commands": {
-            "shutdown": [
-                "sh",
-                "-c",
-                "cortana service &>/dev/null && cortana api computer -cmd shutdown | cortana notify || systemctl poweroff"
-            ],
-            "suspend": [
-                "suspend"
-            ],
             "logout": [
                 "uwsm",
                 "stop"
@@ -525,38 +431,31 @@
                 "-c",
                 "cortana service &>/dev/null && cortana api -cmd reboot computer | cortana notify || systemctl reboot"
             ],
+            "shutdown": [
+                "sh",
+                "-c",
+                "cortana service &>/dev/null && cortana api computer -cmd shutdown | cortana notify || systemctl poweroff"
+            ],
             "steam": [
                 "sh",
                 "-c",
                 "steamos-session-select gamescope || systemctl reboot"
             ],
+            "suspend": [
+                "suspend"
+            ],
             "windows": [
                 "sh",
                 "-c",
                 "cortana service &>/dev/null && cortana api -cmd system computer | cortana notify || systemctl reboot"
-            ],
-            "automode": [
-                "sh",
-                "-c",
-                "cortana service &>/dev/null && cortana api automation -act toggle | cortana notify"
-            ],
-            "generic": [
-                "sh",
-                "-c",
-                "cortana service &>/dev/null && cortana api devices/speakers -act toggle | cortana notify"
-            ],
-            "lamp": [
-                "sh",
-                "-c",
-                "cortana service &>/dev/null && cortana api devices/lamp -act toggle | cortana notify"
             ]
         },
         "icons": {
-            "shutdown": "power_settings_new",
-            "suspend": "bedtime",
             "logout": "exit_to_app",
             "reboot": "cached",
+            "shutdown": "power_settings_new",
             "steam": "stadia_controller",
+            "suspend": "bedtime",
             "windows": "window"
         }
     },
@@ -591,7 +490,7 @@
                 "id": "bluetooth"
             },
             {
-                "enabled": true,
+                "enabled": false,
                 "id": "dnd"
             },
             {
@@ -603,7 +502,7 @@
                 "id": "vpn"
             },
             {
-                "enabled": false,
+                "enabled": true,
                 "id": "wallpaper"
             },
             {

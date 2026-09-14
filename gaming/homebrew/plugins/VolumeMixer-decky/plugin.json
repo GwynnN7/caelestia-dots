@@ -1,0 +1,13 @@
+{
+  "name": "Volume Mixer",
+  "author": "Isiah Lloyd",
+  "flags": [],
+  "publish": {
+    "tags": [
+      "volume",
+      "media"
+    ],
+    "description": "Control the volume of applications and connected Bluetooth sources.",
+    "image": "https://raw.githubusercontent.com/isiah-lloyd/VolumeMixer-decky/main/images/screenshot.png"
+  }
+}

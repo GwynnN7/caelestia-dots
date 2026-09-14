@@ -1,0 +1,62 @@
+version: 7
+daemon:
+  log_level: info
+  admin_group: wheel
+  disable_clocks_cleanup: false
+apply_settings_timer: 5
+gpus:
+  1002:73EF-1462:5026-0000:2d:00.0:
+    fan_control_enabled: true
+    fan_control_settings:
+      mode: curve
+      static_speed: 0.5
+      temperature_key: junction
+      interval_ms: 500
+      curve:
+        40: 0.0
+        55: 0.15
+        65: 0.4
+        75: 0.66
+        85: 0.8
+        100: 1.0
+      spindown_delay_ms: 5000
+      change_threshold: 2
+    performance_level: manual
+    min_core_clock: 600
+    max_core_clock: 2600
+    voltage_offset: -60
+    power_profile_mode_index: 0
+profiles:
+  Gaming:
+    gpus:
+      1002:73EF-1462:5026-0000:2d:00.0:
+        fan_control_enabled: true
+        fan_control_settings:
+          mode: curve
+          static_speed: 0.5
+          temperature_key: junction
+          interval_ms: 500
+          curve:
+            40: 0.0
+            50: 0.3
+            60: 0.5
+            70: 0.66
+            80: 0.8
+            90: 1.0
+          spindown_delay_ms: 5000
+          change_threshold: 2
+        performance_level: manual
+        min_core_clock: 2000
+        max_core_clock: 2800
+        voltage_offset: -75
+        power_profile_mode_index: 1
+    rule:
+      type: process
+      filter:
+        name: winedevice.exe
+        args: /run/host/usr/share/steam/compatibilitytools.d/proton-cachyos-slr/files/lib/wine/x86_64-unix/wine64-preloader /run/host/usr/share/steam/compatibilitytools.d/proton-cachyos-slr/files/lib/wine/x86_64-unix/wine C:\windows\system32\winedevice.exe
+    hooks:
+      activated: sudo scxctl switch --sched lavd
+      deactivated: sudo scxctl restore
+current_profile: null
+auto_switch_profiles: true

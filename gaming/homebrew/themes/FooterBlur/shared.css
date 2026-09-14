@@ -1,0 +1,4 @@
+.footer_BasicFooter_3T1iF {
+	backdrop-filter: blur(var(--footerBlur-strength));
+	background-color: rgba(0, 0, 0, var(--footerBlur-opacity));
+}

@@ -1,0 +1,158 @@
+{
+  "name": "FooterBlur",
+  "author": "KokomiCat",
+  "version": "v1.0",
+  "manifest_version": 8,
+  "inject": {
+    "shared.css": [
+      "SP"
+    ]
+  },
+  "patches": {
+    "Blur Strength": {
+      "type": "slider",
+      "default": "5",
+      "values": {
+        "Off": {
+          "--footerBlur-strength": [
+            "0px",
+            "SP"
+          ]
+        },
+        "1": {
+          "--footerBlur-strength": [
+            "1px",
+            "SP"
+          ]
+        },
+        "2": {
+          "--footerBlur-strength": [
+            "2px",
+            "SP"
+          ]
+        },
+        "3": {
+          "--footerBlur-strength": [
+            "3px",
+            "SP"
+          ]
+        },
+        "4": {
+          "--footerBlur-strength": [
+            "4px",
+            "SP"
+          ]
+        },
+        "5": {
+          "--footerBlur-strength": [
+            "5px",
+            "SP"
+          ]
+        },
+        "6": {
+          "--footerBlur-strength": [
+            "6px",
+            "SP"
+          ]
+        },
+        "7": {
+          "--footerBlur-strength": [
+            "7px",
+            "SP"
+          ]
+        },
+        "8": {
+          "--footerBlur-strength": [
+            "8px",
+            "SP"
+          ]
+        },
+        "9": {
+          "--footerBlur-strength": [
+            "9px",
+            "SP"
+          ]
+        },
+        "10": {
+          "--footerBlur-strength": [
+            "10px",
+            "SP"
+          ]
+        }
+      }
+    },
+    "Opacity": {
+      "type": "slider",
+      "default": "0.3",
+      "values": {
+        "0.0": {
+          "--footerBlur-opacity": [
+            "0.0",
+            "SP"
+          ]
+        },
+        "0.1": {
+          "--footerBlur-opacity": [
+            "0.1",
+            "SP"
+          ]
+        },
+        "0.2": {
+          "--footerBlur-opacity": [
+            "0.2",
+            "SP"
+          ]
+        },
+        "0.3": {
+          "--footerBlur-opacity": [
+            "0.3",
+            "SP"
+          ]
+        },
+        "0.4": {
+          "--footerBlur-opacity": [
+            "0.4",
+            "SP"
+          ]
+        },
+        "0.5": {
+          "--footerBlur-opacity": [
+            "0.5",
+            "SP"
+          ]
+        },
+        "0.6": {
+          "--footerBlur-opacity": [
+            "0.6",
+            "SP"
+          ]
+        },
+        "0.7": {
+          "--footerBlur-opacity": [
+            "0.7",
+            "SP"
+          ]
+        },
+        "0.8": {
+          "--footerBlur-opacity": [
+            "0.8",
+            "SP"
+          ]
+        },
+        "0.9": {
+          "--footerBlur-opacity": [
+            "0.9",
+            "SP"
+          ]
+        },
+        "1.0": {
+          "--footerBlur-opacity": [
+            "1.0",
+            "SP"
+          ]
+        }
+      }
+    }
+  },
+  "id": "3dcf3b7d-1813-4159-a7a5-a7526ddd9f58"
+}

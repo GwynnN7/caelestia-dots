@@ -1,0 +1,12 @@
+{
+  "name": "Compact Library Grid",
+  "author": "RConsis",
+  "version": "v1.0",
+  "manifest_version": 5,
+  "inject": {
+    "shared.css": [
+      "bigpicture"
+    ]
+  },
+  "id": "bc98b016-233b-42b2-b0bf-106a9f30cb1a"
+}

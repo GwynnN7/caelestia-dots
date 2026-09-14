@@ -9,7 +9,7 @@ return {
     terminal                   = "foot",
     browser                    = "zen-browser",
     editor                     = "micro",
-    fileExplorer               = "thunar",
+    fileExplorer               = "atlas",
     audioSettings              = "pwvucontrol",
 
     -- Touchpad
@@ -35,7 +35,7 @@ return {
     workspaceGaps              = 20,
     windowGapsIn               = 5,
     windowGapsOut              = 10,
-    singleWindowGapsOut        = 20,
+    singleWindowGapsOut        = 10,
 
     -- Window styling
     windowOpacity              = 0.8,

@@ -1,0 +1,12 @@
+{
+    "appearance": {
+        "spacing": {
+            "medium": 10
+        }
+    },
+    "sizes": {
+        "bar": {
+            "innerWidth": 34
+        }
+    }
+}

@@ -29,7 +29,7 @@ dest = "$XDG_CONFIG_HOME/xdg-desktop-portal"
 [[components]]
 name = "caelestia"
 default=true
-packages = ["local:shell", "astra-airlock-git", "astra-atlas-git", "astra-foundry-git"]
+packages = ["midnight-shell-git", "astra-airlock-git", "astra-atlas-git", "astra-foundry-git"]
 post_install = [
     "test -f ${XDG_STATE_HOME:-$HOME/.local/state}/caelestia/scheme.json || caelestia scheme set -n caelestia",
     "caelestia shell -k >/dev/null; sleep 1; caelestia shell -d >/dev/null",
@@ -40,6 +40,9 @@ post_update = [
 [[components.entries]]
 src = "caelestia"
 dest = "$XDG_CONFIG_HOME/caelestia"
+[[components.entries]]
+src = "astra/atlas.conf"
+dest = "$XDG_CONFIG_HOME/astra-atlas/atlas.conf"
 
 [[components]]
 name = "system"
@@ -193,16 +196,12 @@ packages = ["wl-clipboard", "cliphist", "wtype"]
 [[components]]
 name = "gaming"
 default = true
-packages = ["cachyos-gaming-applications", "gamemode", "hyprland-focused-booster", "gamescope-session-cachyos", "flatpak"]
+packages = ["cachyos-gaming-applications", "gamemode", "hyprland-focused-booster", "gamescope-session-cachyos", "flatpak", "lact"]
 post_install = [
     "flatpak install -y net.retrodeck.retrodeck",
     "steamos-session-select persistent",
     "curl -L https://github.com/SteamDeckHomebrew/decky-installer/releases/latest/download/install_release.sh | sh",
 ]
-[[components.entries]]
-src = "gaming/gamerun"
-dest = "/usr/local/bin/gamerun"
-sudo=true
 [[components.entries]]
 src = "gaming/booster"
 dest = "/usr/local/bin/booster"
@@ -231,19 +230,22 @@ src = "steamos/steamos-session-select"
 dest = "/usr/bin/steamos-session-select"
 sudo=true
 [[components.entries]]
-src = "homebrew"
+src = "gaming/homebrew"
 dest = "$HOME/homebrew"
 sudo=true
 [[components.entries]]
 src = "gaming/dlo"
 dest = "$HOME/.dlo"
 [[components.entries]]
-src = "gaming/30-amdgpu-perf.rules"
-dest = "/etc/udev/rules.d/30-amdgpu-perf.rules"
-sudo=true
-[[components.entries]]
 src = "gaming/override.conf"
 dest = "$XDG_CONFIG_HOME/systemd/user/hyprland-focused-booster.service.d/override.conf"
+[[components.entries]]
+src = "gaming/lact/lact.yaml"
+dest = "/etc/lact/config.yaml"
+sudo=true
+[[components.entries]]
+src = "gaming/lact/config.yaml"
+dest = "$XDG_CONFIG_HOME/lact/config.yaml"
 
 [[components]]
 name = "systemd"
@@ -270,6 +272,7 @@ packages = [
     "ydotool",
     "hyprpicker",
     "hyprsunset",
+    "hypridle",
     "xdg-user-dirs",
 ]
 post_install = [

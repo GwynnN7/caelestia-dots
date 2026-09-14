@@ -1,0 +1,11 @@
+{
+    "settings": {
+        "size": "regular",
+        "position": "tl",
+        "labelTypeOnHover": "off",
+        "disableSubmit": true,
+        "enableLibraryBadge": true,
+        "enableStoreBadge": true,
+        "storeBadgePosition": "bc"
+    }
+}
