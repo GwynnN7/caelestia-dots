@@ -145,7 +145,7 @@
             "occupiedBg": false,
             "showUnoccupied": true,
             "showWindows": true,
-            "showWindowsOnSpecialWorkspaces": true,
+            "showWindowsOnSpecialWorkspaces": false,
             "shown": 4,
             "useIcon": true
         }

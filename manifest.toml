@@ -29,7 +29,7 @@ dest = "$XDG_CONFIG_HOME/xdg-desktop-portal"
 [[components]]
 name = "caelestia"
 default=true
-packages = ["midnight-shell-git", "astra-airlock-git", "astra-atlas-git", "astra-foundry-git"]
+packages = ["local:shell", "astra-airlock-git", "astra-atlas-git", "astra-foundry-git"]
 post_install = [
     "test -f ${XDG_STATE_HOME:-$HOME/.local/state}/caelestia/scheme.json || caelestia scheme set -n caelestia",
     "caelestia shell -k >/dev/null; sleep 1; caelestia shell -d >/dev/null",
@@ -436,7 +436,6 @@ name = "cortana"
 packages = ["dotnet-sdk"]
 post_install = [
     'git clone https://github.com/GwynnN7/Cortana "$HOME/Projects/Cortana" 2>/dev/null || git -C "$HOME/Projects/Cortana" pull',
-    'mkdir -p "$HOME/Projects/Cortana/CortanaDesktop/out"',
     "systemctl --user daemon-reload",
     "systemctl --user enable cortana-desktop.service"
 ]

@@ -10,8 +10,8 @@ depends=('quickshell-git' 'ddcutil' 'brightnessctl' 'app2unit' 'libcava' 'networ
          'lm_sensors' 'fish' 'aubio' 'libpipewire' 'glibc' 'gcc-libs' 'ttf-material-symbols-variable' 'power-profiles-daemon'
          'ttf-rubik-vf' 'ttf-cascadia-code-nerd' 'swappy' 'libqalculate' 'bash' 'qt6-base' 'qt6-declarative' 'qt6-imageformats' 'qt6-m3shapes-git')
 makedepends=('git' 'cmake' 'ninja' 'qt6-shadertools')
-provides=($_pkgname)
-conflicts=($_pkgname)
+provides=($_pkgname 'midnight-shell' 'midnight-shell-git')
+conflicts=($_pkgname 'midnight-shell' 'midnight-shell-git')
 source=("$pkgname::git+$url.git")
 sha256sums=('SKIP')
 
