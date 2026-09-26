@@ -124,8 +124,7 @@ return {
     -- Utils
     kbClipboard                = "SUPER + V",
     kbEmoji                    = "SUPER + Period",
-    kbAI                       = "SUPER + Comma",
-    kbSidebarAI                = "SUPER + ALT + Comma",
+    kbUtils                    = "SUPER + Comma",
     kbKeybinds                 = "SUPER + K",
     kbWindows                  = "SUPER + J",
     kbWallpaper                = "SUPER + F4",

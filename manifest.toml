@@ -342,7 +342,7 @@ sudo = true
 
 [[components]]
 name = "software"
-packages = ["tidal-hifi-bin", "zen-browser-bin", "telegram-desktop", "equibop"]
+packages = ["sone-bin", "zen-browser-bin", "telegram-desktop", "equibop"]
 [[components.entries]]
 src = "applications/zen.desktop"
 dest = "$XDG_DATA_HOME/applications/zen.desktop"

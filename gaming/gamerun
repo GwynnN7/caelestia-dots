@@ -1,0 +1,114 @@
+#!/usr/bin/env bash
+
+#!/usr/bin/env bash
+
+# Enable execution trace and log stdout/stderr
+set -x
+exec > "/tmp/steam_wrapper_$(date +%s).log" 2>&1
+
+if [[ -n "$HYPRLAND_INSTANCE_SIGNATURE" ]]; then
+    SESSION_TYPE="hyprland"
+else
+    SESSION_TYPE="steamos"
+fi
+
+GAME_CMD=()
+GAME_ENV=(
+    "MANGOHUD_CONFIGFILE=$HOME/.local/share/goverlay/gameconfig/global/MangoHud.conf"
+    "PROTON_FORCE_LARGE_ADDRESS_AWARE=1"
+    "ENABLE_LAYER_MESA_ANTI_LAG=1"
+    "PROTON_VKD3D_LOWLATENCY=1"
+    "PROTON_LOCAL_SHADER_CACHE=1"
+    "PROTON_DISCORD_BRIDGE=1"
+    "PROTON_PRIORITY_HIGH=1"
+)
+
+OPTISCALER="${GR_OPTI:-0}"
+GAMESCOPE="${GR_SCOPE:-0}"
+WAYLAND="${GR_WAYLAND:-0}"
+HDR="${GR_HDR:-0}"
+
+case "${GR_NVAPI:-}" in
+    1|true)  NVAPI_STATUS=2 ;;
+    0|false) NVAPI_STATUS=1 ;;
+    *)       NVAPI_STATUS=0 ;;
+esac
+
+case "${GR_MANGO:-}" in
+    2)       MANGOHUD_TYPE=2 ;;
+    1)       MANGOHUD_TYPE=1 ;;
+    *)       MANGOHUD_TYPE=0 ;;
+esac
+
+while [[ $# -gt 0 ]]; do
+    case "$1" in 
+        --mangoapp) MANGOHUD_TYPE=1; shift ;;
+        --nvapi)    NVAPI_STATUS=1; shift ;;
+        --no-nvapi) NVAPI_STATUS=2; shift ;;
+        --gamescope) GAMESCOPE=1; shift ;;
+        --wayland)   WAYLAND=1; shift ;;
+
+        --) shift; GAME_CMD+=("$@"); break ;;
+        *) GAME_CMD+=("$@"); break ;;
+    esac
+done
+
+if [[ ${#GAME_CMD[@]} -eq 0 ]]; then
+    echo "Error: No game executable provided."
+    exit 1
+fi
+
+if [[ "$SESSION_TYPE" == "steamos" ]]; then
+    WAYLAND=0
+    GAMESCOPE=0
+fi
+
+if [[ $WAYLAND -eq 1 ]]; then
+    GAME_ENV+=("PROTON_ENABLE_WAYLAND=1")
+else
+    GAME_ENV+=("PROTON_ENABLE_WAYLAND=0")
+fi
+
+if [[ $HDR -eq 1 ]]; then
+    GAME_ENV+=("PROTON_ENABLE_HDR=1")
+else
+    GAME_ENV+=("PROTON_ENABLE_HDR=0")
+fi
+
+if [[ $NVAPI_STATUS -eq 1 ]]; then
+    GAME_ENV+=("PROTON_DISABLE_NVAPI=1")
+elif [[ $NVAPI_STATUS -eq 2 ]]; then
+    GAME_ENV+=("PROTON_ENABLE_NVAPI=1")
+fi
+
+WRAPPER=()
+if [[ $MANGOHUD_TYPE -eq 1 ]]; then
+    WRAPPER+=(mangohud)
+fi
+
+WRAPPER+=("${GAME_CMD[@]}")
+LAUNCH_CMD=()
+
+if [[ $GAMESCOPE -eq 1 ]]; then
+    CURRENT_HZ=$(hyprctl monitors -j 2>/dev/null | jq '.[] | select(.focused) | .refreshRate | round' 2>/dev/null)
+    if [[ -z "$CURRENT_HZ" ]]; then
+        CURRENT_HZ="60"
+    fi
+    
+    GAMESCOPE_ARGS=(
+        -W 1920 -H 1080 -f -r "$CURRENT_HZ" --adaptive-sync
+    )
+
+    if [[ $MANGOHUD_TYPE -eq 2 ]]; then
+        GAMESCOPE_ARGS+=("--mangoapp")
+    fi
+
+    LAUNCH_CMD+=(gamescope "${GAMESCOPE_ARGS[@]}" --)
+fi
+
+if [[ $OPTISCALER -eq 1 ]]; then
+    LAUNCH_CMD+=("$HOME/.local/share/goverlay/gameconfig/global/bgmod" --)
+fi
+
+LAUNCH_CMD+=(env "${GAME_ENV[@]}" "${WRAPPER[@]}")
+exec booster "${LAUNCH_CMD[@]}"

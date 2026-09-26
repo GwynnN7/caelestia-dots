@@ -255,10 +255,9 @@ create_bind(
 )
 
 -- Utils
-create_bind(vars.kbClipboard, hl.dsp.global("caelestia:clipboard"))
-create_bind(vars.kbEmoji, hl.dsp.global("caelestia:emoji"))
-create_bind(vars.kbAI, hl.dsp.global("caelestia:cortana"))
-create_bind(vars.kbSidebarAI, hl.dsp.global("caelestia:cortanaSidebar"))
+create_bind(vars.kbClipboard, hl.dsp.exec_cmd("stowaway -t"))
+create_bind(vars.kbEmoji, hl.dsp.global("stowaway -e"))
+create_bind(vars.kbUtils, hl.dsp.global("caelestia:utilities"))
 create_bind(vars.kbKeybinds, hl.dsp.global("caelestia:keybinds"))
 create_bind(vars.kbWindows, hl.dsp.global("caelestia:windowSwitcher"))
 create_bind(vars.kbWallpaper, hl.dsp.global("caelestia:wallpaper"))

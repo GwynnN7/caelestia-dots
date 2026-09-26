@@ -176,7 +176,8 @@
         "idle": {
             "inhibitWhenAudio": true,
             "lockBeforeSleep": true,
-            "timeouts": []
+            "timeouts": [
+            ]
         },
         "logo": "caelestia",
         "mediaGifSpeedAdjustment": 125
@@ -189,7 +190,9 @@
                     "autocomplete",
                     "clipboard"
                 ],
+                "dangerous": false,
                 "description": "View clipboard history",
+                "enabled": true,
                 "icon": "content_paste",
                 "name": "Clipboard"
             },
@@ -198,7 +201,9 @@
                     "autocomplete",
                     "emoji"
                 ],
+                "dangerous": false,
                 "description": "Pick an emoji to copy",
+                "enabled": true,
                 "icon": "emoji_emotions",
                 "name": "Emoji"
             },
@@ -207,7 +212,9 @@
                     "autocomplete",
                     "calc"
                 ],
+                "dangerous": false,
                 "description": "Do simple math equations (powered by Qalc)",
+                "enabled": true,
                 "icon": "calculate",
                 "name": "Calculator"
             },
@@ -216,7 +223,9 @@
                     "autocomplete",
                     "scheme"
                 ],
+                "dangerous": false,
                 "description": "Change the current colour scheme",
+                "enabled": true,
                 "icon": "palette",
                 "name": "Scheme"
             },
@@ -225,7 +234,9 @@
                     "autocomplete",
                     "wallpaper"
                 ],
+                "dangerous": false,
                 "description": "Change the current wallpaper",
+                "enabled": true,
                 "icon": "image",
                 "name": "Wallpaper"
             },
@@ -235,7 +246,9 @@
                     "wallpaper",
                     "-r"
                 ],
+                "dangerous": false,
                 "description": "Switch to a random wallpaper",
+                "enabled": true,
                 "icon": "casino",
                 "name": "Random"
             },
@@ -244,7 +257,9 @@
                     "autocomplete",
                     "variant"
                 ],
+                "dangerous": false,
                 "description": "Change the current scheme variant",
+                "enabled": true,
                 "icon": "colors",
                 "name": "Variant"
             },
@@ -253,7 +268,9 @@
                     "setMode",
                     "light"
                 ],
+                "dangerous": false,
                 "description": "Change the scheme to light mode",
+                "enabled": true,
                 "icon": "light_mode",
                 "name": "Light"
             },
@@ -262,7 +279,9 @@
                     "setMode",
                     "dark"
                 ],
+                "dangerous": false,
                 "description": "Change the scheme to dark mode",
+                "enabled": true,
                 "icon": "dark_mode",
                 "name": "Dark"
             },
@@ -273,6 +292,7 @@
                 ],
                 "dangerous": true,
                 "description": "Shutdown the system",
+                "enabled": true,
                 "icon": "power_settings_new",
                 "name": "Shutdown"
             },
@@ -283,6 +303,7 @@
                 ],
                 "dangerous": true,
                 "description": "Reboot the system",
+                "enabled": true,
                 "icon": "cached",
                 "name": "Reboot"
             },
@@ -293,6 +314,7 @@
                 ],
                 "dangerous": true,
                 "description": "Log out of the current session",
+                "enabled": true,
                 "icon": "exit_to_app",
                 "name": "Logout"
             },
@@ -301,7 +323,9 @@
                     "loginctl",
                     "lock-session"
                 ],
+                "dangerous": false,
                 "description": "Lock the current session",
+                "enabled": true,
                 "icon": "lock",
                 "name": "Lock"
             },
@@ -310,7 +334,9 @@
                     "loginctl",
                     "suspend"
                 ],
+                "dangerous": false,
                 "description": "Suspend then hibernate",
+                "enabled": true,
                 "icon": "bedtime",
                 "name": "Sleep"
             },
@@ -321,7 +347,9 @@
                     "nexus",
                     "open"
                 ],
+                "dangerous": false,
                 "description": "Configure the shell",
+                "enabled": true,
                 "icon": "settings",
                 "name": "Settings"
             },
@@ -330,6 +358,7 @@
                     "autocomplete",
                     "windows"
                 ],
+                "dangerous": false,
                 "description": "Switch to another window",
                 "enabled": true,
                 "icon": "apps",
@@ -340,7 +369,9 @@
                     "autocomplete",
                     "keybinds"
                 ],
+                "dangerous": false,
                 "description": "View all keybinds",
+                "enabled": true,
                 "icon": "keyboard",
                 "name": "Keybinds"
             }
@@ -349,8 +380,9 @@
         "favouriteApps": [
             "zen",
             "org.telegram.desktop",
+            "io.github.lullabyX.sone",
             "equibop",
-            "tidal-hifi",
+            "sone",
             "steam",
             "cortana"
         ],

@@ -83,7 +83,7 @@
                 "move": true
             },
             "tidal-hifi": {
-                "enable": true,
+                "enable": false,
                 "match": [
                     {
                         "class": "tidal-hifi"
@@ -91,6 +91,18 @@
                 ],
                 "command": [
                     "tidal-hifi"
+                ],
+                "move": true
+            },
+            "sone": {
+                "enable": true,
+                "match": [
+                    {
+                        "class": "sone"
+                    }
+                ],
+                "command": [
+                    "sone"
                 ],
                 "move": true
             }

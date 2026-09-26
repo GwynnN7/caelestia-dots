@@ -3,37 +3,15 @@
         "314650": {
             "state": {},
             "originalLaunchOptions": "DRI_PRIME=1 MESA_LOADER_DRIVER_OVERRIDE=zink %command%"
-        },
-        "1091500": {
-            "state": {
-                "optiscaler-goverlay": true,
-                "overlay": false
-            },
-            "originalLaunchOptions": ""
-        },
-        "1903340": {
-            "state": {
-                "optiscaler-goverlay": true
-            },
-            "originalLaunchOptions": ""
-        },
-        "2461850": {
-            "state": {
-                "optiscaler-goverlay": true
-            },
-            "originalLaunchOptions": ""
-        },
-        "2501829966": {
-            "originalLaunchOptions": "%command% run net.retrodeck.retrodeck"
         }
     },
     "launchOptions": [
         {
-            "id": "overlay",
-            "name": "Overlay",
-            "on": "mangohud %command%",
+            "id": "gamerun",
+            "name": "Gamerun",
+            "on": "gamerun %command%",
             "off": "",
-            "enableGlobally": false,
+            "enableGlobally": true,
             "group": "Wrappers",
             "valueId": "",
             "valueName": "",
@@ -41,225 +19,33 @@
             "priority": 0
         },
         {
-            "id": "booster",
-            "name": "Booster",
-            "on": "booster %command%",
-            "off": "",
-            "enableGlobally": true,
-            "group": "Wrappers",
-            "valueId": "",
-            "valueName": "",
-            "fallbackValue": false,
-            "priority": 4
-        },
-        {
-            "id": "gamemode",
-            "name": "Gamemode",
-            "on": "gamemoderun %command%",
-            "off": "",
-            "enableGlobally": false,
-            "group": "Wrappers",
-            "valueId": "",
-            "valueName": "",
-            "fallbackValue": false,
-            "priority": 1
-        },
-        {
-            "id": "optiscaler-goverlay",
-            "name": "Optiscaler",
-            "on": "\"/home/gwynn7/.local/share/goverlay/gameconfig/global/bgmod\" -- env %command%",
-            "off": "",
-            "enableGlobally": false,
-            "group": "Wrappers",
-            "valueId": "optiscaler",
-            "valueName": "GOverlay",
-            "fallbackValue": false,
-            "priority": 2
-        },
-        {
-            "id": "optiscaler-proton",
-            "name": "Optiscaler",
-            "on": "PROTON_USE_OPTISCALER=1 PROTON_OPTISCALER_CONFIG=\\\"Upscalers.Dx11Upscaler=fsr31_12;Upscalers.Dx12Upscaler=fsr31;Upscalers.VulkanUpscaler=fsr31_12;FrameGen.Enabled=true;FrameGen.FGInput=DLSSG;FrameGen.FGOutput=XeFG;FSR.Fsr4Update=true;FSR.Fsr4ForceEnableInt8=true;Menu.ShortcutKey=0x24;Menu.FpsShortcutKey=0x2d\\\" WINEDLLOVERRIDES=\\\"dxgi=n,b\\\" %command%",
-            "off": "",
-            "enableGlobally": false,
-            "group": "Wrappers",
-            "valueId": "optiscaler",
-            "valueName": "Proton",
-            "fallbackValue": false,
-            "priority": 10
-        },
-        {
             "id": "optiscaler",
             "name": "Optiscaler",
-            "on": "",
+            "on": "GR_OPTI=1 %command%",
             "off": "",
             "enableGlobally": false,
             "group": "Wrappers",
-            "valueId": "optiscaler",
-            "valueName": "Disabled",
-            "fallbackValue": true,
+            "valueId": "",
+            "valueName": "",
+            "fallbackValue": false,
             "priority": 10
-        },
-        {
-            "id": "gamescope-laptop-overlay",
-            "name": "Gamescope",
-            "on": "gamescope -W 1920 -H 1080 -f -r 60 --mangoapp -- %command%",
-            "off": "",
-            "enableGlobally": false,
-            "group": "Wrappers",
-            "valueId": "gamescope",
-            "valueName": "Laptop Overlay",
-            "fallbackValue": false,
-            "priority": 3
-        },
-        {
-            "id": "gamescope-desktop-overlay",
-            "name": "Gamescope",
-            "on": "gamescope -W 1920 -H 1080 -f -r 165 --adaptive-sync --mangoapp -- %command%",
-            "off": "",
-            "enableGlobally": false,
-            "group": "Wrappers",
-            "valueId": "gamescope",
-            "valueName": "Desktop Overlay",
-            "fallbackValue": false,
-            "priority": 3
-        },
-        {
-            "id": "gamescope-laptop",
-            "name": "Gamescope",
-            "on": "gamescope -W 1920 -H 1080 -f -r 60 -- %command%",
-            "off": "",
-            "enableGlobally": false,
-            "group": "Wrappers",
-            "valueId": "gamescope",
-            "valueName": "Laptop",
-            "fallbackValue": false,
-            "priority": 3
-        },
-        {
-            "id": "gamescope-desktop",
-            "name": "Gamescope",
-            "on": "gamescope -W 1920 -H 1080 -f -r 165 --adaptive-sync -- %command%",
-            "off": "",
-            "enableGlobally": false,
-            "group": "Wrappers",
-            "valueId": "gamescope",
-            "valueName": "Desktop",
-            "fallbackValue": false,
-            "priority": 3
-        },
-        {
-            "id": "gamescope-grab",
-            "name": "Gamescope",
-            "on": "gamescope -W 1920 -H 1080 -f -r 165 --adaptive-sync --force-grab-cursor -- %command%",
-            "off": "",
-            "enableGlobally": false,
-            "group": "Wrappers",
-            "valueId": "gamescope",
-            "valueName": "Desktop + Grab",
-            "fallbackValue": false,
-            "priority": 3
         },
         {
             "id": "gamescope",
             "name": "Gamescope",
-            "on": "",
+            "on": "GR_SCOPE=1 %command%",
             "off": "",
             "enableGlobally": false,
             "group": "Wrappers",
-            "valueId": "gamescope",
-            "valueName": "Disabled",
-            "fallbackValue": true,
-            "priority": 3
-        },
-        {
-            "id": "latency-layer",
-            "name": "Latency Layer",
-            "on": "LOW_LATENCY_LAYER=1 %command%",
-            "off": "",
-            "enableGlobally": false,
-            "group": "Environment",
-            "valueId": "latency",
-            "valueName": "Layer only",
-            "fallbackValue": true,
-            "priority": 10
-        },
-        {
-            "id": "latency-pace-dx11-vrr",
-            "name": "Latency Layer",
-            "on": "PROTON_DXVK_LOWLATENCY=1 DXVK_FRAME_RATE=155 DXVK_FRAME_PACE=low-latency-vrr-162 %command%",
-            "off": "",
-            "enableGlobally": false,
-            "group": "Environment",
-            "valueId": "latency",
-            "valueName": "Pacing DX9-11",
-            "fallbackValue": false,
-            "priority": 10
-        },
-        {
-            "id": "latency-pace-dx12",
-            "name": "Latency Layer",
-            "on": "PROTON_VKD3D_LOWLATENCY=1 VKD3D_FRAME_RATE=155 %command%",
-            "off": "",
-            "enableGlobally": false,
-            "group": "Environment",
-            "valueId": "latency",
-            "valueName": "Pacing DX12",
-            "fallbackValue": false,
-            "priority": 10
-        },
-        {
-            "id": "latency-reflex",
-            "name": "Latency Layer",
-            "on": "LOW_LATENCY_LAYER=1 LOW_LATENCY_LAYER_REFLEX=1 %command%",
-            "off": "",
-            "enableGlobally": false,
-            "group": "Environment",
-            "valueId": "latency",
-            "valueName": "Reflex Layer (no OptiScaler)",
-            "fallbackValue": false,
-            "priority": 10
-        },
-        {
-            "id": "latency-reflex-unhide",
-            "name": "Latency Layer",
-            "on": "LOW_LATENCY_LAYER=1 LOW_LATENCY_LAYER_REFLEX=1 DXVK_CONFIG=\\\"dxgi.hideAmdGpu = True\\\" %command%",
-            "off": "",
-            "enableGlobally": false,
-            "group": "Environment",
-            "valueId": "latency",
-            "valueName": "Reflex Layer Unhide (no OptiScaler)",
-            "fallbackValue": false,
-            "priority": 10
-        },
-        {
-            "id": "latency-reflex-spoof",
-            "name": "Latency Layer",
-            "on": "LOW_LATENCY_LAYER=1 LOW_LATENCY_LAYER_REFLEX=1 LOW_LATENCY_LAYER_SPOOF_NVIDIA=1 %command%",
-            "off": "",
-            "enableGlobally": false,
-            "group": "Environment",
-            "valueId": "latency",
-            "valueName": "Reflex Layer Spoof (no OptiScaler)",
-            "fallbackValue": false,
-            "priority": 10
-        },
-        {
-            "id": "latency-off",
-            "name": "Latency Layer",
-            "on": "",
-            "off": "",
-            "enableGlobally": false,
-            "group": "Environment",
-            "valueId": "latency",
-            "valueName": "Disabled",
+            "valueId": "",
+            "valueName": "",
             "fallbackValue": false,
             "priority": 10
         },
         {
             "id": "nvapi",
             "name": "NVAPI",
-            "on": "PROTON_DISABLE_NVAPI=1 %command%",
+            "on": "GR_NVAPI=1 %command%",
             "off": "",
             "enableGlobally": false,
             "group": "Environment",
@@ -271,7 +57,7 @@
         {
             "id": "nvapi-enable",
             "name": "NVAPI",
-            "on": "PROTON_ENABLE_NVAPI=1 %command%",
+            "on": "GR_NVAPI=0 %command%",
             "off": "",
             "enableGlobally": false,
             "group": "Environment",
@@ -293,45 +79,45 @@
             "priority": 10
         },
         {
-            "id": "high-priority",
-            "name": "High Priority",
-            "on": "PROTON_PRIORITY_HIGH=1 %command%",
+            "id": "mangohud",
+            "name": "Overlay",
+            "on": "GR_MANGO=0 %command%",
             "off": "",
-            "enableGlobally": true,
+            "enableGlobally": false,
             "group": "Environment",
-            "valueId": "",
-            "valueName": "",
+            "valueId": "overlay",
+            "valueName": "Disabled",
             "fallbackValue": false,
             "priority": 10
         },
         {
-            "id": "local-shader",
-            "name": "Local Shader Cache",
-            "on": "PROTON_LOCAL_SHADER_CACHE=1 %command%",
+            "id": "mangohud-enable",
+            "name": "Overlay",
+            "on": "GR_MANGO=1 %command%",
             "off": "",
             "enableGlobally": true,
             "group": "Environment",
-            "valueId": "",
-            "valueName": "",
-            "fallbackValue": false,
+            "valueId": "overlay",
+            "valueName": "Enabled",
+            "fallbackValue": true,
             "priority": 10
         },
         {
-            "id": "discord",
-            "name": "Discord Bridge",
-            "on": "PROTON_DISCORD_BRIDGE=1 %command%",
+            "id": "mangoapp-enable",
+            "name": "Overlay",
+            "on": "GR_MANGO=2 %command%",
             "off": "",
-            "enableGlobally": true,
+            "enableGlobally": false,
             "group": "Environment",
-            "valueId": "",
-            "valueName": "",
+            "valueId": "overlay",
+            "valueName": "Gamescope",
             "fallbackValue": false,
             "priority": 10
         },
         {
             "id": "enable-wayland",
             "name": "Enable Wayland",
-            "on": "PROTON_ENABLE_WAYLAND=1 %command%",
+            "on": "GR_WAYLAND=1 %command%",
             "off": "",
             "enableGlobally": false,
             "group": "Environment",
@@ -341,14 +127,74 @@
             "priority": 10
         },
         {
-            "id": "hud-latency",
-            "name": "Latency HUD",
-            "on": "DXVK_HUD=fps,frametimes,renderlatency,latencydetails,jitter %command%",
+            "id": "enable-hdr",
+            "name": "Enable HDR",
+            "on": "GR_HDR=1 %command%",
             "off": "",
             "enableGlobally": false,
             "group": "Environment",
             "valueId": "",
             "valueName": "",
+            "fallbackValue": false,
+            "priority": 10
+        },
+        {
+            "id": "latency-layer",
+            "name": "Latency Layer",
+            "on": "LOW_LATENCY_LAYER=1 %command%",
+            "off": "",
+            "enableGlobally": false,
+            "group": "Environment",
+            "valueId": "latency",
+            "valueName": "Layer only",
+            "fallbackValue": true,
+            "priority": 10
+        },
+        {
+            "id": "latency-off",
+            "name": "Latency Layer",
+            "on": "",
+            "off": "",
+            "enableGlobally": false,
+            "group": "Environment",
+            "valueId": "latency",
+            "valueName": "Disabled",
+            "fallbackValue": false,
+            "priority": 10
+        },
+        {
+            "id": "latency-reflex",
+            "name": "Latency Layer",
+            "on": "LOW_LATENCY_LAYER=1 LOW_LATENCY_LAYER_REFLEX=1 %command%",
+            "off": "",
+            "enableGlobally": false,
+            "group": "Environment",
+            "valueId": "latency",
+            "valueName": "Reflex Layer",
+            "fallbackValue": false,
+            "priority": 10
+        },
+        {
+            "id": "latency-reflex-unhide",
+            "name": "Latency Layer",
+            "on": "LOW_LATENCY_LAYER=1 LOW_LATENCY_LAYER_REFLEX=1 DXVK_CONFIG=\\\"dxgi.hideAmdGpu = True\\\" %command%",
+            "off": "",
+            "enableGlobally": false,
+            "group": "Environment",
+            "valueId": "latency",
+            "valueName": "Reflex Layer Unhide",
+            "fallbackValue": false,
+            "priority": 10
+        },
+        {
+            "id": "latency-reflex-spoof",
+            "name": "Latency Layer",
+            "on": "LOW_LATENCY_LAYER=1 LOW_LATENCY_LAYER_REFLEX=1 LOW_LATENCY_LAYER_SPOOF_NVIDIA=1 %command%",
+            "off": "",
+            "enableGlobally": false,
+            "group": "Environment",
+            "valueId": "latency",
+            "valueName": "Reflex Layer Spoof",
             "fallbackValue": false,
             "priority": 10
         }
