@@ -10,7 +10,7 @@ depends=(
     'qt6-base'
     'qt6-declarative'
     'qt6-svg'
-    'quickshell'
+    'quickshell-git'
     'wtype'
 )
 
