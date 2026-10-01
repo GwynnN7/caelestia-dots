@@ -423,7 +423,7 @@ packages = ["rocm-hip-sdk", "rocm-opencl-sdk", "rocm-ml-sdk", "rocminfo", "rocm-
 [[components]]
 name = "openrgb"
 packages = [
-    "openrgb",
+    "openrgb-git",
     "caelestia-rgb-sync"
 ]
 post_install = [
