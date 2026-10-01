@@ -29,7 +29,7 @@ dest = "$XDG_CONFIG_HOME/xdg-desktop-portal"
 [[components]]
 name = "caelestia"
 default=true
-packages = ["local:shell", "astra-airlock-git", "astra-atlas-git", "astra-foundry-git"]
+packages = ["local:shell"]
 post_install = [
     "test -f ${XDG_STATE_HOME:-$HOME/.local/state}/caelestia/scheme.json || caelestia scheme set -n caelestia",
     "caelestia shell -k >/dev/null; sleep 1; caelestia shell -d >/dev/null",
@@ -40,6 +40,11 @@ post_update = [
 [[components.entries]]
 src = "caelestia"
 dest = "$XDG_CONFIG_HOME/caelestia"
+
+[[components]]
+name = "astra"
+default=true
+packages = ["local:stowaway", "local:wormhole", "local:flightdeck", "astra-airlock-git", "astra-atlas-git", "astra-foundry-git"]
 [[components.entries]]
 src = "astra/atlas.conf"
 dest = "$XDG_CONFIG_HOME/astra-atlas/atlas.conf"

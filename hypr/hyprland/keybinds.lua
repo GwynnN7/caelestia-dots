@@ -256,7 +256,7 @@ create_bind(
 
 -- Utils
 create_bind(vars.kbClipboard, hl.dsp.exec_cmd("stowaway -t"))
-create_bind(vars.kbEmoji, hl.dsp.global("stowaway -e"))
+create_bind(vars.kbEmoji, hl.dsp.exec_cmd("stowaway -e"))
 create_bind(vars.kbUtils, hl.dsp.global("caelestia:utilities"))
 create_bind(vars.kbKeybinds, hl.dsp.global("caelestia:keybinds"))
 create_bind(vars.kbWindows, hl.dsp.global("caelestia:windowSwitcher"))
@@ -265,8 +265,8 @@ create_bind(combine("ALT", vars.kbClipboard), hl.dsp.exec_cmd("pkill fuzzel || c
 create_bind(combine("ALT", vars.kbEmoji), hl.dsp.exec_cmd("pkill fuzzel || caelestia emoji -p"))
 
 -- Cortana API
-create_bind("SUPER + F1", hl.dsp.exec_cmd("cortana api devices/lamp -act toggle | cortana notify"), locked)
-create_bind("SUPER + F2", hl.dsp.exec_cmd("cortana api devices/speakers -act toggle | cortana notify"), locked)
+create_bind("SUPER + F1", hl.dsp.exec_cmd("cortana api devices/lamp -act on | cortana notify"), locked)
+create_bind("SUPER + F2", hl.dsp.exec_cmd("cortana api devices/lamp -act off | cortana notify"), locked)
 create_bind("SUPER + F5", hl.dsp.exec_cmd("cortana api automation -act off | cortana notify"), locked)
 create_bind("SUPER + F6", hl.dsp.exec_cmd("cortana api automation -act on | cortana notify"), locked)
 

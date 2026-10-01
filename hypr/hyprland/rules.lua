@@ -150,6 +150,7 @@ tagged_rule(music_player_tag, {
     "Cider",                                                       -- Apple music
     "com.github.th-ch.youtube-music|com-maxrave-simpmusic-MainKt", -- YouTube music
     "tidal-hifi",                                                  -- Tidal
+	"sone",														   -- Sone
 }, "class")
 tagged_rule(music_player_tag, {
     "Spotify|Spotify Free" -- Spotify wayland, it has no class for some reason

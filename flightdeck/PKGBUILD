@@ -1,0 +1,63 @@
+pkgname=astra-flightdeck-git
+pkgver=0
+pkgrel=1
+pkgdesc="Hyprland configuration manager for Astra Suite and Caelestia"
+arch=('x86_64')
+url="https://github.com/AstraSuite/FlightDeck"
+license=('GPL-3.0-only')
+
+depends=(
+    'qt6-base'
+    'qt6-declarative'
+    'qt6-svg'
+    'hyprland'
+)
+
+makedepends=(
+    'cmake'
+    'ninja'
+    'git'
+)
+
+source=("$pkgname::git+$url.git")
+sha256sums=('SKIP')
+
+pkgver() {
+    cd "$srcdir/$pkgname"
+
+    if git describe --tags --match 'v[0-9]*' --abbrev=0 >/dev/null 2>&1; then
+        git describe --tags --match 'v[0-9]*' --abbrev=0 |
+            sed 's/^v//'
+    else
+        printf '0.%s\n' "$(git log -1 --format=%cd --date=format:%Y%m%d)"
+    fi
+}
+
+build() {
+    cd "$srcdir/$pkgname"
+
+    cmake -B build \
+        -S . \
+        -G Ninja \
+        -DCMAKE_BUILD_TYPE=Release \
+        -DFLIGHTDECK_VERSION="$pkgver"
+
+    cmake --build build
+}
+
+check() {
+    cd "$srcdir/$pkgname"
+
+    ctest \
+        --test-dir build \
+        --output-on-failure
+}
+
+package() {
+    cd "$srcdir/$pkgname"
+
+    DESTDIR="$pkgdir" cmake --install build
+
+    install -Dm644 LICENSE \
+        "$pkgdir/usr/share/licenses/$pkgname/LICENSE"
+}

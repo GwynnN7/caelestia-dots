@@ -92,6 +92,7 @@ end
 local home       = os.getenv("HOME")
 local config_dir = os.getenv("XDG_CONFIG_HOME") or (home .. "/.config")
 local json       = require("utils.json") -- rxi's peak library
+local vars       = require("variables")
 
 -- Default config
 local function default_config()
@@ -103,8 +104,8 @@ local function default_config()
         music = {
             spotify = {
                 enable  = true,
-                match   = { { class = "tidal-hifi" } },
-                command = { "tidal-hifi" },
+                match   = { { class = "sone" } },
+                command = { "sone" },
                 move    = true,
 }
         },
@@ -277,14 +278,14 @@ local function focus_workspace(direction)
         if active_ws and active_ws.name then
             local name_only = active_ws.name:match("^special:(.*)") or active_ws.name
             return toggle_special_ws(name_only)()
-        else
-            local smw = hl.plugin.split_monitor_workspaces
-            return hl.dispatch(function() return smw.workspace(direction) end)
-        end
-    end
-end
-
-local PREFERRED_PLAYERS = { "tidal-hifi", "zen-bin", "spotify", "celluloid", "mpv", "vlc" }
+                    else
+                        local smw = hl.plugin.split_monitor_workspaces
+                        return hl.dispatch(function() return smw.workspace(direction) end)
+                    end
+                end
+            end
+            
+            local PREFERRED_PLAYERS = { "sone", "tidal-hifi", "zen-bin", "spotify", "celluloid", "mpv", "vlc" }
 
 local function media_volume(direction)
     return function()

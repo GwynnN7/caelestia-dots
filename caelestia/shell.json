@@ -380,9 +380,8 @@
         "favouriteApps": [
             "zen",
             "org.telegram.desktop",
-            "io.github.lullabyX.sone",
+            "SONE",
             "equibop",
-            "sone",
             "steam",
             "cortana"
         ],
@@ -461,12 +460,12 @@
             "reboot": [
                 "sh",
                 "-c",
-                "cortana service &>/dev/null && cortana api -cmd reboot computer | cortana notify || systemctl reboot"
+                "cortana service &>/dev/null && cortana api computer -cmd Reboot | cortana notify || systemctl reboot"
             ],
             "shutdown": [
                 "sh",
                 "-c",
-                "cortana service &>/dev/null && cortana api computer -cmd shutdown | cortana notify || systemctl poweroff"
+                "cortana service &>/dev/null && cortana api computer -cmd Shutdown | cortana notify || systemctl poweroff"
             ],
             "steam": [
                 "sh",
@@ -479,7 +478,7 @@
             "windows": [
                 "sh",
                 "-c",
-                "cortana service &>/dev/null && cortana api -cmd system computer | cortana notify || systemctl reboot"
+                "cortana service &>/dev/null && cortana api computer -cmd BootIntoOtherOperatingSystem | cortana notify || systemctl reboot"
             ]
         },
         "icons": {

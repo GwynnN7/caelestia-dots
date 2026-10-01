@@ -1,0 +1,59 @@
+pkgname=astra-stowaway-git
+pkgver=1.0.0
+pkgrel=1
+pkgdesc="Wayland clipboard manager and emoji/character picker overlay"
+arch=('x86_64')
+url="https://github.com/AstraSuite/Stowaway"
+license=('GPL-3.0-only')
+
+depends=(
+    'qt6-base'
+    'qt6-declarative'
+    'qt6-svg'
+    'quickshell'
+    'wtype'
+)
+
+makedepends=(
+    'cmake'
+    'ninja'
+    'pkgconf'
+    'git'
+)
+
+source=("$pkgname::git+$url.git")
+sha256sums=('SKIP')
+
+pkgver() {
+    cd "$srcdir/$pkgname"
+    git describe --long --tags --always |
+        sed 's/^v//;s/\([^-]*-g\)/r\1/;s/-/./g'
+}
+
+build() {
+    cd "$srcdir/$pkgname"
+
+    cmake -B build \
+        -S . \
+        -G Ninja \
+        -DCMAKE_BUILD_TYPE=Release
+
+    cmake --build build
+}
+
+check() {
+    cd "$srcdir/$pkgname"
+
+    ctest \
+        --test-dir build \
+        --output-on-failure
+}
+
+package() {
+    cd "$srcdir/$pkgname"
+
+    DESTDIR="$pkgdir" cmake --install build
+
+    install -Dm644 LICENSE \
+        "$pkgdir/usr/share/licenses/$pkgname/LICENSE"
+}
